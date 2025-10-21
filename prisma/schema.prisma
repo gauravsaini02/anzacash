@@ -1,0 +1,215 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int      @id @default(autoincrement())
+  firstName    String   @map("first_name") @db.VarChar(100)
+  lastName     String   @map("last_name") @db.VarChar(100)
+  email        String   @unique @db.VarChar(255)
+  passwordHash String   @map("password_hash") @db.VarChar(255)
+  phone        String?  @map("phone") @db.VarChar(20)
+  role         Role     @map("role")
+  status       Status   @default(ACTIVE) @map("status")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  products Product[]
+  addresses Address[]
+  orders   Order[]
+  orderItems OrderItem[]
+  cart     Cart?
+  @@index([email], map: "idx_users_email")
+  @@map("users")
+}
+
+model Category {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique @map("name") @db.VarChar(100)
+  description String?  @map("description") @db.Text
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  products Product[]
+  @@map("categories")
+}
+
+model Product {
+  id                        Int      @id @default(autoincrement())
+  vendorId                  Int      @map("vendor_id")
+  categoryId                Int?     @map("category_id")
+  name                      String   @map("name") @db.VarChar(255)
+  description               String   @map("description") @db.Text
+  price                     Decimal  @map("price") @db.Decimal(10, 2)
+  stockQuantity             Int      @default(0) @map("stock_quantity") @db.UnsignedTinyInt
+  sku                       String?  @unique @map("sku") @db.VarChar(100)
+  imageUrl                  String?  @map("image_url") @db.VarChar(255)
+  isActive                  Boolean  @default(true) @map("is_active")
+  mlmCommissionPercentage   Decimal? @map("mlm_commission_percentage") @db.Decimal(5, 2)
+  createdAt                 DateTime @default(now()) @map("created_at")
+  updatedAt                 DateTime @updatedAt @map("updated_at")
+
+  vendor   User        @relation(fields: [vendorId], references: [id], onDelete: Cascade)
+  category Category?   @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  orderItems OrderItem[]
+  cartItems CartItem[]
+
+  @@index([vendorId], map: "idx_products_vendor_id")
+  @@index([categoryId], map: "idx_products_category_id")
+  @@index([isActive], map: "idx_products_is_active")
+  @@map("products")
+}
+
+model Address {
+  id            Int      @id @default(autoincrement())
+  userId        Int      @map("user_id")
+  type          AddressType @map("type") @default(SHIPPING)
+  streetAddress String   @map("street_address") @db.VarChar(255)
+  city          String   @map("city") @db.VarChar(100)
+  postalCode    String?  @map("postal_code") @db.VarChar(20)
+  country       String   @map("country") @db.VarChar(100)
+  isDefault     Boolean  @default(false) @map("is_default")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  user           User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  shippingOrders Order[]
+
+  @@index([userId], map: "idx_addresses_user_id")
+  @@index([type], map: "idx_addresses_type")
+  @@map("addresses")
+}
+
+model Order {
+  id                   Int         @id @default(autoincrement())
+  customerId           Int         @map("customer_id")
+  orderStatus          OrderStatus @map("order_status") @default(PENDING)
+  totalAmount          Decimal     @map("total_amount") @db.Decimal(10, 2)
+  platformCommission   Decimal     @map("platform_commission") @db.Decimal(10, 2)
+  vendorPayoutAmount   Decimal     @map("vendor_payout_amount") @db.Decimal(10, 2)
+  shippingAddressId    Int?        @map("shipping_address_id")
+  createdAt            DateTime    @default(now()) @map("created_at")
+  updatedAt            DateTime    @updatedAt @map("updated_at")
+
+  customer            User                @relation(fields: [customerId], references: [id], onDelete: Restrict)
+  shippingAddress     Address?            @relation(fields: [shippingAddressId], references: [id], onDelete: SetNull)
+  orderItems          OrderItem[]
+  paymentTransaction  PaymentTransaction?
+
+  @@index([customerId], map: "idx_orders_customer_id")
+  @@index([orderStatus], map: "idx_orders_order_status")
+  @@index([shippingAddressId], map: "idx_orders_shipping_address_id")
+  @@map("orders")
+}
+
+model OrderItem {
+  id           Int     @id @default(autoincrement())
+  orderId      Int     @map("order_id")
+  productId    Int     @map("product_id")
+  quantity     Int     @map("quantity") @db.UnsignedTinyInt
+  pricePerUnit Decimal @map("price_per_unit") @db.Decimal(10, 2)
+  vendorId     Int     @map("vendor_id")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  order   Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Restrict)
+  vendor  User    @relation(fields: [vendorId], references: [id], onDelete: Restrict)
+
+  @@index([orderId], map: "idx_order_items_order_id")
+  @@index([productId], map: "idx_order_items_product_id")
+  @@index([vendorId], map: "idx_order_items_vendor_id")
+  @@map("order_items")
+}
+
+model PaymentTransaction {
+  id                   Int              @id @default(autoincrement())
+  orderId              Int              @unique @map("order_id")
+  gatewayTransactionId String?          @unique @map("gateway_transaction_id") @db.VarChar(255)
+  paymentMethod        String           @map("payment_method") @db.VarChar(50)
+  amount               Decimal          @map("amount") @db.Decimal(10, 2)
+  status               PaymentStatus    @map("status") @default(PENDING)
+  gatewayResponse      String?          @map("gateway_response") @db.Text
+  createdAt            DateTime         @default(now()) @map("created_at")
+  updatedAt            DateTime         @updatedAt @map("updated_at")
+
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@index([orderId], map: "idx_payment_transactions_order_id")
+  @@index([status], map: "idx_payment_transactions_status")
+  @@index([paymentMethod], map: "idx_payment_transactions_payment_method")
+  @@map("payment_transactions")
+}
+
+model Cart {
+  id        Int      @id @default(autoincrement())
+  customerId Int     @unique @map("customer_id")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  customer  User      @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  cartItems CartItem[]
+
+  @@index([customerId], map: "idx_carts_customer_id")
+  @@map("carts")
+}
+
+model CartItem {
+  id        Int     @id @default(autoincrement())
+  cartId    Int     @map("cart_id")
+  productId Int     @map("product_id")
+  quantity  Int     @default(1) @map("quantity") @db.UnsignedTinyInt
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  cart    Cart    @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([cartId, productId], map: "unique_cart_product")
+  @@index([cartId], map: "idx_cart_items_cart_id")
+  @@index([productId], map: "idx_cart_items_product_id")
+  @@map("cart_items")
+}
+
+enum Role {
+  ADMIN   @map("admin")
+  VENDOR  @map("vendor")
+  CUSTOMER @map("customer")
+}
+
+enum Status {
+  ACTIVE          @map("active")
+  INACTIVE        @map("inactive")
+  PENDING_APPROVAL @map("pending_approval")
+}
+
+enum AddressType {
+  SHIPPING @map("shipping")
+  BILLING  @map("billing")
+}
+
+enum OrderStatus {
+  PENDING   @map("pending")
+  PAID      @map("paid")
+  SHIPPED   @map("shipped")
+  DELIVERED @map("delivered")
+  CANCELLED @map("cancelled")
+}
+
+enum PaymentStatus {
+  SUCCEEDED @map("succeeded")
+  FAILED    @map("failed")
+  PENDING   @map("pending")
+}
