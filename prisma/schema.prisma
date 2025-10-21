@@ -184,9 +184,10 @@ model CartItem {
 }
 
 enum Role {
-  ADMIN   @map("admin")
-  VENDOR  @map("vendor")
-  CUSTOMER @map("customer")
+  ADMIN      @map("admin")
+  VENDOR     @map("vendor")
+  CUSTOMER   @map("customer")
+  MLM_MEMBER @map("mlm_member")
 }
 
 enum Status {
