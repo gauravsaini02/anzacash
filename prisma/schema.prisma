@@ -1,11 +1,5 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
-  provider = "prisma-client-js"
+  provider = "prisma-client"
   output   = "../generated/prisma"
 }
 
@@ -14,203 +8,361 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id           Int      @id @default(autoincrement())
-  firstName    String   @map("first_name") @db.VarChar(100)
-  lastName     String   @map("last_name") @db.VarChar(100)
-  email        String   @unique @db.VarChar(255)
-  passwordHash String   @map("password_hash") @db.VarChar(255)
-  phone        String?  @map("phone") @db.VarChar(20)
-  role         Role     @map("role")
-  status       Status   @default(ACTIVE) @map("status")
-  createdAt    DateTime @default(now()) @map("created_at")
-  updatedAt    DateTime @updatedAt @map("updated_at")
+model ads_check {
+  ads_ID       Int     @id @default(autoincrement())
+  ads_user     String? @db.VarChar(200)
+  ads_photo_id Int?
 
-  products Product[]
-  addresses Address[]
-  orders   Order[]
-  orderItems OrderItem[]
-  cart     Cart?
-  @@index([email], map: "idx_users_email")
-  @@map("users")
+  @@index([ads_user], map: "ads_user")
 }
 
-model Category {
-  id          Int      @id @default(autoincrement())
-  name        String   @unique @map("name") @db.VarChar(100)
-  description String?  @map("description") @db.Text
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @updatedAt @map("updated_at")
+model ch_table {
+  c_ID        Int         @id @default(autoincrement())
+  c_name      String      @db.VarChar(190)
+  c_amount    Float       @default(0) @db.Float
+  c_date      String      @db.VarChar(50)
+  c_week      String      @db.VarChar(100)
+  c_year      Int?
+  c_status    String?     @default("Paid") @db.VarChar(50)
+  nasso_users nasso_users @relation(fields: [c_name], references: [usr_uname], onDelete: NoAction, map: "challengeid")
 
-  products Product[]
-  @@map("categories")
+  @@index([c_name], map: "c_name")
 }
 
-model Product {
-  id                        Int      @id @default(autoincrement())
-  vendorId                  Int      @map("vendor_id")
-  categoryId                Int?     @map("category_id")
-  name                      String   @map("name") @db.VarChar(255)
-  description               String   @map("description") @db.Text
-  price                     Decimal  @map("price") @db.Decimal(10, 2)
-  stockQuantity             Int      @default(0) @map("stock_quantity") @db.UnsignedTinyInt
-  sku                       String?  @unique @map("sku") @db.VarChar(100)
-  imageUrl                  String?  @map("image_url") @db.VarChar(255)
-  isActive                  Boolean  @default(true) @map("is_active")
-  mlmCommissionPercentage   Decimal? @map("mlm_commission_percentage") @db.Decimal(5, 2)
-  createdAt                 DateTime @default(now()) @map("created_at")
-  updatedAt                 DateTime @updatedAt @map("updated_at")
-
-  vendor   User        @relation(fields: [vendorId], references: [id], onDelete: Cascade)
-  category Category?   @relation(fields: [categoryId], references: [id], onDelete: SetNull)
-  orderItems OrderItem[]
-  cartItems CartItem[]
-
-  @@index([vendorId], map: "idx_products_vendor_id")
-  @@index([categoryId], map: "idx_products_category_id")
-  @@index([isActive], map: "idx_products_is_active")
-  @@map("products")
+model cus_link {
+  ln_ID     Int     @id @default(autoincrement())
+  help_link String? @db.Text
+  g_link    String? @db.Text
+  dash_link String  @db.Text
 }
 
-model Address {
-  id            Int      @id @default(autoincrement())
-  userId        Int      @map("user_id")
-  type          AddressType @map("type") @default(SHIPPING)
-  streetAddress String   @map("street_address") @db.VarChar(255)
-  city          String   @map("city") @db.VarChar(100)
-  postalCode    String?  @map("postal_code") @db.VarChar(20)
-  country       String   @map("country") @db.VarChar(100)
-  isDefault     Boolean  @default(false) @map("is_default")
-  createdAt     DateTime @default(now()) @map("created_at")
-  updatedAt     DateTime @updatedAt @map("updated_at")
-
-  user           User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  shippingOrders Order[]
-
-  @@index([userId], map: "idx_addresses_user_id")
-  @@index([type], map: "idx_addresses_type")
-  @@map("addresses")
+model login_noti {
+  noti_ID  Int     @id
+  noti_txt String? @db.Text
 }
 
-model Order {
-  id                   Int         @id @default(autoincrement())
-  customerId           Int         @map("customer_id")
-  orderStatus          OrderStatus @map("order_status") @default(PENDING)
-  totalAmount          Decimal     @map("total_amount") @db.Decimal(10, 2)
-  platformCommission   Decimal     @map("platform_commission") @db.Decimal(10, 2)
-  vendorPayoutAmount   Decimal     @map("vendor_payout_amount") @db.Decimal(10, 2)
-  shippingAddressId    Int?        @map("shipping_address_id")
-  createdAt            DateTime    @default(now()) @map("created_at")
-  updatedAt            DateTime    @updatedAt @map("updated_at")
+model nasso_accounts {
+  ac_Id         Int         @id @default(autoincrement())
+  ac_usr        String      @default("N/A") @db.VarChar(190)
+  ac_bonus      BigInt      @default(0)
+  ac_profit     BigInt      @default(0)
+  ac_withdraw   BigInt      @default(0)
+  ac_spin       BigInt      @default(0)
+  ac_video      BigInt      @default(0)
+  ac_trivia     BigInt      @default(0)
+  ac_status     BigInt      @default(0)
+  ac_balance    BigInt      @default(0)
+  ac_expense    BigInt      @default(0)
+  ac_media      BigInt      @default(0)
+  ac_mshahara   BigInt?     @default(0)
+  paid_month    String?     @default("No") @db.VarChar(100)
+  ac_ads        BigInt      @default(0)
+  task_balance  BigInt      @default(0)
+  task_withdraw Float       @default(0) @db.Float
+  aff_balance   Float?      @default(0) @db.Float
+  nasso_users   nasso_users @relation(fields: [ac_usr], references: [usr_uname], onDelete: Cascade, map: "uza_acc")
 
-  customer            User                @relation(fields: [customerId], references: [id], onDelete: Restrict)
-  shippingAddress     Address?            @relation(fields: [shippingAddressId], references: [id], onDelete: SetNull)
-  orderItems          OrderItem[]
-  paymentTransaction  PaymentTransaction?
-
-  @@index([customerId], map: "idx_orders_customer_id")
-  @@index([orderStatus], map: "idx_orders_order_status")
-  @@index([shippingAddressId], map: "idx_orders_shipping_address_id")
-  @@map("orders")
+  @@index([ac_usr], map: "user_to_acc")
 }
 
-model OrderItem {
-  id           Int     @id @default(autoincrement())
-  orderId      Int     @map("order_id")
-  productId    Int     @map("product_id")
-  quantity     Int     @map("quantity") @db.UnsignedTinyInt
-  pricePerUnit Decimal @map("price_per_unit") @db.Decimal(10, 2)
-  vendorId     Int     @map("vendor_id")
-  createdAt    DateTime @default(now()) @map("created_at")
-  updatedAt    DateTime @updatedAt @map("updated_at")
+model nasso_answer {
+  ans_Id      Int        @id @default(autoincrement())
+  qns_ID      Int?
+  answer      String?    @db.VarChar(300)
+  ans_correct String?    @default("N/A") @db.VarChar(10)
+  ans_uza     Int?
+  nasso_qns   nasso_qns? @relation(fields: [qns_ID], references: [qns_Id], onDelete: Cascade, onUpdate: NoAction, map: "ans_qns")
 
-  order   Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  product Product @relation(fields: [productId], references: [id], onDelete: Restrict)
-  vendor  User    @relation(fields: [vendorId], references: [id], onDelete: Restrict)
-
-  @@index([orderId], map: "idx_order_items_order_id")
-  @@index([productId], map: "idx_order_items_product_id")
-  @@index([vendorId], map: "idx_order_items_vendor_id")
-  @@map("order_items")
+  @@index([ans_uza], map: "ans_uza")
+  @@index([qns_ID], map: "qns_ID")
+  @@index([qns_ID], map: "qns_ID_2")
 }
 
-model PaymentTransaction {
-  id                   Int              @id @default(autoincrement())
-  orderId              Int              @unique @map("order_id")
-  gatewayTransactionId String?          @unique @map("gateway_transaction_id") @db.VarChar(255)
-  paymentMethod        String           @map("payment_method") @db.VarChar(50)
-  amount               Decimal          @map("amount") @db.Decimal(10, 2)
-  status               PaymentStatus    @map("status") @default(PENDING)
-  gatewayResponse      String?          @map("gateway_response") @db.Text
-  createdAt            DateTime         @default(now()) @map("created_at")
-  updatedAt            DateTime         @updatedAt @map("updated_at")
-
-  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
-
-  @@index([orderId], map: "idx_payment_transactions_order_id")
-  @@index([status], map: "idx_payment_transactions_status")
-  @@index([paymentMethod], map: "idx_payment_transactions_payment_method")
-  @@map("payment_transactions")
+model nasso_logs {
+  log_Id     Int    @id @default(autoincrement())
+  log_amount Float  @default(0) @db.Float
+  log_op     String @db.VarChar(100)
+  log_date   String @db.VarChar(50)
+  log_usr    String @db.VarChar(200)
 }
 
-model Cart {
-  id        Int      @id @default(autoincrement())
-  customerId Int     @unique @map("customer_id")
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+model nasso_pay {
+  py_Id        Int     @id @default(autoincrement())
+  py_usr       String? @db.VarChar(200)
+  py_phone     String  @default("N/A") @db.VarChar(20)
+  py_email     String  @default("N/A") @db.VarChar(254)
+  py_type      String  @default("N/A") @db.VarChar(100)
+  py_amount    Float   @default(0) @db.Float
+  py_status    String  @default("Pending") @db.VarChar(100)
+  py_admin     String? @default("N/A") @db.VarChar(200)
+  req_date     String  @default("N/A") @db.VarChar(50)
+  pay_date     String? @default("N/A") @db.VarChar(50)
+  amnt_receive Float?  @default(0) @db.Float
+  amnt_fee     Float?  @db.Float
 
-  customer  User      @relation(fields: [customerId], references: [id], onDelete: Cascade)
-  cartItems CartItem[]
-
-  @@index([customerId], map: "idx_carts_customer_id")
-  @@map("carts")
+  @@index([py_usr(length: 191)], map: "py_usr")
 }
 
-model CartItem {
-  id        Int     @id @default(autoincrement())
-  cartId    Int     @map("cart_id")
-  productId Int     @map("product_id")
-  quantity  Int     @default(1) @map("quantity") @db.UnsignedTinyInt
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+model nasso_qns {
+  qns_Id       Int            @id @default(autoincrement())
+  qns_name     String         @db.VarChar(400)
+  quiz_Id      Int
+  nasso_answer nasso_answer[]
+  uza_answers  uza_answers[]
 
-  cart    Cart    @relation(fields: [cartId], references: [id], onDelete: Cascade)
-  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
-
-  @@unique([cartId, productId], map: "unique_cart_product")
-  @@index([cartId], map: "idx_cart_items_cart_id")
-  @@index([productId], map: "idx_cart_items_product_id")
-  @@map("cart_items")
+  @@index([quiz_Id], map: "quiz_Id")
+  @@index([quiz_Id], map: "quiz_Id_2")
+  @@index([quiz_Id], map: "quiz_Id_3")
 }
 
-enum Role {
-  ADMIN      @map("admin")
-  VENDOR     @map("vendor")
-  CUSTOMER   @map("customer")
-  MLM_MEMBER @map("mlm_member")
+model nasso_quiz {
+  qz_Id    Int     @id @default(autoincrement())
+  qz_name  String  @default("N/A") @db.VarChar(400)
+  qzop     String  @default("N/A") @db.VarChar(100)
+  del_date String? @db.VarChar(50)
 }
 
-enum Status {
-  ACTIVE          @map("active")
-  INACTIVE        @map("inactive")
-  PENDING_APPROVAL @map("pending_approval")
+model nasso_users {
+  usr_Id                                   Int              @id @default(autoincrement())
+  usr_uname                                String           @unique(map: "usr_uname") @db.VarChar(190)
+  usr_posio                                String           @default("traders") @db.VarChar(100)
+  usr_status                               String           @default("Not Active") @db.VarChar(40)
+  usr_code                                 String?          @db.VarChar(100)
+  usr_passwd                               String           @db.VarChar(300)
+  usr_email                                String?          @default("N/A") @db.VarChar(254)
+  usr_phone                                String           @default("N/A") @db.VarChar(20)
+  usr_county                               String           @default("N/A") @db.VarChar(200)
+  usr_photo                                String?          @default("N/A") @db.VarChar(2000)
+  join_date                                String           @default("N/A") @db.VarChar(30)
+  full_name                                String?          @db.VarChar(200)
+  ch_table                                 ch_table[]
+  nasso_accounts                           nasso_accounts[]
+  notifiers                                notifiers[]
+  referal_referal_userIDTonasso_users      referal[]        @relation("referal_userIDTonasso_users")
+  referal_referal_user_ref_IdTonasso_users referal[]        @relation("referal_user_ref_IdTonasso_users")
+  salary_pay                               salary_pay[]
+  tbl_loan                                 tbl_loan[]
 }
 
-enum AddressType {
-  SHIPPING @map("shipping")
-  BILLING  @map("billing")
+model notifiers {
+  notify_Id      Int         @id @default(autoincrement())
+  notify_token   String      @db.Text
+  token_username String      @db.VarChar(190)
+  nasso_users    nasso_users @relation(fields: [token_username], references: [usr_uname], onDelete: NoAction, map: "FK_NOTS")
+
+  @@index([token_username], map: "token_username")
 }
 
-enum OrderStatus {
-  PENDING   @map("pending")
-  PAID      @map("paid")
-  SHIPPED   @map("shipped")
-  DELIVERED @map("delivered")
-  CANCELLED @map("cancelled")
+model pro_photo {
+  p_ID         Int           @id @default(autoincrement())
+  pro_ID       Int?
+  p_path       String?       @db.Text
+  user_Id      Int?
+  tbl_products tbl_products? @relation(fields: [pro_ID], references: [pro_ID], onDelete: Cascade, map: "pro_data_id")
+
+  @@index([pro_ID], map: "pro_data_id")
 }
 
-enum PaymentStatus {
-  SUCCEEDED @map("succeeded")
-  FAILED    @map("failed")
-  PENDING   @map("pending")
+model referal {
+  ref_Id                                       Int          @id @default(autoincrement())
+  userID                                       String?      @db.VarChar(190)
+  user_ref_Id                                  String?      @db.VarChar(190)
+  pay_status                                   String?      @default("n/a") @db.VarChar(40)
+  r_week                                       String?      @db.VarChar(11)
+  r_year                                       Int?
+  r_date                                       String?      @db.VarChar(50)
+  r_month                                      String?      @db.VarChar(20)
+  nasso_users_referal_userIDTonasso_users      nasso_users? @relation("referal_userIDTonasso_users", fields: [userID], references: [usr_uname], onDelete: Cascade, map: "uza_refs")
+  nasso_users_referal_user_ref_IdTonasso_users nasso_users? @relation("referal_user_ref_IdTonasso_users", fields: [user_ref_Id], references: [usr_uname], onDelete: Cascade, map: "uza_refs_IDS")
+
+  @@index([userID], map: "userID")
+  @@index([user_ref_Id], map: "user_ref_Id")
+}
+
+model salary_pay {
+  s_ID        Int          @id @default(autoincrement())
+  s_name      String?      @db.VarChar(190)
+  s_amount    Float        @default(0) @db.Float
+  s_date      String       @db.VarChar(50)
+  s_month     String       @db.VarChar(40)
+  s_year      String       @db.VarChar(7)
+  s_status    String?      @default("Paid") @db.VarChar(100)
+  nasso_users nasso_users? @relation(fields: [s_name], references: [usr_uname], onDelete: NoAction, map: "salaryId")
+
+  @@index([s_name], map: "s_name")
+  @@index([s_name], map: "s_name_2")
+}
+
+model tbl_cashes {
+  c_Id     Int     @id @default(autoincrement())
+  c_type   String? @default("N/A") @db.VarChar(100)
+  data_ID  Int?
+  c_amount Float?  @db.Float
+  c_uza    String? @default("N/A") @db.VarChar(200)
+  c_status String? @default("N/A") @db.VarChar(100)
+}
+
+model tbl_category {
+  ct_ID   Int     @id @default(autoincrement())
+  ct_name String? @db.VarChar(500)
+}
+
+model tbl_exchange {
+  ex_ID   Int  @id @default(autoincrement())
+  ex_rate Int?
+}
+
+model tbl_games {
+  g_ID    Int     @id @default(autoincrement())
+  g_games String? @db.Text
+}
+
+model tbl_jifunze {
+  j_Id     Int     @id @default(autoincrement())
+  j_vaudio String? @default("N/A") @db.VarChar(2000)
+}
+
+model tbl_karibu {
+  v_ID   Int    @id @default(autoincrement())
+  v_link String @db.Text
+}
+
+model tbl_loan {
+  ln_ID       Int          @id @default(autoincrement())
+  ln_user     String?      @db.VarChar(190)
+  ln_amount   Float        @default(0) @db.Float
+  ln_date     String       @db.VarChar(50)
+  ln_status   String       @default("Not Approved") @db.VarChar(50)
+  nasso_users nasso_users? @relation(fields: [ln_user], references: [usr_uname], onDelete: NoAction, map: "lnId")
+
+  @@index([ln_user], map: "ln_user")
+}
+
+model tbl_notify {
+  nt_ID  Int    @id @default(autoincrement())
+  nt_txt String @db.Text
+}
+
+model tbl_payments {
+  pay_ID       Int     @id @default(autoincrement())
+  pay_user     String? @db.VarChar(200)
+  pay_amount   Float?  @default(0) @db.Float
+  pay_phone    String? @default("n/a") @db.VarChar(15)
+  pay_email    String? @default("n/a") @db.VarChar(256)
+  pay_refID    String? @default("n/a") @db.VarChar(150)
+  pay_token    String? @db.Text
+  pay_date     String? @db.VarChar(50)
+  pay_url      String? @db.Text
+  pay_order_Id String? @default("n/a") @db.VarChar(1000)
+  pay_method   String? @default("n/a") @db.VarChar(200)
+  paid_ref     String? @default("n/a") @db.VarChar(200)
+  paid_transId String? @default("n/a") @db.VarChar(100)
+  paid_date    String? @default("n/a") @db.VarChar(50)
+  pay_status   String? @default("Not Paid") @db.VarChar(100)
+  pay_today    String? @db.VarChar(40)
+  pay_types    String? @db.VarChar(100)
+  sh_usr_ID    Int?
+  sh_pro_Id    Int?
+}
+
+model tbl_paymethod {
+  md_ID      Int     @id @default(autoincrement())
+  md_country String? @db.VarChar(200)
+  md_methods String? @db.Text
+}
+
+model tbl_products {
+  pro_ID         Int         @id @default(autoincrement())
+  pro_name       String?     @default("n/a") @db.VarChar(400)
+  pro_seller     String?     @default("n/a") @db.VarChar(200)
+  pro_location   String?     @default("n/a") @db.VarChar(1000)
+  pro_date       String?     @default("n/a") @db.VarChar(50)
+  pro_price      Float?
+  pro_category   String?     @default("n/a") @db.VarChar(300)
+  pro_pay_method String?     @db.VarChar(200)
+  pro_status     String?     @default("Not Approved") @db.VarChar(100)
+  pro_country    String?     @default("n/a") @db.VarChar(300)
+  pro_des        String?     @db.Text
+  seller_nm      Int?
+  sel_comisio    Int?
+  pro_photo      pro_photo[]
+
+  @@index([seller_nm], map: "seller_nm")
+}
+
+model tbl_rates {
+  rt_Id      Int     @id @default(autoincrement())
+  rt_country String  @db.VarChar(200)
+  rt_rate    Float   @default(0) @db.Float
+  rt_symbol  String? @db.VarChar(50)
+}
+
+model tbl_seller {
+  seller_ID   Int    @id @default(autoincrement())
+  seller_name String @db.VarChar(500)
+}
+
+model tbl_sh_orders {
+  o_ID        Int     @id @default(autoincrement())
+  o_pro_Id    Int?
+  order_ID    String  @db.VarChar(100)
+  o_user      Int?
+  o_date      String? @db.VarChar(50)
+  oda_status  String? @default("Pending") @db.VarChar(100)
+  o_idadi     Int?
+  o_datetimes String? @db.VarChar(50)
+  o_delivery  String? @default("Not Received") @db.VarChar(100)
+
+  @@index([o_user], map: "o_user")
+}
+
+model tbl_status {
+  st_Id       Int          @id @default(autoincrement())
+  st_link     String       @default("N/A") @db.VarChar(2000)
+  st_del_date String       @default("N/A") @db.VarChar(40)
+  money_go    String       @default("N/A") @db.VarChar(100)
+  uza_status  uza_status[]
+}
+
+model tbl_video {
+  v_Id       Int     @id @default(autoincrement())
+  v_link     String  @db.LongText
+  v_del_date String  @default("N/A") @db.VarChar(50)
+  v_op       String  @default("N/A") @db.VarChar(50)
+  v_type     String? @default("n/a") @db.VarChar(50)
+  v_duration Int?    @default(0)
+}
+
+model tbl_video_pay {
+  ID     Int     @id @default(autoincrement())
+  uza    String? @db.VarChar(200)
+  status String? @db.VarChar(20)
+}
+
+model tknes_nasso {
+  token_ID    Int    @id @default(autoincrement())
+  tk_nm_nasso String @default("N/A") @db.VarChar(600)
+  tk_rw_nasso String @default("N/A") @db.VarChar(400)
+}
+
+model uza_answers {
+  a_ID      Int        @id @default(autoincrement())
+  uza_ID    String?    @db.VarChar(200)
+  qns_ID    Int?
+  ans_ID    String?    @default("N/A") @db.VarChar(300)
+  a_status  String?    @db.VarChar(40)
+  uza_paid  String?    @default("N/A") @db.VarChar(100)
+  nasso_qns nasso_qns? @relation(fields: [qns_ID], references: [qns_Id], onDelete: Cascade, onUpdate: NoAction, map: "ans_tos_uza")
+
+  @@index([qns_ID], map: "ans_tos_uza")
+}
+
+model uza_status {
+  status_ID      Int         @id @default(autoincrement())
+  status_uza     String      @default("N/A") @db.VarChar(200)
+  status_data_Id Int?
+  status_link    String?     @default("N/A") @db.VarChar(2000)
+  tbl_status     tbl_status? @relation(fields: [status_data_Id], references: [st_Id], onDelete: Cascade, onUpdate: NoAction, map: "uza_status_status")
+
+  @@index([status_data_Id], map: "uza_status_status")
 }

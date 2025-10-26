@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  db:
+    # Use the official MySQL 8 image
+    image: mysql:8.0
+    
+    # Restarts the container automatically if it stops
+    restart: unless-stopped
+    
+    # Set environment variables for the database
+    environment:
+      MYSQL_ROOT_PASSWORD: 'anzacash_1997' # Change this!
+      MYSQL_DATABASE: 'anzacash-db'          # Name of the new DB to create
+    
+    # Map the port from your computer (left) to the container (right)
+    ports:
+      - '3306:3306'
+      
+    volumes:
+      # 1. This is the magic part:
+      #    It copies your .sql file into a special folder in the container.
+      #    On its very first startup, MySQL will automatically run any .sql
+      #    files it finds here.
+      - ./init-db:/docker-entrypoint-initdb.d
+      
+      # 2. This persists your data:
+      #    It links a folder on your computer (a "named volume")
+      #    to the container's data folder. This ensures your data
+      #    is saved even if you stop or remove the container.
+      - db-data:/var/lib/mysql
+
+# This defines the named volume we used above
+volumes:
+  db-data:

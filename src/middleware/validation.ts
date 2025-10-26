@@ -51,7 +51,7 @@ export function validateRegistration(req: Request, res: Response, next: NextFunc
   }
 
   // Role validation
-  const validRoles = ['VENDOR', 'CUSTOMER', 'MLM_MEMBER'];
+  const validRoles = ['ADMIN', 'VENDOR', 'CUSTOMER', 'MLM_MEMBER'];
   if (!validRoles.includes(role)) {
     res.status(400).json({
       error: 'Invalid role',
