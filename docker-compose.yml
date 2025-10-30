@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: anzacash-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword123
+      MYSQL_DATABASE: anzacash_db
+      MYSQL_USER: anzacash_user
+      MYSQL_PASSWORD: anzacash123
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks:
+      - anzacash-network
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: anzacash-phpmyadmin
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: rootpassword123
+    depends_on:
+      - mysql
+    networks:
+      - anzacash-network
+
+volumes:
+  mysql_data:
+
+networks:
+  anzacash-network:
+    driver: bridge
