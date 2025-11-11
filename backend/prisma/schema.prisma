@@ -123,25 +123,34 @@ model nasso_quiz {
 }
 
 model nasso_users {
-  usr_Id                                   Int              @id @default(autoincrement())
-  usr_uname                                String           @unique(map: "usr_uname") @db.VarChar(190)
-  usr_posio                                String           @default("traders") @db.VarChar(100)
-  usr_status                               String           @default("Not Active") @db.VarChar(40)
-  usr_code                                 String?          @db.VarChar(100)
-  usr_passwd                               String           @db.VarChar(300)
-  usr_email                                String?          @default("N/A") @db.VarChar(254)
-  usr_phone                                String           @default("N/A") @db.VarChar(20)
-  usr_county                               String           @default("N/A") @db.VarChar(200)
-  usr_photo                                String?          @default("N/A") @db.VarChar(2000)
-  join_date                                String           @default("N/A") @db.VarChar(30)
-  full_name                                String?          @db.VarChar(200)
-  ch_table                                 ch_table[]
-  nasso_accounts                           nasso_accounts[]
-  notifiers                                notifiers[]
-  referal_referal_userIDTonasso_users      referal[]        @relation("referal_userIDTonasso_users")
-  referal_referal_user_ref_IdTonasso_users referal[]        @relation("referal_user_ref_IdTonasso_users")
-  salary_pay                               salary_pay[]
-  tbl_loan                                 tbl_loan[]
+  usr_Id                                               Int                    @id @default(autoincrement())
+  usr_uname                                            String                 @unique(map: "usr_uname") @db.VarChar(190)
+  usr_posio                                            String                 @default("traders") @db.VarChar(100)
+  usr_status                                           String                 @default("Not Active") @db.VarChar(40)
+  usr_code                                             String?                @db.VarChar(100)
+  usr_passwd                                           String                 @db.VarChar(300)
+  usr_email                                            String?                @default("N/A") @db.VarChar(254)
+  usr_phone                                            String                 @default("N/A") @db.VarChar(20)
+  usr_county                                           String                 @default("N/A") @db.VarChar(200)
+  usr_photo                                            String?                @default("N/A") @db.VarChar(2000)
+  join_date                                            String                 @default("N/A") @db.VarChar(30)
+  full_name                                            String?                @db.VarChar(200)
+  ch_table                                             ch_table[]
+  nasso_accounts                                       nasso_accounts[]
+  notifiers                                            notifiers[]
+  referal_referal_userIDTonasso_users                  referal[]              @relation("referal_userIDTonasso_users")
+  referal_referal_user_ref_IdTonasso_users             referal[]              @relation("referal_user_ref_IdTonasso_users")
+  salary_pay                                           salary_pay[]
+  tbl_customer_profiles                                tbl_customer_profiles?
+  tbl_inventory                                        tbl_inventory[]
+  tbl_loan                                             tbl_loan[]
+  tbl_products                                         tbl_products[]
+  tbl_seller_profiles                                  tbl_seller_profiles?
+  tbl_sh_orders_tbl_sh_orders_customer_idTonasso_users tbl_sh_orders[]        @relation("tbl_sh_orders_customer_idTonasso_users")
+  tbl_sh_orders_tbl_sh_orders_seller_idTonasso_users   tbl_sh_orders[]        @relation("tbl_sh_orders_seller_idTonasso_users")
+  tbl_transactions                                     tbl_transactions[]
+
+  @@index([usr_uname], map: "idx_users_username")
 }
 
 model notifiers {
@@ -272,22 +281,28 @@ model tbl_paymethod {
 }
 
 model tbl_products {
-  pro_ID         Int         @id @default(autoincrement())
-  pro_name       String?     @default("n/a") @db.VarChar(400)
-  pro_seller     String?     @default("n/a") @db.VarChar(200)
-  pro_location   String?     @default("n/a") @db.VarChar(1000)
-  pro_date       String?     @default("n/a") @db.VarChar(50)
-  pro_price      Float?
-  pro_category   String?     @default("n/a") @db.VarChar(300)
-  pro_pay_method String?     @db.VarChar(200)
-  pro_status     String?     @default("Not Approved") @db.VarChar(100)
-  pro_country    String?     @default("n/a") @db.VarChar(300)
-  pro_des        String?     @db.Text
-  seller_nm      Int?
-  sel_comisio    Int?
-  pro_photo      pro_photo[]
+  pro_ID          Int               @id @default(autoincrement())
+  pro_name        String?           @default("n/a") @db.VarChar(400)
+  pro_seller      String?           @default("n/a") @db.VarChar(200)
+  pro_location    String?           @default("n/a") @db.VarChar(1000)
+  pro_date        String?           @default("n/a") @db.VarChar(50)
+  pro_price       Float?
+  pro_category    String?           @default("n/a") @db.VarChar(300)
+  pro_pay_method  String?           @db.VarChar(200)
+  pro_status      String?           @default("Not Approved") @db.VarChar(100)
+  pro_country     String?           @default("n/a") @db.VarChar(300)
+  pro_des         String?           @db.Text
+  seller_nm       Int?
+  sel_comisio     Int?
+  pro_photo       pro_photo[]
+  tbl_inventory   tbl_inventory[]
+  tbl_order_items tbl_order_items[]
+  nasso_users     nasso_users?      @relation(fields: [seller_nm], references: [usr_Id], onUpdate: NoAction, map: "fk_products_seller")
+  tbl_sh_orders   tbl_sh_orders[]
 
   @@index([seller_nm], map: "seller_nm")
+  @@index([seller_nm], map: "idx_products_seller")
+  @@index([pro_status], map: "idx_products_status")
 }
 
 model tbl_rates {
@@ -303,17 +318,28 @@ model tbl_seller {
 }
 
 model tbl_sh_orders {
-  o_ID        Int     @id @default(autoincrement())
-  o_pro_Id    Int?
-  order_ID    String  @db.VarChar(100)
-  o_user      Int?
-  o_date      String? @db.VarChar(50)
-  oda_status  String? @default("Pending") @db.VarChar(100)
-  o_idadi     Int?
-  o_datetimes String? @db.VarChar(50)
-  o_delivery  String? @default("Not Received") @db.VarChar(100)
+  o_ID                                               Int                @id @default(autoincrement())
+  o_pro_Id                                           Int?
+  order_ID                                           String             @db.VarChar(100)
+  o_user                                             Int?
+  o_date                                             String?            @db.VarChar(50)
+  oda_status                                         String?            @default("Pending") @db.VarChar(100)
+  o_idadi                                            Int?
+  o_datetimes                                        String?            @db.VarChar(50)
+  o_delivery                                         String?            @default("Not Received") @db.VarChar(100)
+  customer_id                                        Int?
+  seller_id                                          Int?
+  tbl_order_items                                    tbl_order_items[]
+  nasso_users_tbl_sh_orders_customer_idTonasso_users nasso_users?       @relation("tbl_sh_orders_customer_idTonasso_users", fields: [customer_id], references: [usr_Id], onUpdate: NoAction, map: "fk_orders_customer")
+  tbl_products                                       tbl_products?      @relation(fields: [o_pro_Id], references: [pro_ID], onUpdate: NoAction, map: "fk_orders_product")
+  nasso_users_tbl_sh_orders_seller_idTonasso_users   nasso_users?       @relation("tbl_sh_orders_seller_idTonasso_users", fields: [seller_id], references: [usr_Id], onUpdate: NoAction, map: "fk_orders_seller")
+  tbl_transactions                                   tbl_transactions[]
 
   @@index([o_user], map: "o_user")
+  @@index([o_pro_Id], map: "fk_orders_product")
+  @@index([customer_id], map: "idx_orders_customer")
+  @@index([seller_id], map: "idx_orders_seller")
+  @@index([oda_status], map: "idx_orders_status")
 }
 
 model tbl_status {
@@ -365,4 +391,113 @@ model uza_status {
   tbl_status     tbl_status? @relation(fields: [status_data_Id], references: [st_Id], onDelete: Cascade, onUpdate: NoAction, map: "uza_status_status")
 
   @@index([status_data_Id], map: "uza_status_status")
+}
+
+model tbl_customer_profiles {
+  profile_id       Int         @id @default(autoincrement())
+  user_id          Int         @unique(map: "user_id")
+  shipping_address String?     @db.Text
+  billing_address  String?     @db.Text
+  phone_number     String?     @db.VarChar(20)
+  preferences      Json?
+  loyalty_points   Int?        @default(0)
+  total_orders     Int?        @default(0)
+  total_spent      Decimal?    @default(0.00) @db.Decimal(15, 2)
+  created_at       DateTime?   @default(now()) @db.Timestamp(0)
+  updated_at       DateTime?   @default(now()) @db.Timestamp(0)
+  nasso_users      nasso_users @relation(fields: [user_id], references: [usr_Id], onDelete: Cascade, onUpdate: NoAction, map: "tbl_customer_profiles_ibfk_1")
+
+  @@index([loyalty_points], map: "idx_customer_loyalty")
+  @@index([user_id], map: "idx_customer_user")
+}
+
+model tbl_inventory {
+  inventory_id       Int          @id @default(autoincrement())
+  product_id         Int
+  seller_id          Int
+  quantity_available Int?         @default(0)
+  quantity_sold      Int?         @default(0)
+  reorder_level      Int?         @default(0)
+  cost_price         Decimal?     @db.Decimal(10, 2)
+  selling_price      Decimal?     @db.Decimal(10, 2)
+  last_updated       DateTime?    @default(now()) @db.Timestamp(0)
+  created_at         DateTime?    @default(now()) @db.Timestamp(0)
+  tbl_products       tbl_products @relation(fields: [product_id], references: [pro_ID], onDelete: Cascade, onUpdate: NoAction, map: "tbl_inventory_ibfk_1")
+  nasso_users        nasso_users  @relation(fields: [seller_id], references: [usr_Id], onDelete: Cascade, onUpdate: NoAction, map: "tbl_inventory_ibfk_2")
+
+  @@unique([product_id, seller_id], map: "unique_product_seller")
+  @@index([product_id], map: "idx_inventory_product")
+  @@index([seller_id], map: "idx_inventory_seller")
+  @@index([quantity_available], map: "idx_inventory_stock")
+}
+
+model tbl_order_items {
+  item_id       Int           @id @default(autoincrement())
+  order_id      Int
+  product_id    Int
+  quantity      Int           @default(1)
+  unit_price    Decimal       @db.Decimal(10, 2)
+  total_price   Decimal?      @db.Decimal(10, 2)
+  created_at    DateTime?     @default(now()) @db.Timestamp(0)
+  tbl_sh_orders tbl_sh_orders @relation(fields: [order_id], references: [o_ID], onDelete: Cascade, onUpdate: NoAction, map: "tbl_order_items_ibfk_1")
+  tbl_products  tbl_products  @relation(fields: [product_id], references: [pro_ID], onUpdate: NoAction, map: "tbl_order_items_ibfk_2")
+
+  @@index([created_at], map: "idx_order_items_created")
+  @@index([order_id], map: "idx_order_items_order")
+  @@index([product_id], map: "idx_order_items_product")
+}
+
+model tbl_seller_profiles {
+  profile_id           Int                                      @id @default(autoincrement())
+  user_id              Int                                      @unique(map: "user_id")
+  business_name        String?                                  @db.VarChar(200)
+  business_description String?                                  @db.Text
+  commission_rate      Decimal?                                 @default(15.00) @db.Decimal(5, 2)
+  verification_status  tbl_seller_profiles_verification_status? @default(pending)
+  business_phone       String?                                  @db.VarChar(20)
+  business_email       String?                                  @db.VarChar(254)
+  business_address     String?                                  @db.Text
+  rating               Decimal?                                 @default(0.00) @db.Decimal(3, 2)
+  total_sales          Decimal?                                 @default(0.00) @db.Decimal(15, 2)
+  total_products       Int?                                     @default(0)
+  created_at           DateTime?                                @default(now()) @db.Timestamp(0)
+  updated_at           DateTime?                                @default(now()) @db.Timestamp(0)
+  nasso_users          nasso_users                              @relation(fields: [user_id], references: [usr_Id], onDelete: Cascade, onUpdate: NoAction, map: "tbl_seller_profiles_ibfk_1")
+
+  @@index([rating], map: "idx_seller_rating")
+  @@index([verification_status], map: "idx_seller_status")
+  @@index([user_id], map: "idx_seller_user")
+}
+
+model tbl_transactions {
+  transaction_id   Int                               @id @default(autoincrement())
+  user_id          Int
+  order_id         Int?
+  amount           Decimal                           @db.Decimal(10, 2)
+  transaction_type tbl_transactions_transaction_type
+  description      String?                           @db.Text
+  reference_id     String?                           @db.VarChar(100)
+  balance_after    Decimal?                          @db.Decimal(15, 2)
+  created_at       DateTime?                         @default(now()) @db.Timestamp(0)
+  nasso_users      nasso_users                       @relation(fields: [user_id], references: [usr_Id], onDelete: Cascade, onUpdate: NoAction, map: "tbl_transactions_ibfk_1")
+  tbl_sh_orders    tbl_sh_orders?                    @relation(fields: [order_id], references: [o_ID], onUpdate: NoAction, map: "tbl_transactions_ibfk_2")
+
+  @@index([created_at], map: "idx_transactions_date")
+  @@index([order_id], map: "idx_transactions_order")
+  @@index([transaction_type], map: "idx_transactions_type")
+  @@index([user_id], map: "idx_transactions_user")
+}
+
+enum tbl_transactions_transaction_type {
+  sale
+  commission
+  refund
+  withdrawal
+  payment
+}
+
+enum tbl_seller_profiles_verification_status {
+  pending
+  verified
+  rejected
 }

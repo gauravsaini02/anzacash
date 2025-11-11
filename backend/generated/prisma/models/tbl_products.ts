@@ -292,6 +292,10 @@ export type tbl_productsWhereInput = {
   seller_nm?: Prisma.IntNullableFilter<"tbl_products"> | number | null
   sel_comisio?: Prisma.IntNullableFilter<"tbl_products"> | number | null
   pro_photo?: Prisma.Pro_photoListRelationFilter
+  tbl_inventory?: Prisma.Tbl_inventoryListRelationFilter
+  tbl_order_items?: Prisma.Tbl_order_itemsListRelationFilter
+  nasso_users?: Prisma.XOR<Prisma.Nasso_usersNullableScalarRelationFilter, Prisma.nasso_usersWhereInput> | null
+  tbl_sh_orders?: Prisma.Tbl_sh_ordersListRelationFilter
 }
 
 export type tbl_productsOrderByWithRelationInput = {
@@ -309,6 +313,10 @@ export type tbl_productsOrderByWithRelationInput = {
   seller_nm?: Prisma.SortOrderInput | Prisma.SortOrder
   sel_comisio?: Prisma.SortOrderInput | Prisma.SortOrder
   pro_photo?: Prisma.pro_photoOrderByRelationAggregateInput
+  tbl_inventory?: Prisma.tbl_inventoryOrderByRelationAggregateInput
+  tbl_order_items?: Prisma.tbl_order_itemsOrderByRelationAggregateInput
+  nasso_users?: Prisma.nasso_usersOrderByWithRelationInput
+  tbl_sh_orders?: Prisma.tbl_sh_ordersOrderByRelationAggregateInput
   _relevance?: Prisma.tbl_productsOrderByRelevanceInput
 }
 
@@ -330,6 +338,10 @@ export type tbl_productsWhereUniqueInput = Prisma.AtLeast<{
   seller_nm?: Prisma.IntNullableFilter<"tbl_products"> | number | null
   sel_comisio?: Prisma.IntNullableFilter<"tbl_products"> | number | null
   pro_photo?: Prisma.Pro_photoListRelationFilter
+  tbl_inventory?: Prisma.Tbl_inventoryListRelationFilter
+  tbl_order_items?: Prisma.Tbl_order_itemsListRelationFilter
+  nasso_users?: Prisma.XOR<Prisma.Nasso_usersNullableScalarRelationFilter, Prisma.nasso_usersWhereInput> | null
+  tbl_sh_orders?: Prisma.Tbl_sh_ordersListRelationFilter
 }, "pro_ID">
 
 export type tbl_productsOrderByWithAggregationInput = {
@@ -383,9 +395,12 @@ export type tbl_productsCreateInput = {
   pro_status?: string | null
   pro_country?: string | null
   pro_des?: string | null
-  seller_nm?: number | null
   sel_comisio?: number | null
   pro_photo?: Prisma.pro_photoCreateNestedManyWithoutTbl_productsInput
+  tbl_inventory?: Prisma.tbl_inventoryCreateNestedManyWithoutTbl_productsInput
+  tbl_order_items?: Prisma.tbl_order_itemsCreateNestedManyWithoutTbl_productsInput
+  nasso_users?: Prisma.nasso_usersCreateNestedOneWithoutTbl_productsInput
+  tbl_sh_orders?: Prisma.tbl_sh_ordersCreateNestedManyWithoutTbl_productsInput
 }
 
 export type tbl_productsUncheckedCreateInput = {
@@ -403,6 +418,9 @@ export type tbl_productsUncheckedCreateInput = {
   seller_nm?: number | null
   sel_comisio?: number | null
   pro_photo?: Prisma.pro_photoUncheckedCreateNestedManyWithoutTbl_productsInput
+  tbl_inventory?: Prisma.tbl_inventoryUncheckedCreateNestedManyWithoutTbl_productsInput
+  tbl_order_items?: Prisma.tbl_order_itemsUncheckedCreateNestedManyWithoutTbl_productsInput
+  tbl_sh_orders?: Prisma.tbl_sh_ordersUncheckedCreateNestedManyWithoutTbl_productsInput
 }
 
 export type tbl_productsUpdateInput = {
@@ -416,9 +434,12 @@ export type tbl_productsUpdateInput = {
   pro_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pro_country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pro_des?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  seller_nm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sel_comisio?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   pro_photo?: Prisma.pro_photoUpdateManyWithoutTbl_productsNestedInput
+  tbl_inventory?: Prisma.tbl_inventoryUpdateManyWithoutTbl_productsNestedInput
+  tbl_order_items?: Prisma.tbl_order_itemsUpdateManyWithoutTbl_productsNestedInput
+  nasso_users?: Prisma.nasso_usersUpdateOneWithoutTbl_productsNestedInput
+  tbl_sh_orders?: Prisma.tbl_sh_ordersUpdateManyWithoutTbl_productsNestedInput
 }
 
 export type tbl_productsUncheckedUpdateInput = {
@@ -436,6 +457,9 @@ export type tbl_productsUncheckedUpdateInput = {
   seller_nm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sel_comisio?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   pro_photo?: Prisma.pro_photoUncheckedUpdateManyWithoutTbl_productsNestedInput
+  tbl_inventory?: Prisma.tbl_inventoryUncheckedUpdateManyWithoutTbl_productsNestedInput
+  tbl_order_items?: Prisma.tbl_order_itemsUncheckedUpdateManyWithoutTbl_productsNestedInput
+  tbl_sh_orders?: Prisma.tbl_sh_ordersUncheckedUpdateManyWithoutTbl_productsNestedInput
 }
 
 export type tbl_productsCreateManyInput = {
@@ -465,7 +489,6 @@ export type tbl_productsUpdateManyMutationInput = {
   pro_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pro_country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pro_des?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  seller_nm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sel_comisio?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
@@ -483,6 +506,16 @@ export type tbl_productsUncheckedUpdateManyInput = {
   pro_des?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   seller_nm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sel_comisio?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type Tbl_productsListRelationFilter = {
+  every?: Prisma.tbl_productsWhereInput
+  some?: Prisma.tbl_productsWhereInput
+  none?: Prisma.tbl_productsWhereInput
+}
+
+export type tbl_productsOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type Tbl_productsNullableScalarRelationFilter = {
@@ -558,6 +591,53 @@ export type tbl_productsSumOrderByAggregateInput = {
   sel_comisio?: Prisma.SortOrder
 }
 
+export type Tbl_productsScalarRelationFilter = {
+  is?: Prisma.tbl_productsWhereInput
+  isNot?: Prisma.tbl_productsWhereInput
+}
+
+export type tbl_productsCreateNestedManyWithoutNasso_usersInput = {
+  create?: Prisma.XOR<Prisma.tbl_productsCreateWithoutNasso_usersInput, Prisma.tbl_productsUncheckedCreateWithoutNasso_usersInput> | Prisma.tbl_productsCreateWithoutNasso_usersInput[] | Prisma.tbl_productsUncheckedCreateWithoutNasso_usersInput[]
+  connectOrCreate?: Prisma.tbl_productsCreateOrConnectWithoutNasso_usersInput | Prisma.tbl_productsCreateOrConnectWithoutNasso_usersInput[]
+  createMany?: Prisma.tbl_productsCreateManyNasso_usersInputEnvelope
+  connect?: Prisma.tbl_productsWhereUniqueInput | Prisma.tbl_productsWhereUniqueInput[]
+}
+
+export type tbl_productsUncheckedCreateNestedManyWithoutNasso_usersInput = {
+  create?: Prisma.XOR<Prisma.tbl_productsCreateWithoutNasso_usersInput, Prisma.tbl_productsUncheckedCreateWithoutNasso_usersInput> | Prisma.tbl_productsCreateWithoutNasso_usersInput[] | Prisma.tbl_productsUncheckedCreateWithoutNasso_usersInput[]
+  connectOrCreate?: Prisma.tbl_productsCreateOrConnectWithoutNasso_usersInput | Prisma.tbl_productsCreateOrConnectWithoutNasso_usersInput[]
+  createMany?: Prisma.tbl_productsCreateManyNasso_usersInputEnvelope
+  connect?: Prisma.tbl_productsWhereUniqueInput | Prisma.tbl_productsWhereUniqueInput[]
+}
+
+export type tbl_productsUpdateManyWithoutNasso_usersNestedInput = {
+  create?: Prisma.XOR<Prisma.tbl_productsCreateWithoutNasso_usersInput, Prisma.tbl_productsUncheckedCreateWithoutNasso_usersInput> | Prisma.tbl_productsCreateWithoutNasso_usersInput[] | Prisma.tbl_productsUncheckedCreateWithoutNasso_usersInput[]
+  connectOrCreate?: Prisma.tbl_productsCreateOrConnectWithoutNasso_usersInput | Prisma.tbl_productsCreateOrConnectWithoutNasso_usersInput[]
+  upsert?: Prisma.tbl_productsUpsertWithWhereUniqueWithoutNasso_usersInput | Prisma.tbl_productsUpsertWithWhereUniqueWithoutNasso_usersInput[]
+  createMany?: Prisma.tbl_productsCreateManyNasso_usersInputEnvelope
+  set?: Prisma.tbl_productsWhereUniqueInput | Prisma.tbl_productsWhereUniqueInput[]
+  disconnect?: Prisma.tbl_productsWhereUniqueInput | Prisma.tbl_productsWhereUniqueInput[]
+  delete?: Prisma.tbl_productsWhereUniqueInput | Prisma.tbl_productsWhereUniqueInput[]
+  connect?: Prisma.tbl_productsWhereUniqueInput | Prisma.tbl_productsWhereUniqueInput[]
+  update?: Prisma.tbl_productsUpdateWithWhereUniqueWithoutNasso_usersInput | Prisma.tbl_productsUpdateWithWhereUniqueWithoutNasso_usersInput[]
+  updateMany?: Prisma.tbl_productsUpdateManyWithWhereWithoutNasso_usersInput | Prisma.tbl_productsUpdateManyWithWhereWithoutNasso_usersInput[]
+  deleteMany?: Prisma.tbl_productsScalarWhereInput | Prisma.tbl_productsScalarWhereInput[]
+}
+
+export type tbl_productsUncheckedUpdateManyWithoutNasso_usersNestedInput = {
+  create?: Prisma.XOR<Prisma.tbl_productsCreateWithoutNasso_usersInput, Prisma.tbl_productsUncheckedCreateWithoutNasso_usersInput> | Prisma.tbl_productsCreateWithoutNasso_usersInput[] | Prisma.tbl_productsUncheckedCreateWithoutNasso_usersInput[]
+  connectOrCreate?: Prisma.tbl_productsCreateOrConnectWithoutNasso_usersInput | Prisma.tbl_productsCreateOrConnectWithoutNasso_usersInput[]
+  upsert?: Prisma.tbl_productsUpsertWithWhereUniqueWithoutNasso_usersInput | Prisma.tbl_productsUpsertWithWhereUniqueWithoutNasso_usersInput[]
+  createMany?: Prisma.tbl_productsCreateManyNasso_usersInputEnvelope
+  set?: Prisma.tbl_productsWhereUniqueInput | Prisma.tbl_productsWhereUniqueInput[]
+  disconnect?: Prisma.tbl_productsWhereUniqueInput | Prisma.tbl_productsWhereUniqueInput[]
+  delete?: Prisma.tbl_productsWhereUniqueInput | Prisma.tbl_productsWhereUniqueInput[]
+  connect?: Prisma.tbl_productsWhereUniqueInput | Prisma.tbl_productsWhereUniqueInput[]
+  update?: Prisma.tbl_productsUpdateWithWhereUniqueWithoutNasso_usersInput | Prisma.tbl_productsUpdateWithWhereUniqueWithoutNasso_usersInput[]
+  updateMany?: Prisma.tbl_productsUpdateManyWithWhereWithoutNasso_usersInput | Prisma.tbl_productsUpdateManyWithWhereWithoutNasso_usersInput[]
+  deleteMany?: Prisma.tbl_productsScalarWhereInput | Prisma.tbl_productsScalarWhereInput[]
+}
+
 export type tbl_productsCreateNestedOneWithoutPro_photoInput = {
   create?: Prisma.XOR<Prisma.tbl_productsCreateWithoutPro_photoInput, Prisma.tbl_productsUncheckedCreateWithoutPro_photoInput>
   connectOrCreate?: Prisma.tbl_productsCreateOrConnectWithoutPro_photoInput
@@ -574,6 +654,132 @@ export type tbl_productsUpdateOneWithoutPro_photoNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.tbl_productsUpdateToOneWithWhereWithoutPro_photoInput, Prisma.tbl_productsUpdateWithoutPro_photoInput>, Prisma.tbl_productsUncheckedUpdateWithoutPro_photoInput>
 }
 
+export type tbl_productsCreateNestedOneWithoutTbl_sh_ordersInput = {
+  create?: Prisma.XOR<Prisma.tbl_productsCreateWithoutTbl_sh_ordersInput, Prisma.tbl_productsUncheckedCreateWithoutTbl_sh_ordersInput>
+  connectOrCreate?: Prisma.tbl_productsCreateOrConnectWithoutTbl_sh_ordersInput
+  connect?: Prisma.tbl_productsWhereUniqueInput
+}
+
+export type tbl_productsUpdateOneWithoutTbl_sh_ordersNestedInput = {
+  create?: Prisma.XOR<Prisma.tbl_productsCreateWithoutTbl_sh_ordersInput, Prisma.tbl_productsUncheckedCreateWithoutTbl_sh_ordersInput>
+  connectOrCreate?: Prisma.tbl_productsCreateOrConnectWithoutTbl_sh_ordersInput
+  upsert?: Prisma.tbl_productsUpsertWithoutTbl_sh_ordersInput
+  disconnect?: Prisma.tbl_productsWhereInput | boolean
+  delete?: Prisma.tbl_productsWhereInput | boolean
+  connect?: Prisma.tbl_productsWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.tbl_productsUpdateToOneWithWhereWithoutTbl_sh_ordersInput, Prisma.tbl_productsUpdateWithoutTbl_sh_ordersInput>, Prisma.tbl_productsUncheckedUpdateWithoutTbl_sh_ordersInput>
+}
+
+export type tbl_productsCreateNestedOneWithoutTbl_inventoryInput = {
+  create?: Prisma.XOR<Prisma.tbl_productsCreateWithoutTbl_inventoryInput, Prisma.tbl_productsUncheckedCreateWithoutTbl_inventoryInput>
+  connectOrCreate?: Prisma.tbl_productsCreateOrConnectWithoutTbl_inventoryInput
+  connect?: Prisma.tbl_productsWhereUniqueInput
+}
+
+export type tbl_productsUpdateOneRequiredWithoutTbl_inventoryNestedInput = {
+  create?: Prisma.XOR<Prisma.tbl_productsCreateWithoutTbl_inventoryInput, Prisma.tbl_productsUncheckedCreateWithoutTbl_inventoryInput>
+  connectOrCreate?: Prisma.tbl_productsCreateOrConnectWithoutTbl_inventoryInput
+  upsert?: Prisma.tbl_productsUpsertWithoutTbl_inventoryInput
+  connect?: Prisma.tbl_productsWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.tbl_productsUpdateToOneWithWhereWithoutTbl_inventoryInput, Prisma.tbl_productsUpdateWithoutTbl_inventoryInput>, Prisma.tbl_productsUncheckedUpdateWithoutTbl_inventoryInput>
+}
+
+export type tbl_productsCreateNestedOneWithoutTbl_order_itemsInput = {
+  create?: Prisma.XOR<Prisma.tbl_productsCreateWithoutTbl_order_itemsInput, Prisma.tbl_productsUncheckedCreateWithoutTbl_order_itemsInput>
+  connectOrCreate?: Prisma.tbl_productsCreateOrConnectWithoutTbl_order_itemsInput
+  connect?: Prisma.tbl_productsWhereUniqueInput
+}
+
+export type tbl_productsUpdateOneRequiredWithoutTbl_order_itemsNestedInput = {
+  create?: Prisma.XOR<Prisma.tbl_productsCreateWithoutTbl_order_itemsInput, Prisma.tbl_productsUncheckedCreateWithoutTbl_order_itemsInput>
+  connectOrCreate?: Prisma.tbl_productsCreateOrConnectWithoutTbl_order_itemsInput
+  upsert?: Prisma.tbl_productsUpsertWithoutTbl_order_itemsInput
+  connect?: Prisma.tbl_productsWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.tbl_productsUpdateToOneWithWhereWithoutTbl_order_itemsInput, Prisma.tbl_productsUpdateWithoutTbl_order_itemsInput>, Prisma.tbl_productsUncheckedUpdateWithoutTbl_order_itemsInput>
+}
+
+export type tbl_productsCreateWithoutNasso_usersInput = {
+  pro_name?: string | null
+  pro_seller?: string | null
+  pro_location?: string | null
+  pro_date?: string | null
+  pro_price?: number | null
+  pro_category?: string | null
+  pro_pay_method?: string | null
+  pro_status?: string | null
+  pro_country?: string | null
+  pro_des?: string | null
+  sel_comisio?: number | null
+  pro_photo?: Prisma.pro_photoCreateNestedManyWithoutTbl_productsInput
+  tbl_inventory?: Prisma.tbl_inventoryCreateNestedManyWithoutTbl_productsInput
+  tbl_order_items?: Prisma.tbl_order_itemsCreateNestedManyWithoutTbl_productsInput
+  tbl_sh_orders?: Prisma.tbl_sh_ordersCreateNestedManyWithoutTbl_productsInput
+}
+
+export type tbl_productsUncheckedCreateWithoutNasso_usersInput = {
+  pro_ID?: number
+  pro_name?: string | null
+  pro_seller?: string | null
+  pro_location?: string | null
+  pro_date?: string | null
+  pro_price?: number | null
+  pro_category?: string | null
+  pro_pay_method?: string | null
+  pro_status?: string | null
+  pro_country?: string | null
+  pro_des?: string | null
+  sel_comisio?: number | null
+  pro_photo?: Prisma.pro_photoUncheckedCreateNestedManyWithoutTbl_productsInput
+  tbl_inventory?: Prisma.tbl_inventoryUncheckedCreateNestedManyWithoutTbl_productsInput
+  tbl_order_items?: Prisma.tbl_order_itemsUncheckedCreateNestedManyWithoutTbl_productsInput
+  tbl_sh_orders?: Prisma.tbl_sh_ordersUncheckedCreateNestedManyWithoutTbl_productsInput
+}
+
+export type tbl_productsCreateOrConnectWithoutNasso_usersInput = {
+  where: Prisma.tbl_productsWhereUniqueInput
+  create: Prisma.XOR<Prisma.tbl_productsCreateWithoutNasso_usersInput, Prisma.tbl_productsUncheckedCreateWithoutNasso_usersInput>
+}
+
+export type tbl_productsCreateManyNasso_usersInputEnvelope = {
+  data: Prisma.tbl_productsCreateManyNasso_usersInput | Prisma.tbl_productsCreateManyNasso_usersInput[]
+  skipDuplicates?: boolean
+}
+
+export type tbl_productsUpsertWithWhereUniqueWithoutNasso_usersInput = {
+  where: Prisma.tbl_productsWhereUniqueInput
+  update: Prisma.XOR<Prisma.tbl_productsUpdateWithoutNasso_usersInput, Prisma.tbl_productsUncheckedUpdateWithoutNasso_usersInput>
+  create: Prisma.XOR<Prisma.tbl_productsCreateWithoutNasso_usersInput, Prisma.tbl_productsUncheckedCreateWithoutNasso_usersInput>
+}
+
+export type tbl_productsUpdateWithWhereUniqueWithoutNasso_usersInput = {
+  where: Prisma.tbl_productsWhereUniqueInput
+  data: Prisma.XOR<Prisma.tbl_productsUpdateWithoutNasso_usersInput, Prisma.tbl_productsUncheckedUpdateWithoutNasso_usersInput>
+}
+
+export type tbl_productsUpdateManyWithWhereWithoutNasso_usersInput = {
+  where: Prisma.tbl_productsScalarWhereInput
+  data: Prisma.XOR<Prisma.tbl_productsUpdateManyMutationInput, Prisma.tbl_productsUncheckedUpdateManyWithoutNasso_usersInput>
+}
+
+export type tbl_productsScalarWhereInput = {
+  AND?: Prisma.tbl_productsScalarWhereInput | Prisma.tbl_productsScalarWhereInput[]
+  OR?: Prisma.tbl_productsScalarWhereInput[]
+  NOT?: Prisma.tbl_productsScalarWhereInput | Prisma.tbl_productsScalarWhereInput[]
+  pro_ID?: Prisma.IntFilter<"tbl_products"> | number
+  pro_name?: Prisma.StringNullableFilter<"tbl_products"> | string | null
+  pro_seller?: Prisma.StringNullableFilter<"tbl_products"> | string | null
+  pro_location?: Prisma.StringNullableFilter<"tbl_products"> | string | null
+  pro_date?: Prisma.StringNullableFilter<"tbl_products"> | string | null
+  pro_price?: Prisma.FloatNullableFilter<"tbl_products"> | number | null
+  pro_category?: Prisma.StringNullableFilter<"tbl_products"> | string | null
+  pro_pay_method?: Prisma.StringNullableFilter<"tbl_products"> | string | null
+  pro_status?: Prisma.StringNullableFilter<"tbl_products"> | string | null
+  pro_country?: Prisma.StringNullableFilter<"tbl_products"> | string | null
+  pro_des?: Prisma.StringNullableFilter<"tbl_products"> | string | null
+  seller_nm?: Prisma.IntNullableFilter<"tbl_products"> | number | null
+  sel_comisio?: Prisma.IntNullableFilter<"tbl_products"> | number | null
+}
+
 export type tbl_productsCreateWithoutPro_photoInput = {
   pro_name?: string | null
   pro_seller?: string | null
@@ -585,8 +791,11 @@ export type tbl_productsCreateWithoutPro_photoInput = {
   pro_status?: string | null
   pro_country?: string | null
   pro_des?: string | null
-  seller_nm?: number | null
   sel_comisio?: number | null
+  tbl_inventory?: Prisma.tbl_inventoryCreateNestedManyWithoutTbl_productsInput
+  tbl_order_items?: Prisma.tbl_order_itemsCreateNestedManyWithoutTbl_productsInput
+  nasso_users?: Prisma.nasso_usersCreateNestedOneWithoutTbl_productsInput
+  tbl_sh_orders?: Prisma.tbl_sh_ordersCreateNestedManyWithoutTbl_productsInput
 }
 
 export type tbl_productsUncheckedCreateWithoutPro_photoInput = {
@@ -603,6 +812,9 @@ export type tbl_productsUncheckedCreateWithoutPro_photoInput = {
   pro_des?: string | null
   seller_nm?: number | null
   sel_comisio?: number | null
+  tbl_inventory?: Prisma.tbl_inventoryUncheckedCreateNestedManyWithoutTbl_productsInput
+  tbl_order_items?: Prisma.tbl_order_itemsUncheckedCreateNestedManyWithoutTbl_productsInput
+  tbl_sh_orders?: Prisma.tbl_sh_ordersUncheckedCreateNestedManyWithoutTbl_productsInput
 }
 
 export type tbl_productsCreateOrConnectWithoutPro_photoInput = {
@@ -632,8 +844,11 @@ export type tbl_productsUpdateWithoutPro_photoInput = {
   pro_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pro_country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pro_des?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  seller_nm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sel_comisio?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tbl_inventory?: Prisma.tbl_inventoryUpdateManyWithoutTbl_productsNestedInput
+  tbl_order_items?: Prisma.tbl_order_itemsUpdateManyWithoutTbl_productsNestedInput
+  nasso_users?: Prisma.nasso_usersUpdateOneWithoutTbl_productsNestedInput
+  tbl_sh_orders?: Prisma.tbl_sh_ordersUpdateManyWithoutTbl_productsNestedInput
 }
 
 export type tbl_productsUncheckedUpdateWithoutPro_photoInput = {
@@ -650,6 +865,346 @@ export type tbl_productsUncheckedUpdateWithoutPro_photoInput = {
   pro_des?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   seller_nm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sel_comisio?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tbl_inventory?: Prisma.tbl_inventoryUncheckedUpdateManyWithoutTbl_productsNestedInput
+  tbl_order_items?: Prisma.tbl_order_itemsUncheckedUpdateManyWithoutTbl_productsNestedInput
+  tbl_sh_orders?: Prisma.tbl_sh_ordersUncheckedUpdateManyWithoutTbl_productsNestedInput
+}
+
+export type tbl_productsCreateWithoutTbl_sh_ordersInput = {
+  pro_name?: string | null
+  pro_seller?: string | null
+  pro_location?: string | null
+  pro_date?: string | null
+  pro_price?: number | null
+  pro_category?: string | null
+  pro_pay_method?: string | null
+  pro_status?: string | null
+  pro_country?: string | null
+  pro_des?: string | null
+  sel_comisio?: number | null
+  pro_photo?: Prisma.pro_photoCreateNestedManyWithoutTbl_productsInput
+  tbl_inventory?: Prisma.tbl_inventoryCreateNestedManyWithoutTbl_productsInput
+  tbl_order_items?: Prisma.tbl_order_itemsCreateNestedManyWithoutTbl_productsInput
+  nasso_users?: Prisma.nasso_usersCreateNestedOneWithoutTbl_productsInput
+}
+
+export type tbl_productsUncheckedCreateWithoutTbl_sh_ordersInput = {
+  pro_ID?: number
+  pro_name?: string | null
+  pro_seller?: string | null
+  pro_location?: string | null
+  pro_date?: string | null
+  pro_price?: number | null
+  pro_category?: string | null
+  pro_pay_method?: string | null
+  pro_status?: string | null
+  pro_country?: string | null
+  pro_des?: string | null
+  seller_nm?: number | null
+  sel_comisio?: number | null
+  pro_photo?: Prisma.pro_photoUncheckedCreateNestedManyWithoutTbl_productsInput
+  tbl_inventory?: Prisma.tbl_inventoryUncheckedCreateNestedManyWithoutTbl_productsInput
+  tbl_order_items?: Prisma.tbl_order_itemsUncheckedCreateNestedManyWithoutTbl_productsInput
+}
+
+export type tbl_productsCreateOrConnectWithoutTbl_sh_ordersInput = {
+  where: Prisma.tbl_productsWhereUniqueInput
+  create: Prisma.XOR<Prisma.tbl_productsCreateWithoutTbl_sh_ordersInput, Prisma.tbl_productsUncheckedCreateWithoutTbl_sh_ordersInput>
+}
+
+export type tbl_productsUpsertWithoutTbl_sh_ordersInput = {
+  update: Prisma.XOR<Prisma.tbl_productsUpdateWithoutTbl_sh_ordersInput, Prisma.tbl_productsUncheckedUpdateWithoutTbl_sh_ordersInput>
+  create: Prisma.XOR<Prisma.tbl_productsCreateWithoutTbl_sh_ordersInput, Prisma.tbl_productsUncheckedCreateWithoutTbl_sh_ordersInput>
+  where?: Prisma.tbl_productsWhereInput
+}
+
+export type tbl_productsUpdateToOneWithWhereWithoutTbl_sh_ordersInput = {
+  where?: Prisma.tbl_productsWhereInput
+  data: Prisma.XOR<Prisma.tbl_productsUpdateWithoutTbl_sh_ordersInput, Prisma.tbl_productsUncheckedUpdateWithoutTbl_sh_ordersInput>
+}
+
+export type tbl_productsUpdateWithoutTbl_sh_ordersInput = {
+  pro_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_seller?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_date?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  pro_category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_pay_method?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_des?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sel_comisio?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  pro_photo?: Prisma.pro_photoUpdateManyWithoutTbl_productsNestedInput
+  tbl_inventory?: Prisma.tbl_inventoryUpdateManyWithoutTbl_productsNestedInput
+  tbl_order_items?: Prisma.tbl_order_itemsUpdateManyWithoutTbl_productsNestedInput
+  nasso_users?: Prisma.nasso_usersUpdateOneWithoutTbl_productsNestedInput
+}
+
+export type tbl_productsUncheckedUpdateWithoutTbl_sh_ordersInput = {
+  pro_ID?: Prisma.IntFieldUpdateOperationsInput | number
+  pro_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_seller?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_date?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  pro_category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_pay_method?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_des?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seller_nm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sel_comisio?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  pro_photo?: Prisma.pro_photoUncheckedUpdateManyWithoutTbl_productsNestedInput
+  tbl_inventory?: Prisma.tbl_inventoryUncheckedUpdateManyWithoutTbl_productsNestedInput
+  tbl_order_items?: Prisma.tbl_order_itemsUncheckedUpdateManyWithoutTbl_productsNestedInput
+}
+
+export type tbl_productsCreateWithoutTbl_inventoryInput = {
+  pro_name?: string | null
+  pro_seller?: string | null
+  pro_location?: string | null
+  pro_date?: string | null
+  pro_price?: number | null
+  pro_category?: string | null
+  pro_pay_method?: string | null
+  pro_status?: string | null
+  pro_country?: string | null
+  pro_des?: string | null
+  sel_comisio?: number | null
+  pro_photo?: Prisma.pro_photoCreateNestedManyWithoutTbl_productsInput
+  tbl_order_items?: Prisma.tbl_order_itemsCreateNestedManyWithoutTbl_productsInput
+  nasso_users?: Prisma.nasso_usersCreateNestedOneWithoutTbl_productsInput
+  tbl_sh_orders?: Prisma.tbl_sh_ordersCreateNestedManyWithoutTbl_productsInput
+}
+
+export type tbl_productsUncheckedCreateWithoutTbl_inventoryInput = {
+  pro_ID?: number
+  pro_name?: string | null
+  pro_seller?: string | null
+  pro_location?: string | null
+  pro_date?: string | null
+  pro_price?: number | null
+  pro_category?: string | null
+  pro_pay_method?: string | null
+  pro_status?: string | null
+  pro_country?: string | null
+  pro_des?: string | null
+  seller_nm?: number | null
+  sel_comisio?: number | null
+  pro_photo?: Prisma.pro_photoUncheckedCreateNestedManyWithoutTbl_productsInput
+  tbl_order_items?: Prisma.tbl_order_itemsUncheckedCreateNestedManyWithoutTbl_productsInput
+  tbl_sh_orders?: Prisma.tbl_sh_ordersUncheckedCreateNestedManyWithoutTbl_productsInput
+}
+
+export type tbl_productsCreateOrConnectWithoutTbl_inventoryInput = {
+  where: Prisma.tbl_productsWhereUniqueInput
+  create: Prisma.XOR<Prisma.tbl_productsCreateWithoutTbl_inventoryInput, Prisma.tbl_productsUncheckedCreateWithoutTbl_inventoryInput>
+}
+
+export type tbl_productsUpsertWithoutTbl_inventoryInput = {
+  update: Prisma.XOR<Prisma.tbl_productsUpdateWithoutTbl_inventoryInput, Prisma.tbl_productsUncheckedUpdateWithoutTbl_inventoryInput>
+  create: Prisma.XOR<Prisma.tbl_productsCreateWithoutTbl_inventoryInput, Prisma.tbl_productsUncheckedCreateWithoutTbl_inventoryInput>
+  where?: Prisma.tbl_productsWhereInput
+}
+
+export type tbl_productsUpdateToOneWithWhereWithoutTbl_inventoryInput = {
+  where?: Prisma.tbl_productsWhereInput
+  data: Prisma.XOR<Prisma.tbl_productsUpdateWithoutTbl_inventoryInput, Prisma.tbl_productsUncheckedUpdateWithoutTbl_inventoryInput>
+}
+
+export type tbl_productsUpdateWithoutTbl_inventoryInput = {
+  pro_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_seller?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_date?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  pro_category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_pay_method?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_des?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sel_comisio?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  pro_photo?: Prisma.pro_photoUpdateManyWithoutTbl_productsNestedInput
+  tbl_order_items?: Prisma.tbl_order_itemsUpdateManyWithoutTbl_productsNestedInput
+  nasso_users?: Prisma.nasso_usersUpdateOneWithoutTbl_productsNestedInput
+  tbl_sh_orders?: Prisma.tbl_sh_ordersUpdateManyWithoutTbl_productsNestedInput
+}
+
+export type tbl_productsUncheckedUpdateWithoutTbl_inventoryInput = {
+  pro_ID?: Prisma.IntFieldUpdateOperationsInput | number
+  pro_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_seller?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_date?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  pro_category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_pay_method?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_des?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seller_nm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sel_comisio?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  pro_photo?: Prisma.pro_photoUncheckedUpdateManyWithoutTbl_productsNestedInput
+  tbl_order_items?: Prisma.tbl_order_itemsUncheckedUpdateManyWithoutTbl_productsNestedInput
+  tbl_sh_orders?: Prisma.tbl_sh_ordersUncheckedUpdateManyWithoutTbl_productsNestedInput
+}
+
+export type tbl_productsCreateWithoutTbl_order_itemsInput = {
+  pro_name?: string | null
+  pro_seller?: string | null
+  pro_location?: string | null
+  pro_date?: string | null
+  pro_price?: number | null
+  pro_category?: string | null
+  pro_pay_method?: string | null
+  pro_status?: string | null
+  pro_country?: string | null
+  pro_des?: string | null
+  sel_comisio?: number | null
+  pro_photo?: Prisma.pro_photoCreateNestedManyWithoutTbl_productsInput
+  tbl_inventory?: Prisma.tbl_inventoryCreateNestedManyWithoutTbl_productsInput
+  nasso_users?: Prisma.nasso_usersCreateNestedOneWithoutTbl_productsInput
+  tbl_sh_orders?: Prisma.tbl_sh_ordersCreateNestedManyWithoutTbl_productsInput
+}
+
+export type tbl_productsUncheckedCreateWithoutTbl_order_itemsInput = {
+  pro_ID?: number
+  pro_name?: string | null
+  pro_seller?: string | null
+  pro_location?: string | null
+  pro_date?: string | null
+  pro_price?: number | null
+  pro_category?: string | null
+  pro_pay_method?: string | null
+  pro_status?: string | null
+  pro_country?: string | null
+  pro_des?: string | null
+  seller_nm?: number | null
+  sel_comisio?: number | null
+  pro_photo?: Prisma.pro_photoUncheckedCreateNestedManyWithoutTbl_productsInput
+  tbl_inventory?: Prisma.tbl_inventoryUncheckedCreateNestedManyWithoutTbl_productsInput
+  tbl_sh_orders?: Prisma.tbl_sh_ordersUncheckedCreateNestedManyWithoutTbl_productsInput
+}
+
+export type tbl_productsCreateOrConnectWithoutTbl_order_itemsInput = {
+  where: Prisma.tbl_productsWhereUniqueInput
+  create: Prisma.XOR<Prisma.tbl_productsCreateWithoutTbl_order_itemsInput, Prisma.tbl_productsUncheckedCreateWithoutTbl_order_itemsInput>
+}
+
+export type tbl_productsUpsertWithoutTbl_order_itemsInput = {
+  update: Prisma.XOR<Prisma.tbl_productsUpdateWithoutTbl_order_itemsInput, Prisma.tbl_productsUncheckedUpdateWithoutTbl_order_itemsInput>
+  create: Prisma.XOR<Prisma.tbl_productsCreateWithoutTbl_order_itemsInput, Prisma.tbl_productsUncheckedCreateWithoutTbl_order_itemsInput>
+  where?: Prisma.tbl_productsWhereInput
+}
+
+export type tbl_productsUpdateToOneWithWhereWithoutTbl_order_itemsInput = {
+  where?: Prisma.tbl_productsWhereInput
+  data: Prisma.XOR<Prisma.tbl_productsUpdateWithoutTbl_order_itemsInput, Prisma.tbl_productsUncheckedUpdateWithoutTbl_order_itemsInput>
+}
+
+export type tbl_productsUpdateWithoutTbl_order_itemsInput = {
+  pro_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_seller?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_date?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  pro_category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_pay_method?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_des?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sel_comisio?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  pro_photo?: Prisma.pro_photoUpdateManyWithoutTbl_productsNestedInput
+  tbl_inventory?: Prisma.tbl_inventoryUpdateManyWithoutTbl_productsNestedInput
+  nasso_users?: Prisma.nasso_usersUpdateOneWithoutTbl_productsNestedInput
+  tbl_sh_orders?: Prisma.tbl_sh_ordersUpdateManyWithoutTbl_productsNestedInput
+}
+
+export type tbl_productsUncheckedUpdateWithoutTbl_order_itemsInput = {
+  pro_ID?: Prisma.IntFieldUpdateOperationsInput | number
+  pro_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_seller?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_date?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  pro_category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_pay_method?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_des?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seller_nm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sel_comisio?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  pro_photo?: Prisma.pro_photoUncheckedUpdateManyWithoutTbl_productsNestedInput
+  tbl_inventory?: Prisma.tbl_inventoryUncheckedUpdateManyWithoutTbl_productsNestedInput
+  tbl_sh_orders?: Prisma.tbl_sh_ordersUncheckedUpdateManyWithoutTbl_productsNestedInput
+}
+
+export type tbl_productsCreateManyNasso_usersInput = {
+  pro_ID?: number
+  pro_name?: string | null
+  pro_seller?: string | null
+  pro_location?: string | null
+  pro_date?: string | null
+  pro_price?: number | null
+  pro_category?: string | null
+  pro_pay_method?: string | null
+  pro_status?: string | null
+  pro_country?: string | null
+  pro_des?: string | null
+  sel_comisio?: number | null
+}
+
+export type tbl_productsUpdateWithoutNasso_usersInput = {
+  pro_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_seller?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_date?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  pro_category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_pay_method?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_des?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sel_comisio?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  pro_photo?: Prisma.pro_photoUpdateManyWithoutTbl_productsNestedInput
+  tbl_inventory?: Prisma.tbl_inventoryUpdateManyWithoutTbl_productsNestedInput
+  tbl_order_items?: Prisma.tbl_order_itemsUpdateManyWithoutTbl_productsNestedInput
+  tbl_sh_orders?: Prisma.tbl_sh_ordersUpdateManyWithoutTbl_productsNestedInput
+}
+
+export type tbl_productsUncheckedUpdateWithoutNasso_usersInput = {
+  pro_ID?: Prisma.IntFieldUpdateOperationsInput | number
+  pro_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_seller?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_date?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  pro_category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_pay_method?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_des?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sel_comisio?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  pro_photo?: Prisma.pro_photoUncheckedUpdateManyWithoutTbl_productsNestedInput
+  tbl_inventory?: Prisma.tbl_inventoryUncheckedUpdateManyWithoutTbl_productsNestedInput
+  tbl_order_items?: Prisma.tbl_order_itemsUncheckedUpdateManyWithoutTbl_productsNestedInput
+  tbl_sh_orders?: Prisma.tbl_sh_ordersUncheckedUpdateManyWithoutTbl_productsNestedInput
+}
+
+export type tbl_productsUncheckedUpdateManyWithoutNasso_usersInput = {
+  pro_ID?: Prisma.IntFieldUpdateOperationsInput | number
+  pro_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_seller?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_date?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  pro_category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_pay_method?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pro_des?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sel_comisio?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 
@@ -659,10 +1214,16 @@ export type tbl_productsUncheckedUpdateWithoutPro_photoInput = {
 
 export type Tbl_productsCountOutputType = {
   pro_photo: number
+  tbl_inventory: number
+  tbl_order_items: number
+  tbl_sh_orders: number
 }
 
 export type Tbl_productsCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   pro_photo?: boolean | Tbl_productsCountOutputTypeCountPro_photoArgs
+  tbl_inventory?: boolean | Tbl_productsCountOutputTypeCountTbl_inventoryArgs
+  tbl_order_items?: boolean | Tbl_productsCountOutputTypeCountTbl_order_itemsArgs
+  tbl_sh_orders?: boolean | Tbl_productsCountOutputTypeCountTbl_sh_ordersArgs
 }
 
 /**
@@ -682,6 +1243,27 @@ export type Tbl_productsCountOutputTypeCountPro_photoArgs<ExtArgs extends runtim
   where?: Prisma.pro_photoWhereInput
 }
 
+/**
+ * Tbl_productsCountOutputType without action
+ */
+export type Tbl_productsCountOutputTypeCountTbl_inventoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.tbl_inventoryWhereInput
+}
+
+/**
+ * Tbl_productsCountOutputType without action
+ */
+export type Tbl_productsCountOutputTypeCountTbl_order_itemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.tbl_order_itemsWhereInput
+}
+
+/**
+ * Tbl_productsCountOutputType without action
+ */
+export type Tbl_productsCountOutputTypeCountTbl_sh_ordersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.tbl_sh_ordersWhereInput
+}
+
 
 export type tbl_productsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   pro_ID?: boolean
@@ -698,6 +1280,10 @@ export type tbl_productsSelect<ExtArgs extends runtime.Types.Extensions.Internal
   seller_nm?: boolean
   sel_comisio?: boolean
   pro_photo?: boolean | Prisma.tbl_products$pro_photoArgs<ExtArgs>
+  tbl_inventory?: boolean | Prisma.tbl_products$tbl_inventoryArgs<ExtArgs>
+  tbl_order_items?: boolean | Prisma.tbl_products$tbl_order_itemsArgs<ExtArgs>
+  nasso_users?: boolean | Prisma.tbl_products$nasso_usersArgs<ExtArgs>
+  tbl_sh_orders?: boolean | Prisma.tbl_products$tbl_sh_ordersArgs<ExtArgs>
   _count?: boolean | Prisma.Tbl_productsCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tbl_products"]>
 
@@ -722,6 +1308,10 @@ export type tbl_productsSelectScalar = {
 export type tbl_productsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"pro_ID" | "pro_name" | "pro_seller" | "pro_location" | "pro_date" | "pro_price" | "pro_category" | "pro_pay_method" | "pro_status" | "pro_country" | "pro_des" | "seller_nm" | "sel_comisio", ExtArgs["result"]["tbl_products"]>
 export type tbl_productsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   pro_photo?: boolean | Prisma.tbl_products$pro_photoArgs<ExtArgs>
+  tbl_inventory?: boolean | Prisma.tbl_products$tbl_inventoryArgs<ExtArgs>
+  tbl_order_items?: boolean | Prisma.tbl_products$tbl_order_itemsArgs<ExtArgs>
+  nasso_users?: boolean | Prisma.tbl_products$nasso_usersArgs<ExtArgs>
+  tbl_sh_orders?: boolean | Prisma.tbl_products$tbl_sh_ordersArgs<ExtArgs>
   _count?: boolean | Prisma.Tbl_productsCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -729,6 +1319,10 @@ export type $tbl_productsPayload<ExtArgs extends runtime.Types.Extensions.Intern
   name: "tbl_products"
   objects: {
     pro_photo: Prisma.$pro_photoPayload<ExtArgs>[]
+    tbl_inventory: Prisma.$tbl_inventoryPayload<ExtArgs>[]
+    tbl_order_items: Prisma.$tbl_order_itemsPayload<ExtArgs>[]
+    nasso_users: Prisma.$nasso_usersPayload<ExtArgs> | null
+    tbl_sh_orders: Prisma.$tbl_sh_ordersPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     pro_ID: number
@@ -1085,6 +1679,10 @@ readonly fields: tbl_productsFieldRefs;
 export interface Prisma__tbl_productsClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   pro_photo<T extends Prisma.tbl_products$pro_photoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.tbl_products$pro_photoArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$pro_photoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  tbl_inventory<T extends Prisma.tbl_products$tbl_inventoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.tbl_products$tbl_inventoryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$tbl_inventoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  tbl_order_items<T extends Prisma.tbl_products$tbl_order_itemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.tbl_products$tbl_order_itemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$tbl_order_itemsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  nasso_users<T extends Prisma.tbl_products$nasso_usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.tbl_products$nasso_usersArgs<ExtArgs>>): Prisma.Prisma__nasso_usersClient<runtime.Types.Result.GetResult<Prisma.$nasso_usersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  tbl_sh_orders<T extends Prisma.tbl_products$tbl_sh_ordersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.tbl_products$tbl_sh_ordersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$tbl_sh_ordersPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1491,6 +2089,97 @@ export type tbl_products$pro_photoArgs<ExtArgs extends runtime.Types.Extensions.
   take?: number
   skip?: number
   distinct?: Prisma.Pro_photoScalarFieldEnum | Prisma.Pro_photoScalarFieldEnum[]
+}
+
+/**
+ * tbl_products.tbl_inventory
+ */
+export type tbl_products$tbl_inventoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the tbl_inventory
+   */
+  select?: Prisma.tbl_inventorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the tbl_inventory
+   */
+  omit?: Prisma.tbl_inventoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.tbl_inventoryInclude<ExtArgs> | null
+  where?: Prisma.tbl_inventoryWhereInput
+  orderBy?: Prisma.tbl_inventoryOrderByWithRelationInput | Prisma.tbl_inventoryOrderByWithRelationInput[]
+  cursor?: Prisma.tbl_inventoryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.Tbl_inventoryScalarFieldEnum | Prisma.Tbl_inventoryScalarFieldEnum[]
+}
+
+/**
+ * tbl_products.tbl_order_items
+ */
+export type tbl_products$tbl_order_itemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the tbl_order_items
+   */
+  select?: Prisma.tbl_order_itemsSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the tbl_order_items
+   */
+  omit?: Prisma.tbl_order_itemsOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.tbl_order_itemsInclude<ExtArgs> | null
+  where?: Prisma.tbl_order_itemsWhereInput
+  orderBy?: Prisma.tbl_order_itemsOrderByWithRelationInput | Prisma.tbl_order_itemsOrderByWithRelationInput[]
+  cursor?: Prisma.tbl_order_itemsWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.Tbl_order_itemsScalarFieldEnum | Prisma.Tbl_order_itemsScalarFieldEnum[]
+}
+
+/**
+ * tbl_products.nasso_users
+ */
+export type tbl_products$nasso_usersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the nasso_users
+   */
+  select?: Prisma.nasso_usersSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the nasso_users
+   */
+  omit?: Prisma.nasso_usersOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.nasso_usersInclude<ExtArgs> | null
+  where?: Prisma.nasso_usersWhereInput
+}
+
+/**
+ * tbl_products.tbl_sh_orders
+ */
+export type tbl_products$tbl_sh_ordersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the tbl_sh_orders
+   */
+  select?: Prisma.tbl_sh_ordersSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the tbl_sh_orders
+   */
+  omit?: Prisma.tbl_sh_ordersOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.tbl_sh_ordersInclude<ExtArgs> | null
+  where?: Prisma.tbl_sh_ordersWhereInput
+  orderBy?: Prisma.tbl_sh_ordersOrderByWithRelationInput | Prisma.tbl_sh_ordersOrderByWithRelationInput[]
+  cursor?: Prisma.tbl_sh_ordersWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.Tbl_sh_ordersScalarFieldEnum | Prisma.Tbl_sh_ordersScalarFieldEnum[]
 }
 
 /**

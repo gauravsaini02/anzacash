@@ -82,7 +82,12 @@ export const ModelName = {
   tbl_video_pay: 'tbl_video_pay',
   tknes_nasso: 'tknes_nasso',
   uza_answers: 'uza_answers',
-  uza_status: 'uza_status'
+  uza_status: 'uza_status',
+  tbl_customer_profiles: 'tbl_customer_profiles',
+  tbl_inventory: 'tbl_inventory',
+  tbl_order_items: 'tbl_order_items',
+  tbl_seller_profiles: 'tbl_seller_profiles',
+  tbl_transactions: 'tbl_transactions'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -439,7 +444,9 @@ export const Tbl_sh_ordersScalarFieldEnum = {
   oda_status: 'oda_status',
   o_idadi: 'o_idadi',
   o_datetimes: 'o_datetimes',
-  o_delivery: 'o_delivery'
+  o_delivery: 'o_delivery',
+  customer_id: 'customer_id',
+  seller_id: 'seller_id'
 } as const
 
 export type Tbl_sh_ordersScalarFieldEnum = (typeof Tbl_sh_ordersScalarFieldEnum)[keyof typeof Tbl_sh_ordersScalarFieldEnum]
@@ -507,12 +514,101 @@ export const Uza_statusScalarFieldEnum = {
 export type Uza_statusScalarFieldEnum = (typeof Uza_statusScalarFieldEnum)[keyof typeof Uza_statusScalarFieldEnum]
 
 
+export const Tbl_customer_profilesScalarFieldEnum = {
+  profile_id: 'profile_id',
+  user_id: 'user_id',
+  shipping_address: 'shipping_address',
+  billing_address: 'billing_address',
+  phone_number: 'phone_number',
+  preferences: 'preferences',
+  loyalty_points: 'loyalty_points',
+  total_orders: 'total_orders',
+  total_spent: 'total_spent',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type Tbl_customer_profilesScalarFieldEnum = (typeof Tbl_customer_profilesScalarFieldEnum)[keyof typeof Tbl_customer_profilesScalarFieldEnum]
+
+
+export const Tbl_inventoryScalarFieldEnum = {
+  inventory_id: 'inventory_id',
+  product_id: 'product_id',
+  seller_id: 'seller_id',
+  quantity_available: 'quantity_available',
+  quantity_sold: 'quantity_sold',
+  reorder_level: 'reorder_level',
+  cost_price: 'cost_price',
+  selling_price: 'selling_price',
+  last_updated: 'last_updated',
+  created_at: 'created_at'
+} as const
+
+export type Tbl_inventoryScalarFieldEnum = (typeof Tbl_inventoryScalarFieldEnum)[keyof typeof Tbl_inventoryScalarFieldEnum]
+
+
+export const Tbl_order_itemsScalarFieldEnum = {
+  item_id: 'item_id',
+  order_id: 'order_id',
+  product_id: 'product_id',
+  quantity: 'quantity',
+  unit_price: 'unit_price',
+  total_price: 'total_price',
+  created_at: 'created_at'
+} as const
+
+export type Tbl_order_itemsScalarFieldEnum = (typeof Tbl_order_itemsScalarFieldEnum)[keyof typeof Tbl_order_itemsScalarFieldEnum]
+
+
+export const Tbl_seller_profilesScalarFieldEnum = {
+  profile_id: 'profile_id',
+  user_id: 'user_id',
+  business_name: 'business_name',
+  business_description: 'business_description',
+  commission_rate: 'commission_rate',
+  verification_status: 'verification_status',
+  business_phone: 'business_phone',
+  business_email: 'business_email',
+  business_address: 'business_address',
+  rating: 'rating',
+  total_sales: 'total_sales',
+  total_products: 'total_products',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type Tbl_seller_profilesScalarFieldEnum = (typeof Tbl_seller_profilesScalarFieldEnum)[keyof typeof Tbl_seller_profilesScalarFieldEnum]
+
+
+export const Tbl_transactionsScalarFieldEnum = {
+  transaction_id: 'transaction_id',
+  user_id: 'user_id',
+  order_id: 'order_id',
+  amount: 'amount',
+  transaction_type: 'transaction_type',
+  description: 'description',
+  reference_id: 'reference_id',
+  balance_after: 'balance_after',
+  created_at: 'created_at'
+} as const
+
+export type Tbl_transactionsScalarFieldEnum = (typeof Tbl_transactionsScalarFieldEnum)[keyof typeof Tbl_transactionsScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const NullableJsonNullValueInput = {
+  DbNull: DbNull,
+  JsonNull: JsonNull
+} as const
+
+export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
 
 
 export const NullsOrder = {
@@ -840,4 +936,49 @@ export const uza_statusOrderByRelevanceFieldEnum = {
 } as const
 
 export type uza_statusOrderByRelevanceFieldEnum = (typeof uza_statusOrderByRelevanceFieldEnum)[keyof typeof uza_statusOrderByRelevanceFieldEnum]
+
+
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
+
+
+export const QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
+} as const
+
+export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+export const tbl_customer_profilesOrderByRelevanceFieldEnum = {
+  shipping_address: 'shipping_address',
+  billing_address: 'billing_address',
+  phone_number: 'phone_number'
+} as const
+
+export type tbl_customer_profilesOrderByRelevanceFieldEnum = (typeof tbl_customer_profilesOrderByRelevanceFieldEnum)[keyof typeof tbl_customer_profilesOrderByRelevanceFieldEnum]
+
+
+export const tbl_seller_profilesOrderByRelevanceFieldEnum = {
+  business_name: 'business_name',
+  business_description: 'business_description',
+  business_phone: 'business_phone',
+  business_email: 'business_email',
+  business_address: 'business_address'
+} as const
+
+export type tbl_seller_profilesOrderByRelevanceFieldEnum = (typeof tbl_seller_profilesOrderByRelevanceFieldEnum)[keyof typeof tbl_seller_profilesOrderByRelevanceFieldEnum]
+
+
+export const tbl_transactionsOrderByRelevanceFieldEnum = {
+  description: 'description',
+  reference_id: 'reference_id'
+} as const
+
+export type tbl_transactionsOrderByRelevanceFieldEnum = (typeof tbl_transactionsOrderByRelevanceFieldEnum)[keyof typeof tbl_transactionsOrderByRelevanceFieldEnum]
 

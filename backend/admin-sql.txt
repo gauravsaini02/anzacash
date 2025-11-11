@@ -1,0 +1,33 @@
+-- ANZACASH Admin User Creation Script
+-- Run this in your MySQL database
+
+-- First, check if admin user exists and delete it to start fresh
+DELETE FROM nasso_users WHERE usr_uname = 'admin';
+
+-- Insert the admin user with hashed password
+INSERT INTO nasso_users (
+    usr_uname,
+    usr_posio,
+    usr_status,
+    usr_passwd,
+    usr_email,
+    usr_phone,
+    usr_county,
+    full_name,
+    join_date
+) VALUES (
+    'admin',
+    'admin',
+    'Active',
+    '$2b$10$uZO71akNa56As1PjQoshS.UdTUoOPYkkAo7Nst4/bODPDdbvz.YKa',
+    'admin@anzacash.com',
+    '+255712345678',
+    'Tanzania',
+    'System Administrator',
+    CURDATE()
+);
+
+-- Verify the admin user was created
+SELECT usr_Id, usr_uname, usr_posio, usr_status, usr_email, full_name
+FROM nasso_users
+WHERE usr_uname = 'admin';

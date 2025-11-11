@@ -198,7 +198,7 @@ export class AuthService {
 
     // Send email with verification code
     const emailResult = await this.emailService.sendPasswordResetCode(
-      user.usr_email,
+      user.usr_email || 'N/A',
       verificationCode,
       user.full_name || user.usr_uname
     );

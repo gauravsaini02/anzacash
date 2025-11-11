@@ -30,6 +30,8 @@ export type Tbl_sh_ordersAvgAggregateOutputType = {
   o_pro_Id: number | null
   o_user: number | null
   o_idadi: number | null
+  customer_id: number | null
+  seller_id: number | null
 }
 
 export type Tbl_sh_ordersSumAggregateOutputType = {
@@ -37,6 +39,8 @@ export type Tbl_sh_ordersSumAggregateOutputType = {
   o_pro_Id: number | null
   o_user: number | null
   o_idadi: number | null
+  customer_id: number | null
+  seller_id: number | null
 }
 
 export type Tbl_sh_ordersMinAggregateOutputType = {
@@ -49,6 +53,8 @@ export type Tbl_sh_ordersMinAggregateOutputType = {
   o_idadi: number | null
   o_datetimes: string | null
   o_delivery: string | null
+  customer_id: number | null
+  seller_id: number | null
 }
 
 export type Tbl_sh_ordersMaxAggregateOutputType = {
@@ -61,6 +67,8 @@ export type Tbl_sh_ordersMaxAggregateOutputType = {
   o_idadi: number | null
   o_datetimes: string | null
   o_delivery: string | null
+  customer_id: number | null
+  seller_id: number | null
 }
 
 export type Tbl_sh_ordersCountAggregateOutputType = {
@@ -73,6 +81,8 @@ export type Tbl_sh_ordersCountAggregateOutputType = {
   o_idadi: number
   o_datetimes: number
   o_delivery: number
+  customer_id: number
+  seller_id: number
   _all: number
 }
 
@@ -82,6 +92,8 @@ export type Tbl_sh_ordersAvgAggregateInputType = {
   o_pro_Id?: true
   o_user?: true
   o_idadi?: true
+  customer_id?: true
+  seller_id?: true
 }
 
 export type Tbl_sh_ordersSumAggregateInputType = {
@@ -89,6 +101,8 @@ export type Tbl_sh_ordersSumAggregateInputType = {
   o_pro_Id?: true
   o_user?: true
   o_idadi?: true
+  customer_id?: true
+  seller_id?: true
 }
 
 export type Tbl_sh_ordersMinAggregateInputType = {
@@ -101,6 +115,8 @@ export type Tbl_sh_ordersMinAggregateInputType = {
   o_idadi?: true
   o_datetimes?: true
   o_delivery?: true
+  customer_id?: true
+  seller_id?: true
 }
 
 export type Tbl_sh_ordersMaxAggregateInputType = {
@@ -113,6 +129,8 @@ export type Tbl_sh_ordersMaxAggregateInputType = {
   o_idadi?: true
   o_datetimes?: true
   o_delivery?: true
+  customer_id?: true
+  seller_id?: true
 }
 
 export type Tbl_sh_ordersCountAggregateInputType = {
@@ -125,6 +143,8 @@ export type Tbl_sh_ordersCountAggregateInputType = {
   o_idadi?: true
   o_datetimes?: true
   o_delivery?: true
+  customer_id?: true
+  seller_id?: true
   _all?: true
 }
 
@@ -224,6 +244,8 @@ export type Tbl_sh_ordersGroupByOutputType = {
   o_idadi: number | null
   o_datetimes: string | null
   o_delivery: string | null
+  customer_id: number | null
+  seller_id: number | null
   _count: Tbl_sh_ordersCountAggregateOutputType | null
   _avg: Tbl_sh_ordersAvgAggregateOutputType | null
   _sum: Tbl_sh_ordersSumAggregateOutputType | null
@@ -259,6 +281,13 @@ export type tbl_sh_ordersWhereInput = {
   o_idadi?: Prisma.IntNullableFilter<"tbl_sh_orders"> | number | null
   o_datetimes?: Prisma.StringNullableFilter<"tbl_sh_orders"> | string | null
   o_delivery?: Prisma.StringNullableFilter<"tbl_sh_orders"> | string | null
+  customer_id?: Prisma.IntNullableFilter<"tbl_sh_orders"> | number | null
+  seller_id?: Prisma.IntNullableFilter<"tbl_sh_orders"> | number | null
+  tbl_order_items?: Prisma.Tbl_order_itemsListRelationFilter
+  nasso_users_tbl_sh_orders_customer_idTonasso_users?: Prisma.XOR<Prisma.Nasso_usersNullableScalarRelationFilter, Prisma.nasso_usersWhereInput> | null
+  tbl_products?: Prisma.XOR<Prisma.Tbl_productsNullableScalarRelationFilter, Prisma.tbl_productsWhereInput> | null
+  nasso_users_tbl_sh_orders_seller_idTonasso_users?: Prisma.XOR<Prisma.Nasso_usersNullableScalarRelationFilter, Prisma.nasso_usersWhereInput> | null
+  tbl_transactions?: Prisma.Tbl_transactionsListRelationFilter
 }
 
 export type tbl_sh_ordersOrderByWithRelationInput = {
@@ -271,6 +300,13 @@ export type tbl_sh_ordersOrderByWithRelationInput = {
   o_idadi?: Prisma.SortOrderInput | Prisma.SortOrder
   o_datetimes?: Prisma.SortOrderInput | Prisma.SortOrder
   o_delivery?: Prisma.SortOrderInput | Prisma.SortOrder
+  customer_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  seller_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  tbl_order_items?: Prisma.tbl_order_itemsOrderByRelationAggregateInput
+  nasso_users_tbl_sh_orders_customer_idTonasso_users?: Prisma.nasso_usersOrderByWithRelationInput
+  tbl_products?: Prisma.tbl_productsOrderByWithRelationInput
+  nasso_users_tbl_sh_orders_seller_idTonasso_users?: Prisma.nasso_usersOrderByWithRelationInput
+  tbl_transactions?: Prisma.tbl_transactionsOrderByRelationAggregateInput
   _relevance?: Prisma.tbl_sh_ordersOrderByRelevanceInput
 }
 
@@ -287,6 +323,13 @@ export type tbl_sh_ordersWhereUniqueInput = Prisma.AtLeast<{
   o_idadi?: Prisma.IntNullableFilter<"tbl_sh_orders"> | number | null
   o_datetimes?: Prisma.StringNullableFilter<"tbl_sh_orders"> | string | null
   o_delivery?: Prisma.StringNullableFilter<"tbl_sh_orders"> | string | null
+  customer_id?: Prisma.IntNullableFilter<"tbl_sh_orders"> | number | null
+  seller_id?: Prisma.IntNullableFilter<"tbl_sh_orders"> | number | null
+  tbl_order_items?: Prisma.Tbl_order_itemsListRelationFilter
+  nasso_users_tbl_sh_orders_customer_idTonasso_users?: Prisma.XOR<Prisma.Nasso_usersNullableScalarRelationFilter, Prisma.nasso_usersWhereInput> | null
+  tbl_products?: Prisma.XOR<Prisma.Tbl_productsNullableScalarRelationFilter, Prisma.tbl_productsWhereInput> | null
+  nasso_users_tbl_sh_orders_seller_idTonasso_users?: Prisma.XOR<Prisma.Nasso_usersNullableScalarRelationFilter, Prisma.nasso_usersWhereInput> | null
+  tbl_transactions?: Prisma.Tbl_transactionsListRelationFilter
 }, "o_ID">
 
 export type tbl_sh_ordersOrderByWithAggregationInput = {
@@ -299,6 +342,8 @@ export type tbl_sh_ordersOrderByWithAggregationInput = {
   o_idadi?: Prisma.SortOrderInput | Prisma.SortOrder
   o_datetimes?: Prisma.SortOrderInput | Prisma.SortOrder
   o_delivery?: Prisma.SortOrderInput | Prisma.SortOrder
+  customer_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  seller_id?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.tbl_sh_ordersCountOrderByAggregateInput
   _avg?: Prisma.tbl_sh_ordersAvgOrderByAggregateInput
   _max?: Prisma.tbl_sh_ordersMaxOrderByAggregateInput
@@ -319,10 +364,11 @@ export type tbl_sh_ordersScalarWhereWithAggregatesInput = {
   o_idadi?: Prisma.IntNullableWithAggregatesFilter<"tbl_sh_orders"> | number | null
   o_datetimes?: Prisma.StringNullableWithAggregatesFilter<"tbl_sh_orders"> | string | null
   o_delivery?: Prisma.StringNullableWithAggregatesFilter<"tbl_sh_orders"> | string | null
+  customer_id?: Prisma.IntNullableWithAggregatesFilter<"tbl_sh_orders"> | number | null
+  seller_id?: Prisma.IntNullableWithAggregatesFilter<"tbl_sh_orders"> | number | null
 }
 
 export type tbl_sh_ordersCreateInput = {
-  o_pro_Id?: number | null
   order_ID: string
   o_user?: number | null
   o_date?: string | null
@@ -330,6 +376,11 @@ export type tbl_sh_ordersCreateInput = {
   o_idadi?: number | null
   o_datetimes?: string | null
   o_delivery?: string | null
+  tbl_order_items?: Prisma.tbl_order_itemsCreateNestedManyWithoutTbl_sh_ordersInput
+  nasso_users_tbl_sh_orders_customer_idTonasso_users?: Prisma.nasso_usersCreateNestedOneWithoutTbl_sh_orders_tbl_sh_orders_customer_idTonasso_usersInput
+  tbl_products?: Prisma.tbl_productsCreateNestedOneWithoutTbl_sh_ordersInput
+  nasso_users_tbl_sh_orders_seller_idTonasso_users?: Prisma.nasso_usersCreateNestedOneWithoutTbl_sh_orders_tbl_sh_orders_seller_idTonasso_usersInput
+  tbl_transactions?: Prisma.tbl_transactionsCreateNestedManyWithoutTbl_sh_ordersInput
 }
 
 export type tbl_sh_ordersUncheckedCreateInput = {
@@ -342,10 +393,13 @@ export type tbl_sh_ordersUncheckedCreateInput = {
   o_idadi?: number | null
   o_datetimes?: string | null
   o_delivery?: string | null
+  customer_id?: number | null
+  seller_id?: number | null
+  tbl_order_items?: Prisma.tbl_order_itemsUncheckedCreateNestedManyWithoutTbl_sh_ordersInput
+  tbl_transactions?: Prisma.tbl_transactionsUncheckedCreateNestedManyWithoutTbl_sh_ordersInput
 }
 
 export type tbl_sh_ordersUpdateInput = {
-  o_pro_Id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_ID?: Prisma.StringFieldUpdateOperationsInput | string
   o_user?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   o_date?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -353,6 +407,11 @@ export type tbl_sh_ordersUpdateInput = {
   o_idadi?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   o_datetimes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   o_delivery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tbl_order_items?: Prisma.tbl_order_itemsUpdateManyWithoutTbl_sh_ordersNestedInput
+  nasso_users_tbl_sh_orders_customer_idTonasso_users?: Prisma.nasso_usersUpdateOneWithoutTbl_sh_orders_tbl_sh_orders_customer_idTonasso_usersNestedInput
+  tbl_products?: Prisma.tbl_productsUpdateOneWithoutTbl_sh_ordersNestedInput
+  nasso_users_tbl_sh_orders_seller_idTonasso_users?: Prisma.nasso_usersUpdateOneWithoutTbl_sh_orders_tbl_sh_orders_seller_idTonasso_usersNestedInput
+  tbl_transactions?: Prisma.tbl_transactionsUpdateManyWithoutTbl_sh_ordersNestedInput
 }
 
 export type tbl_sh_ordersUncheckedUpdateInput = {
@@ -365,6 +424,10 @@ export type tbl_sh_ordersUncheckedUpdateInput = {
   o_idadi?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   o_datetimes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   o_delivery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  seller_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tbl_order_items?: Prisma.tbl_order_itemsUncheckedUpdateManyWithoutTbl_sh_ordersNestedInput
+  tbl_transactions?: Prisma.tbl_transactionsUncheckedUpdateManyWithoutTbl_sh_ordersNestedInput
 }
 
 export type tbl_sh_ordersCreateManyInput = {
@@ -377,10 +440,11 @@ export type tbl_sh_ordersCreateManyInput = {
   o_idadi?: number | null
   o_datetimes?: string | null
   o_delivery?: string | null
+  customer_id?: number | null
+  seller_id?: number | null
 }
 
 export type tbl_sh_ordersUpdateManyMutationInput = {
-  o_pro_Id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_ID?: Prisma.StringFieldUpdateOperationsInput | string
   o_user?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   o_date?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -400,6 +464,18 @@ export type tbl_sh_ordersUncheckedUpdateManyInput = {
   o_idadi?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   o_datetimes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   o_delivery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  seller_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type Tbl_sh_ordersListRelationFilter = {
+  every?: Prisma.tbl_sh_ordersWhereInput
+  some?: Prisma.tbl_sh_ordersWhereInput
+  none?: Prisma.tbl_sh_ordersWhereInput
+}
+
+export type tbl_sh_ordersOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type tbl_sh_ordersOrderByRelevanceInput = {
@@ -418,6 +494,8 @@ export type tbl_sh_ordersCountOrderByAggregateInput = {
   o_idadi?: Prisma.SortOrder
   o_datetimes?: Prisma.SortOrder
   o_delivery?: Prisma.SortOrder
+  customer_id?: Prisma.SortOrder
+  seller_id?: Prisma.SortOrder
 }
 
 export type tbl_sh_ordersAvgOrderByAggregateInput = {
@@ -425,6 +503,8 @@ export type tbl_sh_ordersAvgOrderByAggregateInput = {
   o_pro_Id?: Prisma.SortOrder
   o_user?: Prisma.SortOrder
   o_idadi?: Prisma.SortOrder
+  customer_id?: Prisma.SortOrder
+  seller_id?: Prisma.SortOrder
 }
 
 export type tbl_sh_ordersMaxOrderByAggregateInput = {
@@ -437,6 +517,8 @@ export type tbl_sh_ordersMaxOrderByAggregateInput = {
   o_idadi?: Prisma.SortOrder
   o_datetimes?: Prisma.SortOrder
   o_delivery?: Prisma.SortOrder
+  customer_id?: Prisma.SortOrder
+  seller_id?: Prisma.SortOrder
 }
 
 export type tbl_sh_ordersMinOrderByAggregateInput = {
@@ -449,6 +531,8 @@ export type tbl_sh_ordersMinOrderByAggregateInput = {
   o_idadi?: Prisma.SortOrder
   o_datetimes?: Prisma.SortOrder
   o_delivery?: Prisma.SortOrder
+  customer_id?: Prisma.SortOrder
+  seller_id?: Prisma.SortOrder
 }
 
 export type tbl_sh_ordersSumOrderByAggregateInput = {
@@ -456,8 +540,709 @@ export type tbl_sh_ordersSumOrderByAggregateInput = {
   o_pro_Id?: Prisma.SortOrder
   o_user?: Prisma.SortOrder
   o_idadi?: Prisma.SortOrder
+  customer_id?: Prisma.SortOrder
+  seller_id?: Prisma.SortOrder
 }
 
+export type Tbl_sh_ordersScalarRelationFilter = {
+  is?: Prisma.tbl_sh_ordersWhereInput
+  isNot?: Prisma.tbl_sh_ordersWhereInput
+}
+
+export type Tbl_sh_ordersNullableScalarRelationFilter = {
+  is?: Prisma.tbl_sh_ordersWhereInput | null
+  isNot?: Prisma.tbl_sh_ordersWhereInput | null
+}
+
+export type tbl_sh_ordersCreateNestedManyWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput = {
+  create?: Prisma.XOR<Prisma.tbl_sh_ordersCreateWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput, Prisma.tbl_sh_ordersUncheckedCreateWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput> | Prisma.tbl_sh_ordersCreateWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput[] | Prisma.tbl_sh_ordersUncheckedCreateWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput[]
+  connectOrCreate?: Prisma.tbl_sh_ordersCreateOrConnectWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput | Prisma.tbl_sh_ordersCreateOrConnectWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput[]
+  createMany?: Prisma.tbl_sh_ordersCreateManyNasso_users_tbl_sh_orders_customer_idTonasso_usersInputEnvelope
+  connect?: Prisma.tbl_sh_ordersWhereUniqueInput | Prisma.tbl_sh_ordersWhereUniqueInput[]
+}
+
+export type tbl_sh_ordersCreateNestedManyWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput = {
+  create?: Prisma.XOR<Prisma.tbl_sh_ordersCreateWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput, Prisma.tbl_sh_ordersUncheckedCreateWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput> | Prisma.tbl_sh_ordersCreateWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput[] | Prisma.tbl_sh_ordersUncheckedCreateWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput[]
+  connectOrCreate?: Prisma.tbl_sh_ordersCreateOrConnectWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput | Prisma.tbl_sh_ordersCreateOrConnectWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput[]
+  createMany?: Prisma.tbl_sh_ordersCreateManyNasso_users_tbl_sh_orders_seller_idTonasso_usersInputEnvelope
+  connect?: Prisma.tbl_sh_ordersWhereUniqueInput | Prisma.tbl_sh_ordersWhereUniqueInput[]
+}
+
+export type tbl_sh_ordersUncheckedCreateNestedManyWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput = {
+  create?: Prisma.XOR<Prisma.tbl_sh_ordersCreateWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput, Prisma.tbl_sh_ordersUncheckedCreateWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput> | Prisma.tbl_sh_ordersCreateWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput[] | Prisma.tbl_sh_ordersUncheckedCreateWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput[]
+  connectOrCreate?: Prisma.tbl_sh_ordersCreateOrConnectWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput | Prisma.tbl_sh_ordersCreateOrConnectWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput[]
+  createMany?: Prisma.tbl_sh_ordersCreateManyNasso_users_tbl_sh_orders_customer_idTonasso_usersInputEnvelope
+  connect?: Prisma.tbl_sh_ordersWhereUniqueInput | Prisma.tbl_sh_ordersWhereUniqueInput[]
+}
+
+export type tbl_sh_ordersUncheckedCreateNestedManyWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput = {
+  create?: Prisma.XOR<Prisma.tbl_sh_ordersCreateWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput, Prisma.tbl_sh_ordersUncheckedCreateWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput> | Prisma.tbl_sh_ordersCreateWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput[] | Prisma.tbl_sh_ordersUncheckedCreateWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput[]
+  connectOrCreate?: Prisma.tbl_sh_ordersCreateOrConnectWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput | Prisma.tbl_sh_ordersCreateOrConnectWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput[]
+  createMany?: Prisma.tbl_sh_ordersCreateManyNasso_users_tbl_sh_orders_seller_idTonasso_usersInputEnvelope
+  connect?: Prisma.tbl_sh_ordersWhereUniqueInput | Prisma.tbl_sh_ordersWhereUniqueInput[]
+}
+
+export type tbl_sh_ordersUpdateManyWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersNestedInput = {
+  create?: Prisma.XOR<Prisma.tbl_sh_ordersCreateWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput, Prisma.tbl_sh_ordersUncheckedCreateWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput> | Prisma.tbl_sh_ordersCreateWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput[] | Prisma.tbl_sh_ordersUncheckedCreateWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput[]
+  connectOrCreate?: Prisma.tbl_sh_ordersCreateOrConnectWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput | Prisma.tbl_sh_ordersCreateOrConnectWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput[]
+  upsert?: Prisma.tbl_sh_ordersUpsertWithWhereUniqueWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput | Prisma.tbl_sh_ordersUpsertWithWhereUniqueWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput[]
+  createMany?: Prisma.tbl_sh_ordersCreateManyNasso_users_tbl_sh_orders_customer_idTonasso_usersInputEnvelope
+  set?: Prisma.tbl_sh_ordersWhereUniqueInput | Prisma.tbl_sh_ordersWhereUniqueInput[]
+  disconnect?: Prisma.tbl_sh_ordersWhereUniqueInput | Prisma.tbl_sh_ordersWhereUniqueInput[]
+  delete?: Prisma.tbl_sh_ordersWhereUniqueInput | Prisma.tbl_sh_ordersWhereUniqueInput[]
+  connect?: Prisma.tbl_sh_ordersWhereUniqueInput | Prisma.tbl_sh_ordersWhereUniqueInput[]
+  update?: Prisma.tbl_sh_ordersUpdateWithWhereUniqueWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput | Prisma.tbl_sh_ordersUpdateWithWhereUniqueWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput[]
+  updateMany?: Prisma.tbl_sh_ordersUpdateManyWithWhereWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput | Prisma.tbl_sh_ordersUpdateManyWithWhereWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput[]
+  deleteMany?: Prisma.tbl_sh_ordersScalarWhereInput | Prisma.tbl_sh_ordersScalarWhereInput[]
+}
+
+export type tbl_sh_ordersUpdateManyWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersNestedInput = {
+  create?: Prisma.XOR<Prisma.tbl_sh_ordersCreateWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput, Prisma.tbl_sh_ordersUncheckedCreateWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput> | Prisma.tbl_sh_ordersCreateWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput[] | Prisma.tbl_sh_ordersUncheckedCreateWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput[]
+  connectOrCreate?: Prisma.tbl_sh_ordersCreateOrConnectWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput | Prisma.tbl_sh_ordersCreateOrConnectWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput[]
+  upsert?: Prisma.tbl_sh_ordersUpsertWithWhereUniqueWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput | Prisma.tbl_sh_ordersUpsertWithWhereUniqueWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput[]
+  createMany?: Prisma.tbl_sh_ordersCreateManyNasso_users_tbl_sh_orders_seller_idTonasso_usersInputEnvelope
+  set?: Prisma.tbl_sh_ordersWhereUniqueInput | Prisma.tbl_sh_ordersWhereUniqueInput[]
+  disconnect?: Prisma.tbl_sh_ordersWhereUniqueInput | Prisma.tbl_sh_ordersWhereUniqueInput[]
+  delete?: Prisma.tbl_sh_ordersWhereUniqueInput | Prisma.tbl_sh_ordersWhereUniqueInput[]
+  connect?: Prisma.tbl_sh_ordersWhereUniqueInput | Prisma.tbl_sh_ordersWhereUniqueInput[]
+  update?: Prisma.tbl_sh_ordersUpdateWithWhereUniqueWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput | Prisma.tbl_sh_ordersUpdateWithWhereUniqueWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput[]
+  updateMany?: Prisma.tbl_sh_ordersUpdateManyWithWhereWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput | Prisma.tbl_sh_ordersUpdateManyWithWhereWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput[]
+  deleteMany?: Prisma.tbl_sh_ordersScalarWhereInput | Prisma.tbl_sh_ordersScalarWhereInput[]
+}
+
+export type tbl_sh_ordersUncheckedUpdateManyWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersNestedInput = {
+  create?: Prisma.XOR<Prisma.tbl_sh_ordersCreateWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput, Prisma.tbl_sh_ordersUncheckedCreateWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput> | Prisma.tbl_sh_ordersCreateWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput[] | Prisma.tbl_sh_ordersUncheckedCreateWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput[]
+  connectOrCreate?: Prisma.tbl_sh_ordersCreateOrConnectWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput | Prisma.tbl_sh_ordersCreateOrConnectWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput[]
+  upsert?: Prisma.tbl_sh_ordersUpsertWithWhereUniqueWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput | Prisma.tbl_sh_ordersUpsertWithWhereUniqueWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput[]
+  createMany?: Prisma.tbl_sh_ordersCreateManyNasso_users_tbl_sh_orders_customer_idTonasso_usersInputEnvelope
+  set?: Prisma.tbl_sh_ordersWhereUniqueInput | Prisma.tbl_sh_ordersWhereUniqueInput[]
+  disconnect?: Prisma.tbl_sh_ordersWhereUniqueInput | Prisma.tbl_sh_ordersWhereUniqueInput[]
+  delete?: Prisma.tbl_sh_ordersWhereUniqueInput | Prisma.tbl_sh_ordersWhereUniqueInput[]
+  connect?: Prisma.tbl_sh_ordersWhereUniqueInput | Prisma.tbl_sh_ordersWhereUniqueInput[]
+  update?: Prisma.tbl_sh_ordersUpdateWithWhereUniqueWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput | Prisma.tbl_sh_ordersUpdateWithWhereUniqueWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput[]
+  updateMany?: Prisma.tbl_sh_ordersUpdateManyWithWhereWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput | Prisma.tbl_sh_ordersUpdateManyWithWhereWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput[]
+  deleteMany?: Prisma.tbl_sh_ordersScalarWhereInput | Prisma.tbl_sh_ordersScalarWhereInput[]
+}
+
+export type tbl_sh_ordersUncheckedUpdateManyWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersNestedInput = {
+  create?: Prisma.XOR<Prisma.tbl_sh_ordersCreateWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput, Prisma.tbl_sh_ordersUncheckedCreateWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput> | Prisma.tbl_sh_ordersCreateWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput[] | Prisma.tbl_sh_ordersUncheckedCreateWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput[]
+  connectOrCreate?: Prisma.tbl_sh_ordersCreateOrConnectWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput | Prisma.tbl_sh_ordersCreateOrConnectWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput[]
+  upsert?: Prisma.tbl_sh_ordersUpsertWithWhereUniqueWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput | Prisma.tbl_sh_ordersUpsertWithWhereUniqueWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput[]
+  createMany?: Prisma.tbl_sh_ordersCreateManyNasso_users_tbl_sh_orders_seller_idTonasso_usersInputEnvelope
+  set?: Prisma.tbl_sh_ordersWhereUniqueInput | Prisma.tbl_sh_ordersWhereUniqueInput[]
+  disconnect?: Prisma.tbl_sh_ordersWhereUniqueInput | Prisma.tbl_sh_ordersWhereUniqueInput[]
+  delete?: Prisma.tbl_sh_ordersWhereUniqueInput | Prisma.tbl_sh_ordersWhereUniqueInput[]
+  connect?: Prisma.tbl_sh_ordersWhereUniqueInput | Prisma.tbl_sh_ordersWhereUniqueInput[]
+  update?: Prisma.tbl_sh_ordersUpdateWithWhereUniqueWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput | Prisma.tbl_sh_ordersUpdateWithWhereUniqueWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput[]
+  updateMany?: Prisma.tbl_sh_ordersUpdateManyWithWhereWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput | Prisma.tbl_sh_ordersUpdateManyWithWhereWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput[]
+  deleteMany?: Prisma.tbl_sh_ordersScalarWhereInput | Prisma.tbl_sh_ordersScalarWhereInput[]
+}
+
+export type tbl_sh_ordersCreateNestedManyWithoutTbl_productsInput = {
+  create?: Prisma.XOR<Prisma.tbl_sh_ordersCreateWithoutTbl_productsInput, Prisma.tbl_sh_ordersUncheckedCreateWithoutTbl_productsInput> | Prisma.tbl_sh_ordersCreateWithoutTbl_productsInput[] | Prisma.tbl_sh_ordersUncheckedCreateWithoutTbl_productsInput[]
+  connectOrCreate?: Prisma.tbl_sh_ordersCreateOrConnectWithoutTbl_productsInput | Prisma.tbl_sh_ordersCreateOrConnectWithoutTbl_productsInput[]
+  createMany?: Prisma.tbl_sh_ordersCreateManyTbl_productsInputEnvelope
+  connect?: Prisma.tbl_sh_ordersWhereUniqueInput | Prisma.tbl_sh_ordersWhereUniqueInput[]
+}
+
+export type tbl_sh_ordersUncheckedCreateNestedManyWithoutTbl_productsInput = {
+  create?: Prisma.XOR<Prisma.tbl_sh_ordersCreateWithoutTbl_productsInput, Prisma.tbl_sh_ordersUncheckedCreateWithoutTbl_productsInput> | Prisma.tbl_sh_ordersCreateWithoutTbl_productsInput[] | Prisma.tbl_sh_ordersUncheckedCreateWithoutTbl_productsInput[]
+  connectOrCreate?: Prisma.tbl_sh_ordersCreateOrConnectWithoutTbl_productsInput | Prisma.tbl_sh_ordersCreateOrConnectWithoutTbl_productsInput[]
+  createMany?: Prisma.tbl_sh_ordersCreateManyTbl_productsInputEnvelope
+  connect?: Prisma.tbl_sh_ordersWhereUniqueInput | Prisma.tbl_sh_ordersWhereUniqueInput[]
+}
+
+export type tbl_sh_ordersUpdateManyWithoutTbl_productsNestedInput = {
+  create?: Prisma.XOR<Prisma.tbl_sh_ordersCreateWithoutTbl_productsInput, Prisma.tbl_sh_ordersUncheckedCreateWithoutTbl_productsInput> | Prisma.tbl_sh_ordersCreateWithoutTbl_productsInput[] | Prisma.tbl_sh_ordersUncheckedCreateWithoutTbl_productsInput[]
+  connectOrCreate?: Prisma.tbl_sh_ordersCreateOrConnectWithoutTbl_productsInput | Prisma.tbl_sh_ordersCreateOrConnectWithoutTbl_productsInput[]
+  upsert?: Prisma.tbl_sh_ordersUpsertWithWhereUniqueWithoutTbl_productsInput | Prisma.tbl_sh_ordersUpsertWithWhereUniqueWithoutTbl_productsInput[]
+  createMany?: Prisma.tbl_sh_ordersCreateManyTbl_productsInputEnvelope
+  set?: Prisma.tbl_sh_ordersWhereUniqueInput | Prisma.tbl_sh_ordersWhereUniqueInput[]
+  disconnect?: Prisma.tbl_sh_ordersWhereUniqueInput | Prisma.tbl_sh_ordersWhereUniqueInput[]
+  delete?: Prisma.tbl_sh_ordersWhereUniqueInput | Prisma.tbl_sh_ordersWhereUniqueInput[]
+  connect?: Prisma.tbl_sh_ordersWhereUniqueInput | Prisma.tbl_sh_ordersWhereUniqueInput[]
+  update?: Prisma.tbl_sh_ordersUpdateWithWhereUniqueWithoutTbl_productsInput | Prisma.tbl_sh_ordersUpdateWithWhereUniqueWithoutTbl_productsInput[]
+  updateMany?: Prisma.tbl_sh_ordersUpdateManyWithWhereWithoutTbl_productsInput | Prisma.tbl_sh_ordersUpdateManyWithWhereWithoutTbl_productsInput[]
+  deleteMany?: Prisma.tbl_sh_ordersScalarWhereInput | Prisma.tbl_sh_ordersScalarWhereInput[]
+}
+
+export type tbl_sh_ordersUncheckedUpdateManyWithoutTbl_productsNestedInput = {
+  create?: Prisma.XOR<Prisma.tbl_sh_ordersCreateWithoutTbl_productsInput, Prisma.tbl_sh_ordersUncheckedCreateWithoutTbl_productsInput> | Prisma.tbl_sh_ordersCreateWithoutTbl_productsInput[] | Prisma.tbl_sh_ordersUncheckedCreateWithoutTbl_productsInput[]
+  connectOrCreate?: Prisma.tbl_sh_ordersCreateOrConnectWithoutTbl_productsInput | Prisma.tbl_sh_ordersCreateOrConnectWithoutTbl_productsInput[]
+  upsert?: Prisma.tbl_sh_ordersUpsertWithWhereUniqueWithoutTbl_productsInput | Prisma.tbl_sh_ordersUpsertWithWhereUniqueWithoutTbl_productsInput[]
+  createMany?: Prisma.tbl_sh_ordersCreateManyTbl_productsInputEnvelope
+  set?: Prisma.tbl_sh_ordersWhereUniqueInput | Prisma.tbl_sh_ordersWhereUniqueInput[]
+  disconnect?: Prisma.tbl_sh_ordersWhereUniqueInput | Prisma.tbl_sh_ordersWhereUniqueInput[]
+  delete?: Prisma.tbl_sh_ordersWhereUniqueInput | Prisma.tbl_sh_ordersWhereUniqueInput[]
+  connect?: Prisma.tbl_sh_ordersWhereUniqueInput | Prisma.tbl_sh_ordersWhereUniqueInput[]
+  update?: Prisma.tbl_sh_ordersUpdateWithWhereUniqueWithoutTbl_productsInput | Prisma.tbl_sh_ordersUpdateWithWhereUniqueWithoutTbl_productsInput[]
+  updateMany?: Prisma.tbl_sh_ordersUpdateManyWithWhereWithoutTbl_productsInput | Prisma.tbl_sh_ordersUpdateManyWithWhereWithoutTbl_productsInput[]
+  deleteMany?: Prisma.tbl_sh_ordersScalarWhereInput | Prisma.tbl_sh_ordersScalarWhereInput[]
+}
+
+export type tbl_sh_ordersCreateNestedOneWithoutTbl_order_itemsInput = {
+  create?: Prisma.XOR<Prisma.tbl_sh_ordersCreateWithoutTbl_order_itemsInput, Prisma.tbl_sh_ordersUncheckedCreateWithoutTbl_order_itemsInput>
+  connectOrCreate?: Prisma.tbl_sh_ordersCreateOrConnectWithoutTbl_order_itemsInput
+  connect?: Prisma.tbl_sh_ordersWhereUniqueInput
+}
+
+export type tbl_sh_ordersUpdateOneRequiredWithoutTbl_order_itemsNestedInput = {
+  create?: Prisma.XOR<Prisma.tbl_sh_ordersCreateWithoutTbl_order_itemsInput, Prisma.tbl_sh_ordersUncheckedCreateWithoutTbl_order_itemsInput>
+  connectOrCreate?: Prisma.tbl_sh_ordersCreateOrConnectWithoutTbl_order_itemsInput
+  upsert?: Prisma.tbl_sh_ordersUpsertWithoutTbl_order_itemsInput
+  connect?: Prisma.tbl_sh_ordersWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.tbl_sh_ordersUpdateToOneWithWhereWithoutTbl_order_itemsInput, Prisma.tbl_sh_ordersUpdateWithoutTbl_order_itemsInput>, Prisma.tbl_sh_ordersUncheckedUpdateWithoutTbl_order_itemsInput>
+}
+
+export type tbl_sh_ordersCreateNestedOneWithoutTbl_transactionsInput = {
+  create?: Prisma.XOR<Prisma.tbl_sh_ordersCreateWithoutTbl_transactionsInput, Prisma.tbl_sh_ordersUncheckedCreateWithoutTbl_transactionsInput>
+  connectOrCreate?: Prisma.tbl_sh_ordersCreateOrConnectWithoutTbl_transactionsInput
+  connect?: Prisma.tbl_sh_ordersWhereUniqueInput
+}
+
+export type tbl_sh_ordersUpdateOneWithoutTbl_transactionsNestedInput = {
+  create?: Prisma.XOR<Prisma.tbl_sh_ordersCreateWithoutTbl_transactionsInput, Prisma.tbl_sh_ordersUncheckedCreateWithoutTbl_transactionsInput>
+  connectOrCreate?: Prisma.tbl_sh_ordersCreateOrConnectWithoutTbl_transactionsInput
+  upsert?: Prisma.tbl_sh_ordersUpsertWithoutTbl_transactionsInput
+  disconnect?: Prisma.tbl_sh_ordersWhereInput | boolean
+  delete?: Prisma.tbl_sh_ordersWhereInput | boolean
+  connect?: Prisma.tbl_sh_ordersWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.tbl_sh_ordersUpdateToOneWithWhereWithoutTbl_transactionsInput, Prisma.tbl_sh_ordersUpdateWithoutTbl_transactionsInput>, Prisma.tbl_sh_ordersUncheckedUpdateWithoutTbl_transactionsInput>
+}
+
+export type tbl_sh_ordersCreateWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput = {
+  order_ID: string
+  o_user?: number | null
+  o_date?: string | null
+  oda_status?: string | null
+  o_idadi?: number | null
+  o_datetimes?: string | null
+  o_delivery?: string | null
+  tbl_order_items?: Prisma.tbl_order_itemsCreateNestedManyWithoutTbl_sh_ordersInput
+  tbl_products?: Prisma.tbl_productsCreateNestedOneWithoutTbl_sh_ordersInput
+  nasso_users_tbl_sh_orders_seller_idTonasso_users?: Prisma.nasso_usersCreateNestedOneWithoutTbl_sh_orders_tbl_sh_orders_seller_idTonasso_usersInput
+  tbl_transactions?: Prisma.tbl_transactionsCreateNestedManyWithoutTbl_sh_ordersInput
+}
+
+export type tbl_sh_ordersUncheckedCreateWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput = {
+  o_ID?: number
+  o_pro_Id?: number | null
+  order_ID: string
+  o_user?: number | null
+  o_date?: string | null
+  oda_status?: string | null
+  o_idadi?: number | null
+  o_datetimes?: string | null
+  o_delivery?: string | null
+  seller_id?: number | null
+  tbl_order_items?: Prisma.tbl_order_itemsUncheckedCreateNestedManyWithoutTbl_sh_ordersInput
+  tbl_transactions?: Prisma.tbl_transactionsUncheckedCreateNestedManyWithoutTbl_sh_ordersInput
+}
+
+export type tbl_sh_ordersCreateOrConnectWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput = {
+  where: Prisma.tbl_sh_ordersWhereUniqueInput
+  create: Prisma.XOR<Prisma.tbl_sh_ordersCreateWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput, Prisma.tbl_sh_ordersUncheckedCreateWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput>
+}
+
+export type tbl_sh_ordersCreateManyNasso_users_tbl_sh_orders_customer_idTonasso_usersInputEnvelope = {
+  data: Prisma.tbl_sh_ordersCreateManyNasso_users_tbl_sh_orders_customer_idTonasso_usersInput | Prisma.tbl_sh_ordersCreateManyNasso_users_tbl_sh_orders_customer_idTonasso_usersInput[]
+  skipDuplicates?: boolean
+}
+
+export type tbl_sh_ordersCreateWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput = {
+  order_ID: string
+  o_user?: number | null
+  o_date?: string | null
+  oda_status?: string | null
+  o_idadi?: number | null
+  o_datetimes?: string | null
+  o_delivery?: string | null
+  tbl_order_items?: Prisma.tbl_order_itemsCreateNestedManyWithoutTbl_sh_ordersInput
+  nasso_users_tbl_sh_orders_customer_idTonasso_users?: Prisma.nasso_usersCreateNestedOneWithoutTbl_sh_orders_tbl_sh_orders_customer_idTonasso_usersInput
+  tbl_products?: Prisma.tbl_productsCreateNestedOneWithoutTbl_sh_ordersInput
+  tbl_transactions?: Prisma.tbl_transactionsCreateNestedManyWithoutTbl_sh_ordersInput
+}
+
+export type tbl_sh_ordersUncheckedCreateWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput = {
+  o_ID?: number
+  o_pro_Id?: number | null
+  order_ID: string
+  o_user?: number | null
+  o_date?: string | null
+  oda_status?: string | null
+  o_idadi?: number | null
+  o_datetimes?: string | null
+  o_delivery?: string | null
+  customer_id?: number | null
+  tbl_order_items?: Prisma.tbl_order_itemsUncheckedCreateNestedManyWithoutTbl_sh_ordersInput
+  tbl_transactions?: Prisma.tbl_transactionsUncheckedCreateNestedManyWithoutTbl_sh_ordersInput
+}
+
+export type tbl_sh_ordersCreateOrConnectWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput = {
+  where: Prisma.tbl_sh_ordersWhereUniqueInput
+  create: Prisma.XOR<Prisma.tbl_sh_ordersCreateWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput, Prisma.tbl_sh_ordersUncheckedCreateWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput>
+}
+
+export type tbl_sh_ordersCreateManyNasso_users_tbl_sh_orders_seller_idTonasso_usersInputEnvelope = {
+  data: Prisma.tbl_sh_ordersCreateManyNasso_users_tbl_sh_orders_seller_idTonasso_usersInput | Prisma.tbl_sh_ordersCreateManyNasso_users_tbl_sh_orders_seller_idTonasso_usersInput[]
+  skipDuplicates?: boolean
+}
+
+export type tbl_sh_ordersUpsertWithWhereUniqueWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput = {
+  where: Prisma.tbl_sh_ordersWhereUniqueInput
+  update: Prisma.XOR<Prisma.tbl_sh_ordersUpdateWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput, Prisma.tbl_sh_ordersUncheckedUpdateWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput>
+  create: Prisma.XOR<Prisma.tbl_sh_ordersCreateWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput, Prisma.tbl_sh_ordersUncheckedCreateWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput>
+}
+
+export type tbl_sh_ordersUpdateWithWhereUniqueWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput = {
+  where: Prisma.tbl_sh_ordersWhereUniqueInput
+  data: Prisma.XOR<Prisma.tbl_sh_ordersUpdateWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput, Prisma.tbl_sh_ordersUncheckedUpdateWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput>
+}
+
+export type tbl_sh_ordersUpdateManyWithWhereWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput = {
+  where: Prisma.tbl_sh_ordersScalarWhereInput
+  data: Prisma.XOR<Prisma.tbl_sh_ordersUpdateManyMutationInput, Prisma.tbl_sh_ordersUncheckedUpdateManyWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput>
+}
+
+export type tbl_sh_ordersScalarWhereInput = {
+  AND?: Prisma.tbl_sh_ordersScalarWhereInput | Prisma.tbl_sh_ordersScalarWhereInput[]
+  OR?: Prisma.tbl_sh_ordersScalarWhereInput[]
+  NOT?: Prisma.tbl_sh_ordersScalarWhereInput | Prisma.tbl_sh_ordersScalarWhereInput[]
+  o_ID?: Prisma.IntFilter<"tbl_sh_orders"> | number
+  o_pro_Id?: Prisma.IntNullableFilter<"tbl_sh_orders"> | number | null
+  order_ID?: Prisma.StringFilter<"tbl_sh_orders"> | string
+  o_user?: Prisma.IntNullableFilter<"tbl_sh_orders"> | number | null
+  o_date?: Prisma.StringNullableFilter<"tbl_sh_orders"> | string | null
+  oda_status?: Prisma.StringNullableFilter<"tbl_sh_orders"> | string | null
+  o_idadi?: Prisma.IntNullableFilter<"tbl_sh_orders"> | number | null
+  o_datetimes?: Prisma.StringNullableFilter<"tbl_sh_orders"> | string | null
+  o_delivery?: Prisma.StringNullableFilter<"tbl_sh_orders"> | string | null
+  customer_id?: Prisma.IntNullableFilter<"tbl_sh_orders"> | number | null
+  seller_id?: Prisma.IntNullableFilter<"tbl_sh_orders"> | number | null
+}
+
+export type tbl_sh_ordersUpsertWithWhereUniqueWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput = {
+  where: Prisma.tbl_sh_ordersWhereUniqueInput
+  update: Prisma.XOR<Prisma.tbl_sh_ordersUpdateWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput, Prisma.tbl_sh_ordersUncheckedUpdateWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput>
+  create: Prisma.XOR<Prisma.tbl_sh_ordersCreateWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput, Prisma.tbl_sh_ordersUncheckedCreateWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput>
+}
+
+export type tbl_sh_ordersUpdateWithWhereUniqueWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput = {
+  where: Prisma.tbl_sh_ordersWhereUniqueInput
+  data: Prisma.XOR<Prisma.tbl_sh_ordersUpdateWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput, Prisma.tbl_sh_ordersUncheckedUpdateWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput>
+}
+
+export type tbl_sh_ordersUpdateManyWithWhereWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput = {
+  where: Prisma.tbl_sh_ordersScalarWhereInput
+  data: Prisma.XOR<Prisma.tbl_sh_ordersUpdateManyMutationInput, Prisma.tbl_sh_ordersUncheckedUpdateManyWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput>
+}
+
+export type tbl_sh_ordersCreateWithoutTbl_productsInput = {
+  order_ID: string
+  o_user?: number | null
+  o_date?: string | null
+  oda_status?: string | null
+  o_idadi?: number | null
+  o_datetimes?: string | null
+  o_delivery?: string | null
+  tbl_order_items?: Prisma.tbl_order_itemsCreateNestedManyWithoutTbl_sh_ordersInput
+  nasso_users_tbl_sh_orders_customer_idTonasso_users?: Prisma.nasso_usersCreateNestedOneWithoutTbl_sh_orders_tbl_sh_orders_customer_idTonasso_usersInput
+  nasso_users_tbl_sh_orders_seller_idTonasso_users?: Prisma.nasso_usersCreateNestedOneWithoutTbl_sh_orders_tbl_sh_orders_seller_idTonasso_usersInput
+  tbl_transactions?: Prisma.tbl_transactionsCreateNestedManyWithoutTbl_sh_ordersInput
+}
+
+export type tbl_sh_ordersUncheckedCreateWithoutTbl_productsInput = {
+  o_ID?: number
+  order_ID: string
+  o_user?: number | null
+  o_date?: string | null
+  oda_status?: string | null
+  o_idadi?: number | null
+  o_datetimes?: string | null
+  o_delivery?: string | null
+  customer_id?: number | null
+  seller_id?: number | null
+  tbl_order_items?: Prisma.tbl_order_itemsUncheckedCreateNestedManyWithoutTbl_sh_ordersInput
+  tbl_transactions?: Prisma.tbl_transactionsUncheckedCreateNestedManyWithoutTbl_sh_ordersInput
+}
+
+export type tbl_sh_ordersCreateOrConnectWithoutTbl_productsInput = {
+  where: Prisma.tbl_sh_ordersWhereUniqueInput
+  create: Prisma.XOR<Prisma.tbl_sh_ordersCreateWithoutTbl_productsInput, Prisma.tbl_sh_ordersUncheckedCreateWithoutTbl_productsInput>
+}
+
+export type tbl_sh_ordersCreateManyTbl_productsInputEnvelope = {
+  data: Prisma.tbl_sh_ordersCreateManyTbl_productsInput | Prisma.tbl_sh_ordersCreateManyTbl_productsInput[]
+  skipDuplicates?: boolean
+}
+
+export type tbl_sh_ordersUpsertWithWhereUniqueWithoutTbl_productsInput = {
+  where: Prisma.tbl_sh_ordersWhereUniqueInput
+  update: Prisma.XOR<Prisma.tbl_sh_ordersUpdateWithoutTbl_productsInput, Prisma.tbl_sh_ordersUncheckedUpdateWithoutTbl_productsInput>
+  create: Prisma.XOR<Prisma.tbl_sh_ordersCreateWithoutTbl_productsInput, Prisma.tbl_sh_ordersUncheckedCreateWithoutTbl_productsInput>
+}
+
+export type tbl_sh_ordersUpdateWithWhereUniqueWithoutTbl_productsInput = {
+  where: Prisma.tbl_sh_ordersWhereUniqueInput
+  data: Prisma.XOR<Prisma.tbl_sh_ordersUpdateWithoutTbl_productsInput, Prisma.tbl_sh_ordersUncheckedUpdateWithoutTbl_productsInput>
+}
+
+export type tbl_sh_ordersUpdateManyWithWhereWithoutTbl_productsInput = {
+  where: Prisma.tbl_sh_ordersScalarWhereInput
+  data: Prisma.XOR<Prisma.tbl_sh_ordersUpdateManyMutationInput, Prisma.tbl_sh_ordersUncheckedUpdateManyWithoutTbl_productsInput>
+}
+
+export type tbl_sh_ordersCreateWithoutTbl_order_itemsInput = {
+  order_ID: string
+  o_user?: number | null
+  o_date?: string | null
+  oda_status?: string | null
+  o_idadi?: number | null
+  o_datetimes?: string | null
+  o_delivery?: string | null
+  nasso_users_tbl_sh_orders_customer_idTonasso_users?: Prisma.nasso_usersCreateNestedOneWithoutTbl_sh_orders_tbl_sh_orders_customer_idTonasso_usersInput
+  tbl_products?: Prisma.tbl_productsCreateNestedOneWithoutTbl_sh_ordersInput
+  nasso_users_tbl_sh_orders_seller_idTonasso_users?: Prisma.nasso_usersCreateNestedOneWithoutTbl_sh_orders_tbl_sh_orders_seller_idTonasso_usersInput
+  tbl_transactions?: Prisma.tbl_transactionsCreateNestedManyWithoutTbl_sh_ordersInput
+}
+
+export type tbl_sh_ordersUncheckedCreateWithoutTbl_order_itemsInput = {
+  o_ID?: number
+  o_pro_Id?: number | null
+  order_ID: string
+  o_user?: number | null
+  o_date?: string | null
+  oda_status?: string | null
+  o_idadi?: number | null
+  o_datetimes?: string | null
+  o_delivery?: string | null
+  customer_id?: number | null
+  seller_id?: number | null
+  tbl_transactions?: Prisma.tbl_transactionsUncheckedCreateNestedManyWithoutTbl_sh_ordersInput
+}
+
+export type tbl_sh_ordersCreateOrConnectWithoutTbl_order_itemsInput = {
+  where: Prisma.tbl_sh_ordersWhereUniqueInput
+  create: Prisma.XOR<Prisma.tbl_sh_ordersCreateWithoutTbl_order_itemsInput, Prisma.tbl_sh_ordersUncheckedCreateWithoutTbl_order_itemsInput>
+}
+
+export type tbl_sh_ordersUpsertWithoutTbl_order_itemsInput = {
+  update: Prisma.XOR<Prisma.tbl_sh_ordersUpdateWithoutTbl_order_itemsInput, Prisma.tbl_sh_ordersUncheckedUpdateWithoutTbl_order_itemsInput>
+  create: Prisma.XOR<Prisma.tbl_sh_ordersCreateWithoutTbl_order_itemsInput, Prisma.tbl_sh_ordersUncheckedCreateWithoutTbl_order_itemsInput>
+  where?: Prisma.tbl_sh_ordersWhereInput
+}
+
+export type tbl_sh_ordersUpdateToOneWithWhereWithoutTbl_order_itemsInput = {
+  where?: Prisma.tbl_sh_ordersWhereInput
+  data: Prisma.XOR<Prisma.tbl_sh_ordersUpdateWithoutTbl_order_itemsInput, Prisma.tbl_sh_ordersUncheckedUpdateWithoutTbl_order_itemsInput>
+}
+
+export type tbl_sh_ordersUpdateWithoutTbl_order_itemsInput = {
+  order_ID?: Prisma.StringFieldUpdateOperationsInput | string
+  o_user?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  o_date?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  oda_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  o_idadi?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  o_datetimes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  o_delivery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nasso_users_tbl_sh_orders_customer_idTonasso_users?: Prisma.nasso_usersUpdateOneWithoutTbl_sh_orders_tbl_sh_orders_customer_idTonasso_usersNestedInput
+  tbl_products?: Prisma.tbl_productsUpdateOneWithoutTbl_sh_ordersNestedInput
+  nasso_users_tbl_sh_orders_seller_idTonasso_users?: Prisma.nasso_usersUpdateOneWithoutTbl_sh_orders_tbl_sh_orders_seller_idTonasso_usersNestedInput
+  tbl_transactions?: Prisma.tbl_transactionsUpdateManyWithoutTbl_sh_ordersNestedInput
+}
+
+export type tbl_sh_ordersUncheckedUpdateWithoutTbl_order_itemsInput = {
+  o_ID?: Prisma.IntFieldUpdateOperationsInput | number
+  o_pro_Id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  order_ID?: Prisma.StringFieldUpdateOperationsInput | string
+  o_user?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  o_date?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  oda_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  o_idadi?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  o_datetimes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  o_delivery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  seller_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tbl_transactions?: Prisma.tbl_transactionsUncheckedUpdateManyWithoutTbl_sh_ordersNestedInput
+}
+
+export type tbl_sh_ordersCreateWithoutTbl_transactionsInput = {
+  order_ID: string
+  o_user?: number | null
+  o_date?: string | null
+  oda_status?: string | null
+  o_idadi?: number | null
+  o_datetimes?: string | null
+  o_delivery?: string | null
+  tbl_order_items?: Prisma.tbl_order_itemsCreateNestedManyWithoutTbl_sh_ordersInput
+  nasso_users_tbl_sh_orders_customer_idTonasso_users?: Prisma.nasso_usersCreateNestedOneWithoutTbl_sh_orders_tbl_sh_orders_customer_idTonasso_usersInput
+  tbl_products?: Prisma.tbl_productsCreateNestedOneWithoutTbl_sh_ordersInput
+  nasso_users_tbl_sh_orders_seller_idTonasso_users?: Prisma.nasso_usersCreateNestedOneWithoutTbl_sh_orders_tbl_sh_orders_seller_idTonasso_usersInput
+}
+
+export type tbl_sh_ordersUncheckedCreateWithoutTbl_transactionsInput = {
+  o_ID?: number
+  o_pro_Id?: number | null
+  order_ID: string
+  o_user?: number | null
+  o_date?: string | null
+  oda_status?: string | null
+  o_idadi?: number | null
+  o_datetimes?: string | null
+  o_delivery?: string | null
+  customer_id?: number | null
+  seller_id?: number | null
+  tbl_order_items?: Prisma.tbl_order_itemsUncheckedCreateNestedManyWithoutTbl_sh_ordersInput
+}
+
+export type tbl_sh_ordersCreateOrConnectWithoutTbl_transactionsInput = {
+  where: Prisma.tbl_sh_ordersWhereUniqueInput
+  create: Prisma.XOR<Prisma.tbl_sh_ordersCreateWithoutTbl_transactionsInput, Prisma.tbl_sh_ordersUncheckedCreateWithoutTbl_transactionsInput>
+}
+
+export type tbl_sh_ordersUpsertWithoutTbl_transactionsInput = {
+  update: Prisma.XOR<Prisma.tbl_sh_ordersUpdateWithoutTbl_transactionsInput, Prisma.tbl_sh_ordersUncheckedUpdateWithoutTbl_transactionsInput>
+  create: Prisma.XOR<Prisma.tbl_sh_ordersCreateWithoutTbl_transactionsInput, Prisma.tbl_sh_ordersUncheckedCreateWithoutTbl_transactionsInput>
+  where?: Prisma.tbl_sh_ordersWhereInput
+}
+
+export type tbl_sh_ordersUpdateToOneWithWhereWithoutTbl_transactionsInput = {
+  where?: Prisma.tbl_sh_ordersWhereInput
+  data: Prisma.XOR<Prisma.tbl_sh_ordersUpdateWithoutTbl_transactionsInput, Prisma.tbl_sh_ordersUncheckedUpdateWithoutTbl_transactionsInput>
+}
+
+export type tbl_sh_ordersUpdateWithoutTbl_transactionsInput = {
+  order_ID?: Prisma.StringFieldUpdateOperationsInput | string
+  o_user?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  o_date?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  oda_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  o_idadi?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  o_datetimes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  o_delivery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tbl_order_items?: Prisma.tbl_order_itemsUpdateManyWithoutTbl_sh_ordersNestedInput
+  nasso_users_tbl_sh_orders_customer_idTonasso_users?: Prisma.nasso_usersUpdateOneWithoutTbl_sh_orders_tbl_sh_orders_customer_idTonasso_usersNestedInput
+  tbl_products?: Prisma.tbl_productsUpdateOneWithoutTbl_sh_ordersNestedInput
+  nasso_users_tbl_sh_orders_seller_idTonasso_users?: Prisma.nasso_usersUpdateOneWithoutTbl_sh_orders_tbl_sh_orders_seller_idTonasso_usersNestedInput
+}
+
+export type tbl_sh_ordersUncheckedUpdateWithoutTbl_transactionsInput = {
+  o_ID?: Prisma.IntFieldUpdateOperationsInput | number
+  o_pro_Id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  order_ID?: Prisma.StringFieldUpdateOperationsInput | string
+  o_user?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  o_date?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  oda_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  o_idadi?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  o_datetimes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  o_delivery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  seller_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tbl_order_items?: Prisma.tbl_order_itemsUncheckedUpdateManyWithoutTbl_sh_ordersNestedInput
+}
+
+export type tbl_sh_ordersCreateManyNasso_users_tbl_sh_orders_customer_idTonasso_usersInput = {
+  o_ID?: number
+  o_pro_Id?: number | null
+  order_ID: string
+  o_user?: number | null
+  o_date?: string | null
+  oda_status?: string | null
+  o_idadi?: number | null
+  o_datetimes?: string | null
+  o_delivery?: string | null
+  seller_id?: number | null
+}
+
+export type tbl_sh_ordersCreateManyNasso_users_tbl_sh_orders_seller_idTonasso_usersInput = {
+  o_ID?: number
+  o_pro_Id?: number | null
+  order_ID: string
+  o_user?: number | null
+  o_date?: string | null
+  oda_status?: string | null
+  o_idadi?: number | null
+  o_datetimes?: string | null
+  o_delivery?: string | null
+  customer_id?: number | null
+}
+
+export type tbl_sh_ordersUpdateWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput = {
+  order_ID?: Prisma.StringFieldUpdateOperationsInput | string
+  o_user?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  o_date?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  oda_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  o_idadi?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  o_datetimes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  o_delivery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tbl_order_items?: Prisma.tbl_order_itemsUpdateManyWithoutTbl_sh_ordersNestedInput
+  tbl_products?: Prisma.tbl_productsUpdateOneWithoutTbl_sh_ordersNestedInput
+  nasso_users_tbl_sh_orders_seller_idTonasso_users?: Prisma.nasso_usersUpdateOneWithoutTbl_sh_orders_tbl_sh_orders_seller_idTonasso_usersNestedInput
+  tbl_transactions?: Prisma.tbl_transactionsUpdateManyWithoutTbl_sh_ordersNestedInput
+}
+
+export type tbl_sh_ordersUncheckedUpdateWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput = {
+  o_ID?: Prisma.IntFieldUpdateOperationsInput | number
+  o_pro_Id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  order_ID?: Prisma.StringFieldUpdateOperationsInput | string
+  o_user?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  o_date?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  oda_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  o_idadi?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  o_datetimes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  o_delivery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seller_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tbl_order_items?: Prisma.tbl_order_itemsUncheckedUpdateManyWithoutTbl_sh_ordersNestedInput
+  tbl_transactions?: Prisma.tbl_transactionsUncheckedUpdateManyWithoutTbl_sh_ordersNestedInput
+}
+
+export type tbl_sh_ordersUncheckedUpdateManyWithoutNasso_users_tbl_sh_orders_customer_idTonasso_usersInput = {
+  o_ID?: Prisma.IntFieldUpdateOperationsInput | number
+  o_pro_Id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  order_ID?: Prisma.StringFieldUpdateOperationsInput | string
+  o_user?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  o_date?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  oda_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  o_idadi?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  o_datetimes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  o_delivery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seller_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type tbl_sh_ordersUpdateWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput = {
+  order_ID?: Prisma.StringFieldUpdateOperationsInput | string
+  o_user?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  o_date?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  oda_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  o_idadi?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  o_datetimes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  o_delivery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tbl_order_items?: Prisma.tbl_order_itemsUpdateManyWithoutTbl_sh_ordersNestedInput
+  nasso_users_tbl_sh_orders_customer_idTonasso_users?: Prisma.nasso_usersUpdateOneWithoutTbl_sh_orders_tbl_sh_orders_customer_idTonasso_usersNestedInput
+  tbl_products?: Prisma.tbl_productsUpdateOneWithoutTbl_sh_ordersNestedInput
+  tbl_transactions?: Prisma.tbl_transactionsUpdateManyWithoutTbl_sh_ordersNestedInput
+}
+
+export type tbl_sh_ordersUncheckedUpdateWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput = {
+  o_ID?: Prisma.IntFieldUpdateOperationsInput | number
+  o_pro_Id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  order_ID?: Prisma.StringFieldUpdateOperationsInput | string
+  o_user?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  o_date?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  oda_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  o_idadi?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  o_datetimes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  o_delivery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tbl_order_items?: Prisma.tbl_order_itemsUncheckedUpdateManyWithoutTbl_sh_ordersNestedInput
+  tbl_transactions?: Prisma.tbl_transactionsUncheckedUpdateManyWithoutTbl_sh_ordersNestedInput
+}
+
+export type tbl_sh_ordersUncheckedUpdateManyWithoutNasso_users_tbl_sh_orders_seller_idTonasso_usersInput = {
+  o_ID?: Prisma.IntFieldUpdateOperationsInput | number
+  o_pro_Id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  order_ID?: Prisma.StringFieldUpdateOperationsInput | string
+  o_user?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  o_date?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  oda_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  o_idadi?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  o_datetimes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  o_delivery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type tbl_sh_ordersCreateManyTbl_productsInput = {
+  o_ID?: number
+  order_ID: string
+  o_user?: number | null
+  o_date?: string | null
+  oda_status?: string | null
+  o_idadi?: number | null
+  o_datetimes?: string | null
+  o_delivery?: string | null
+  customer_id?: number | null
+  seller_id?: number | null
+}
+
+export type tbl_sh_ordersUpdateWithoutTbl_productsInput = {
+  order_ID?: Prisma.StringFieldUpdateOperationsInput | string
+  o_user?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  o_date?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  oda_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  o_idadi?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  o_datetimes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  o_delivery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tbl_order_items?: Prisma.tbl_order_itemsUpdateManyWithoutTbl_sh_ordersNestedInput
+  nasso_users_tbl_sh_orders_customer_idTonasso_users?: Prisma.nasso_usersUpdateOneWithoutTbl_sh_orders_tbl_sh_orders_customer_idTonasso_usersNestedInput
+  nasso_users_tbl_sh_orders_seller_idTonasso_users?: Prisma.nasso_usersUpdateOneWithoutTbl_sh_orders_tbl_sh_orders_seller_idTonasso_usersNestedInput
+  tbl_transactions?: Prisma.tbl_transactionsUpdateManyWithoutTbl_sh_ordersNestedInput
+}
+
+export type tbl_sh_ordersUncheckedUpdateWithoutTbl_productsInput = {
+  o_ID?: Prisma.IntFieldUpdateOperationsInput | number
+  order_ID?: Prisma.StringFieldUpdateOperationsInput | string
+  o_user?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  o_date?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  oda_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  o_idadi?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  o_datetimes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  o_delivery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  seller_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tbl_order_items?: Prisma.tbl_order_itemsUncheckedUpdateManyWithoutTbl_sh_ordersNestedInput
+  tbl_transactions?: Prisma.tbl_transactionsUncheckedUpdateManyWithoutTbl_sh_ordersNestedInput
+}
+
+export type tbl_sh_ordersUncheckedUpdateManyWithoutTbl_productsInput = {
+  o_ID?: Prisma.IntFieldUpdateOperationsInput | number
+  order_ID?: Prisma.StringFieldUpdateOperationsInput | string
+  o_user?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  o_date?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  oda_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  o_idadi?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  o_datetimes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  o_delivery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  seller_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+
+/**
+ * Count Type Tbl_sh_ordersCountOutputType
+ */
+
+export type Tbl_sh_ordersCountOutputType = {
+  tbl_order_items: number
+  tbl_transactions: number
+}
+
+export type Tbl_sh_ordersCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  tbl_order_items?: boolean | Tbl_sh_ordersCountOutputTypeCountTbl_order_itemsArgs
+  tbl_transactions?: boolean | Tbl_sh_ordersCountOutputTypeCountTbl_transactionsArgs
+}
+
+/**
+ * Tbl_sh_ordersCountOutputType without action
+ */
+export type Tbl_sh_ordersCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Tbl_sh_ordersCountOutputType
+   */
+  select?: Prisma.Tbl_sh_ordersCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * Tbl_sh_ordersCountOutputType without action
+ */
+export type Tbl_sh_ordersCountOutputTypeCountTbl_order_itemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.tbl_order_itemsWhereInput
+}
+
+/**
+ * Tbl_sh_ordersCountOutputType without action
+ */
+export type Tbl_sh_ordersCountOutputTypeCountTbl_transactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.tbl_transactionsWhereInput
+}
 
 
 export type tbl_sh_ordersSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -470,6 +1255,14 @@ export type tbl_sh_ordersSelect<ExtArgs extends runtime.Types.Extensions.Interna
   o_idadi?: boolean
   o_datetimes?: boolean
   o_delivery?: boolean
+  customer_id?: boolean
+  seller_id?: boolean
+  tbl_order_items?: boolean | Prisma.tbl_sh_orders$tbl_order_itemsArgs<ExtArgs>
+  nasso_users_tbl_sh_orders_customer_idTonasso_users?: boolean | Prisma.tbl_sh_orders$nasso_users_tbl_sh_orders_customer_idTonasso_usersArgs<ExtArgs>
+  tbl_products?: boolean | Prisma.tbl_sh_orders$tbl_productsArgs<ExtArgs>
+  nasso_users_tbl_sh_orders_seller_idTonasso_users?: boolean | Prisma.tbl_sh_orders$nasso_users_tbl_sh_orders_seller_idTonasso_usersArgs<ExtArgs>
+  tbl_transactions?: boolean | Prisma.tbl_sh_orders$tbl_transactionsArgs<ExtArgs>
+  _count?: boolean | Prisma.Tbl_sh_ordersCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tbl_sh_orders"]>
 
 
@@ -484,13 +1277,29 @@ export type tbl_sh_ordersSelectScalar = {
   o_idadi?: boolean
   o_datetimes?: boolean
   o_delivery?: boolean
+  customer_id?: boolean
+  seller_id?: boolean
 }
 
-export type tbl_sh_ordersOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"o_ID" | "o_pro_Id" | "order_ID" | "o_user" | "o_date" | "oda_status" | "o_idadi" | "o_datetimes" | "o_delivery", ExtArgs["result"]["tbl_sh_orders"]>
+export type tbl_sh_ordersOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"o_ID" | "o_pro_Id" | "order_ID" | "o_user" | "o_date" | "oda_status" | "o_idadi" | "o_datetimes" | "o_delivery" | "customer_id" | "seller_id", ExtArgs["result"]["tbl_sh_orders"]>
+export type tbl_sh_ordersInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  tbl_order_items?: boolean | Prisma.tbl_sh_orders$tbl_order_itemsArgs<ExtArgs>
+  nasso_users_tbl_sh_orders_customer_idTonasso_users?: boolean | Prisma.tbl_sh_orders$nasso_users_tbl_sh_orders_customer_idTonasso_usersArgs<ExtArgs>
+  tbl_products?: boolean | Prisma.tbl_sh_orders$tbl_productsArgs<ExtArgs>
+  nasso_users_tbl_sh_orders_seller_idTonasso_users?: boolean | Prisma.tbl_sh_orders$nasso_users_tbl_sh_orders_seller_idTonasso_usersArgs<ExtArgs>
+  tbl_transactions?: boolean | Prisma.tbl_sh_orders$tbl_transactionsArgs<ExtArgs>
+  _count?: boolean | Prisma.Tbl_sh_ordersCountOutputTypeDefaultArgs<ExtArgs>
+}
 
 export type $tbl_sh_ordersPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "tbl_sh_orders"
-  objects: {}
+  objects: {
+    tbl_order_items: Prisma.$tbl_order_itemsPayload<ExtArgs>[]
+    nasso_users_tbl_sh_orders_customer_idTonasso_users: Prisma.$nasso_usersPayload<ExtArgs> | null
+    tbl_products: Prisma.$tbl_productsPayload<ExtArgs> | null
+    nasso_users_tbl_sh_orders_seller_idTonasso_users: Prisma.$nasso_usersPayload<ExtArgs> | null
+    tbl_transactions: Prisma.$tbl_transactionsPayload<ExtArgs>[]
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     o_ID: number
     o_pro_Id: number | null
@@ -501,6 +1310,8 @@ export type $tbl_sh_ordersPayload<ExtArgs extends runtime.Types.Extensions.Inter
     o_idadi: number | null
     o_datetimes: string | null
     o_delivery: string | null
+    customer_id: number | null
+    seller_id: number | null
   }, ExtArgs["result"]["tbl_sh_orders"]>
   composites: {}
 }
@@ -841,6 +1652,11 @@ readonly fields: tbl_sh_ordersFieldRefs;
  */
 export interface Prisma__tbl_sh_ordersClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  tbl_order_items<T extends Prisma.tbl_sh_orders$tbl_order_itemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.tbl_sh_orders$tbl_order_itemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$tbl_order_itemsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  nasso_users_tbl_sh_orders_customer_idTonasso_users<T extends Prisma.tbl_sh_orders$nasso_users_tbl_sh_orders_customer_idTonasso_usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.tbl_sh_orders$nasso_users_tbl_sh_orders_customer_idTonasso_usersArgs<ExtArgs>>): Prisma.Prisma__nasso_usersClient<runtime.Types.Result.GetResult<Prisma.$nasso_usersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  tbl_products<T extends Prisma.tbl_sh_orders$tbl_productsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.tbl_sh_orders$tbl_productsArgs<ExtArgs>>): Prisma.Prisma__tbl_productsClient<runtime.Types.Result.GetResult<Prisma.$tbl_productsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  nasso_users_tbl_sh_orders_seller_idTonasso_users<T extends Prisma.tbl_sh_orders$nasso_users_tbl_sh_orders_seller_idTonasso_usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.tbl_sh_orders$nasso_users_tbl_sh_orders_seller_idTonasso_usersArgs<ExtArgs>>): Prisma.Prisma__nasso_usersClient<runtime.Types.Result.GetResult<Prisma.$nasso_usersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  tbl_transactions<T extends Prisma.tbl_sh_orders$tbl_transactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.tbl_sh_orders$tbl_transactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$tbl_transactionsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -879,6 +1695,8 @@ export interface tbl_sh_ordersFieldRefs {
   readonly o_idadi: Prisma.FieldRef<"tbl_sh_orders", 'Int'>
   readonly o_datetimes: Prisma.FieldRef<"tbl_sh_orders", 'String'>
   readonly o_delivery: Prisma.FieldRef<"tbl_sh_orders", 'String'>
+  readonly customer_id: Prisma.FieldRef<"tbl_sh_orders", 'Int'>
+  readonly seller_id: Prisma.FieldRef<"tbl_sh_orders", 'Int'>
 }
     
 
@@ -895,6 +1713,10 @@ export type tbl_sh_ordersFindUniqueArgs<ExtArgs extends runtime.Types.Extensions
    * Omit specific fields from the tbl_sh_orders
    */
   omit?: Prisma.tbl_sh_ordersOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.tbl_sh_ordersInclude<ExtArgs> | null
   /**
    * Filter, which tbl_sh_orders to fetch.
    */
@@ -914,6 +1736,10 @@ export type tbl_sh_ordersFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Ext
    */
   omit?: Prisma.tbl_sh_ordersOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.tbl_sh_ordersInclude<ExtArgs> | null
+  /**
    * Filter, which tbl_sh_orders to fetch.
    */
   where: Prisma.tbl_sh_ordersWhereUniqueInput
@@ -931,6 +1757,10 @@ export type tbl_sh_ordersFindFirstArgs<ExtArgs extends runtime.Types.Extensions.
    * Omit specific fields from the tbl_sh_orders
    */
   omit?: Prisma.tbl_sh_ordersOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.tbl_sh_ordersInclude<ExtArgs> | null
   /**
    * Filter, which tbl_sh_orders to fetch.
    */
@@ -980,6 +1810,10 @@ export type tbl_sh_ordersFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Exte
    */
   omit?: Prisma.tbl_sh_ordersOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.tbl_sh_ordersInclude<ExtArgs> | null
+  /**
    * Filter, which tbl_sh_orders to fetch.
    */
   where?: Prisma.tbl_sh_ordersWhereInput
@@ -1028,6 +1862,10 @@ export type tbl_sh_ordersFindManyArgs<ExtArgs extends runtime.Types.Extensions.I
    */
   omit?: Prisma.tbl_sh_ordersOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.tbl_sh_ordersInclude<ExtArgs> | null
+  /**
    * Filter, which tbl_sh_orders to fetch.
    */
   where?: Prisma.tbl_sh_ordersWhereInput
@@ -1071,6 +1909,10 @@ export type tbl_sh_ordersCreateArgs<ExtArgs extends runtime.Types.Extensions.Int
    */
   omit?: Prisma.tbl_sh_ordersOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.tbl_sh_ordersInclude<ExtArgs> | null
+  /**
    * The data needed to create a tbl_sh_orders.
    */
   data: Prisma.XOR<Prisma.tbl_sh_ordersCreateInput, Prisma.tbl_sh_ordersUncheckedCreateInput>
@@ -1099,6 +1941,10 @@ export type tbl_sh_ordersUpdateArgs<ExtArgs extends runtime.Types.Extensions.Int
    * Omit specific fields from the tbl_sh_orders
    */
   omit?: Prisma.tbl_sh_ordersOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.tbl_sh_ordersInclude<ExtArgs> | null
   /**
    * The data needed to update a tbl_sh_orders.
    */
@@ -1140,6 +1986,10 @@ export type tbl_sh_ordersUpsertArgs<ExtArgs extends runtime.Types.Extensions.Int
    */
   omit?: Prisma.tbl_sh_ordersOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.tbl_sh_ordersInclude<ExtArgs> | null
+  /**
    * The filter to search for the tbl_sh_orders to update in case it exists.
    */
   where: Prisma.tbl_sh_ordersWhereUniqueInput
@@ -1166,6 +2016,10 @@ export type tbl_sh_ordersDeleteArgs<ExtArgs extends runtime.Types.Extensions.Int
    */
   omit?: Prisma.tbl_sh_ordersOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.tbl_sh_ordersInclude<ExtArgs> | null
+  /**
    * Filter which tbl_sh_orders to delete.
    */
   where: Prisma.tbl_sh_ordersWhereUniqueInput
@@ -1186,6 +2040,111 @@ export type tbl_sh_ordersDeleteManyArgs<ExtArgs extends runtime.Types.Extensions
 }
 
 /**
+ * tbl_sh_orders.tbl_order_items
+ */
+export type tbl_sh_orders$tbl_order_itemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the tbl_order_items
+   */
+  select?: Prisma.tbl_order_itemsSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the tbl_order_items
+   */
+  omit?: Prisma.tbl_order_itemsOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.tbl_order_itemsInclude<ExtArgs> | null
+  where?: Prisma.tbl_order_itemsWhereInput
+  orderBy?: Prisma.tbl_order_itemsOrderByWithRelationInput | Prisma.tbl_order_itemsOrderByWithRelationInput[]
+  cursor?: Prisma.tbl_order_itemsWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.Tbl_order_itemsScalarFieldEnum | Prisma.Tbl_order_itemsScalarFieldEnum[]
+}
+
+/**
+ * tbl_sh_orders.nasso_users_tbl_sh_orders_customer_idTonasso_users
+ */
+export type tbl_sh_orders$nasso_users_tbl_sh_orders_customer_idTonasso_usersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the nasso_users
+   */
+  select?: Prisma.nasso_usersSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the nasso_users
+   */
+  omit?: Prisma.nasso_usersOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.nasso_usersInclude<ExtArgs> | null
+  where?: Prisma.nasso_usersWhereInput
+}
+
+/**
+ * tbl_sh_orders.tbl_products
+ */
+export type tbl_sh_orders$tbl_productsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the tbl_products
+   */
+  select?: Prisma.tbl_productsSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the tbl_products
+   */
+  omit?: Prisma.tbl_productsOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.tbl_productsInclude<ExtArgs> | null
+  where?: Prisma.tbl_productsWhereInput
+}
+
+/**
+ * tbl_sh_orders.nasso_users_tbl_sh_orders_seller_idTonasso_users
+ */
+export type tbl_sh_orders$nasso_users_tbl_sh_orders_seller_idTonasso_usersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the nasso_users
+   */
+  select?: Prisma.nasso_usersSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the nasso_users
+   */
+  omit?: Prisma.nasso_usersOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.nasso_usersInclude<ExtArgs> | null
+  where?: Prisma.nasso_usersWhereInput
+}
+
+/**
+ * tbl_sh_orders.tbl_transactions
+ */
+export type tbl_sh_orders$tbl_transactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the tbl_transactions
+   */
+  select?: Prisma.tbl_transactionsSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the tbl_transactions
+   */
+  omit?: Prisma.tbl_transactionsOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.tbl_transactionsInclude<ExtArgs> | null
+  where?: Prisma.tbl_transactionsWhereInput
+  orderBy?: Prisma.tbl_transactionsOrderByWithRelationInput | Prisma.tbl_transactionsOrderByWithRelationInput[]
+  cursor?: Prisma.tbl_transactionsWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.Tbl_transactionsScalarFieldEnum | Prisma.Tbl_transactionsScalarFieldEnum[]
+}
+
+/**
  * tbl_sh_orders without action
  */
 export type tbl_sh_ordersDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1197,4 +2156,8 @@ export type tbl_sh_ordersDefaultArgs<ExtArgs extends runtime.Types.Extensions.In
    * Omit specific fields from the tbl_sh_orders
    */
   omit?: Prisma.tbl_sh_ordersOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.tbl_sh_ordersInclude<ExtArgs> | null
 }

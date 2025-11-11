@@ -8,7 +8,21 @@
 * 🟢 You can import this file directly.
 */
 
+export const tbl_transactions_transaction_type = {
+  sale: 'sale',
+  commission: 'commission',
+  refund: 'refund',
+  withdrawal: 'withdrawal',
+  payment: 'payment'
+} as const
+
+export type tbl_transactions_transaction_type = (typeof tbl_transactions_transaction_type)[keyof typeof tbl_transactions_transaction_type]
 
 
-// This file is empty because there are no enums in the schema.
-export {}
+export const tbl_seller_profiles_verification_status = {
+  pending: 'pending',
+  verified: 'verified',
+  rejected: 'rejected'
+} as const
+
+export type tbl_seller_profiles_verification_status = (typeof tbl_seller_profiles_verification_status)[keyof typeof tbl_seller_profiles_verification_status]

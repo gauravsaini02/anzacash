@@ -191,3 +191,28 @@ export type uza_answers = Prisma.uza_answersModel
  * 
  */
 export type uza_status = Prisma.uza_statusModel
+/**
+ * Model tbl_customer_profiles
+ * 
+ */
+export type tbl_customer_profiles = Prisma.tbl_customer_profilesModel
+/**
+ * Model tbl_inventory
+ * 
+ */
+export type tbl_inventory = Prisma.tbl_inventoryModel
+/**
+ * Model tbl_order_items
+ * 
+ */
+export type tbl_order_items = Prisma.tbl_order_itemsModel
+/**
+ * Model tbl_seller_profiles
+ * 
+ */
+export type tbl_seller_profiles = Prisma.tbl_seller_profilesModel
+/**
+ * Model tbl_transactions
+ * 
+ */
+export type tbl_transactions = Prisma.tbl_transactionsModel

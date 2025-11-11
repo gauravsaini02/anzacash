@@ -1,16 +1,31 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import CustomerHomePage from './components/CustomerHomePage';
-import LoginPage from './components/LoginPage';
-import RegisterPage from './components/RegisterPage';
-import ResetPasswordPage from './components/ResetPasswordPage';
-import CategoriesPage from './components/CategoriesPage';
-import ProductDetailPage from './components/ProductDetailPage';
-import CustomerDashboard from './components/CustomerDashboard';
-import VendorDashboard from './components/VendorDashboard';
-import CartPage from './components/CartPage';
-import CheckoutPage from './components/CheckoutPage';
-import OrderConfirmationPage from './components/OrderConfirmationPage';
+// Auth components
+import LoginPage from './components/auth/LoginPage';
+import RegisterPage from './components/auth/RegisterPage';
+import ResetPasswordPage from './components/auth/ResetPasswordPage';
+
+// Customer components
+import CustomerHomePage from './components/customer/CustomerHomePage';
+import CategoriesPage from './components/customer/CategoriesPage';
+import CustomerDashboard from './components/customer/CustomerDashboard';
+import CartPage from './components/customer/CartPage';
+import CheckoutPage from './components/customer/CheckoutPage';
+import OrderConfirmationPage from './components/customer/OrderConfirmationPage';
+
+// Vendor components
+import VendorDashboard from './components/vendor/VendorDashboard';
+import AddProductPage from './components/vendor/AddProductPage';
+import ProductsPage from './components/vendor/ProductsPage';
+import OrdersPage from './components/vendor/OrdersPage';
+import AnalyticsPage from './components/vendor/AnalyticsPage';
+
+// Product components
+import ProductDetailPage from './components/product/ProductDetailPage';
+
+// Admin components
+import AdminDashboard from './components/admin/AdminDashboard';
+import VendorManagement from './components/admin/VendorManagement';
 
 function App() {
   const [userPosition, setUserPosition] = useState<string | null>(null);
@@ -20,7 +35,7 @@ function App() {
     checkAuthStatus();
   }, []);
 
-  // Listen for storage changes (when login happens in another tab)
+  // Listen for storage changes and custom auth events
   useEffect(() => {
     const handleStorageChange = (e: StorageEvent) => {
       if (e.key === 'anzacash_user' || e.key === 'anzacash_token') {
@@ -28,8 +43,21 @@ function App() {
       }
     };
 
+    const handleAuthChange = (e: CustomEvent) => {
+      console.log('🎯 Received authChange event:', e.detail);
+      checkAuthStatus();
+    };
+
+    // Listen for storage events (other tabs/windows)
     window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
+
+    // Listen for custom auth change events (same tab)
+    window.addEventListener('authChange', handleAuthChange as EventListener);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('authChange', handleAuthChange as EventListener);
+    };
   }, []);
 
   const checkAuthStatus = () => {
@@ -74,8 +102,9 @@ function App() {
   console.log('Rendering App - userPosition:', userPosition, 'isLoading:', isLoading);
 
   // Check if user should have access to customer home page
-  const hasAccess = userPosition === 'customer' || userPosition === 'traders';
+  const hasAccess = userPosition === 'customer';
   console.log('Has access to customer home page:', hasAccess);
+  console.log('User can access vendor dashboard:', userPosition === 'vendor' || userPosition === 'traders');
 
   return (
     <Router>
@@ -89,12 +118,117 @@ function App() {
           <Route
             path="/dashboard"
             element={
-              userPosition === 'traders' ? <VendorDashboard /> : <CustomerDashboard />
+              userPosition === 'vendor' ? <VendorDashboard /> :
+              userPosition === 'customer' ? <CustomerDashboard /> :
+              <Navigate to="/login" replace />
+            }
+          />
+          <Route
+            path="/vendor"
+            element={
+              userPosition === 'vendor' || userPosition === 'traders' ? <VendorDashboard /> :
+              <Navigate to="/login" replace />
+            }
+          />
+          <Route
+            path="/orders"
+            element={
+              userPosition === 'vendor' || userPosition === 'traders' ? <OrdersPage /> :
+              <Navigate to="/login" replace />
+            }
+          />
+          <Route
+            path="/analytics"
+            element={
+              userPosition === 'vendor' || userPosition === 'traders' ? <AnalyticsPage /> :
+              <Navigate to="/login" replace />
+            }
+          />
+          <Route
+            path="/add-product"
+            element={
+              (() => {
+                console.log('=== ADD PRODUCT ROUTE DEBUG ===');
+                const storedUser = localStorage.getItem('anzacash_user');
+                const token = localStorage.getItem('anzacash_token');
+
+                console.log('Token exists:', !!token);
+                console.log('User data exists:', !!storedUser);
+                console.log('Raw user data:', storedUser);
+
+                if (!token || !storedUser) {
+                  console.log('❌ No auth data found for add-product route');
+                  return <Navigate to="/login" replace />;
+                }
+
+                try {
+                  const user = JSON.parse(storedUser);
+                  console.log('✅ Parsed user data:', user);
+                  console.log('📍 User role (usr_posio):', user.usr_posio);
+                  console.log('📍 User position type:', typeof user.usr_posio);
+
+                  if (user.usr_posio === 'vendor') {
+                    console.log('✅ Vendor role detected - showing Add Product page');
+                    return <AddProductPage />;
+                  } else if (user.usr_posio === 'traders') {
+                    console.log('✅ Traders role detected - showing Add Product page');
+                    return <AddProductPage />;
+                  } else {
+                    console.log('❌ User role not authorized for add-product:', user.usr_posio);
+                    console.log('❌ Available roles that work: vendor, traders');
+                    return <Navigate to="/login" replace />;
+                  }
+                } catch (error) {
+                  console.error('❌ Error parsing user data for add-product:', error);
+                  return <Navigate to="/login" replace />;
+                }
+              })()
+            }
+          />
+          <Route
+            path="/products"
+            element={
+              (() => {
+                const storedUser = localStorage.getItem('anzacash_user');
+                const token = localStorage.getItem('anzacash_token');
+
+                if (!token || !storedUser) {
+                  return <Navigate to="/login" replace />;
+                }
+
+                try {
+                  const user = JSON.parse(storedUser);
+
+                  if (user.usr_posio === 'vendor' || user.usr_posio === 'traders') {
+                    return <ProductsPage />;
+                  } else {
+                    return <Navigate to="/login" replace />;
+                  }
+                } catch (error) {
+                  return <Navigate to="/login" replace />;
+                }
+              })()
             }
           />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/confirmation" element={<OrderConfirmationPage />} />
+
+          {/* Admin route */}
+          <Route
+            path="/admin"
+            element={
+              userPosition === 'admin' ? <AdminDashboard /> : <Navigate to="/login" replace />
+            }
+          />
+
+          {/* Admin Vendor Management route */}
+          <Route
+            path="/admin/vendors"
+            element={
+              userPosition === 'admin' ? <VendorManagement /> : <Navigate to="/login" replace />
+            }
+          />
 
           {/* Development route - access customer homepage without login */}
           <Route path="/preview" element={<CustomerHomePage />} />

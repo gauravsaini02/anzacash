@@ -423,7 +423,12 @@ export const ModelName = {
   tbl_video_pay: 'tbl_video_pay',
   tknes_nasso: 'tknes_nasso',
   uza_answers: 'uza_answers',
-  uza_status: 'uza_status'
+  uza_status: 'uza_status',
+  tbl_customer_profiles: 'tbl_customer_profiles',
+  tbl_inventory: 'tbl_inventory',
+  tbl_order_items: 'tbl_order_items',
+  tbl_seller_profiles: 'tbl_seller_profiles',
+  tbl_transactions: 'tbl_transactions'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -439,7 +444,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "ads_check" | "ch_table" | "cus_link" | "login_noti" | "nasso_accounts" | "nasso_answer" | "nasso_logs" | "nasso_pay" | "nasso_qns" | "nasso_quiz" | "nasso_users" | "notifiers" | "pro_photo" | "referal" | "salary_pay" | "tbl_cashes" | "tbl_category" | "tbl_exchange" | "tbl_games" | "tbl_jifunze" | "tbl_karibu" | "tbl_loan" | "tbl_notify" | "tbl_payments" | "tbl_paymethod" | "tbl_products" | "tbl_rates" | "tbl_seller" | "tbl_sh_orders" | "tbl_status" | "tbl_video" | "tbl_video_pay" | "tknes_nasso" | "uza_answers" | "uza_status"
+    modelProps: "ads_check" | "ch_table" | "cus_link" | "login_noti" | "nasso_accounts" | "nasso_answer" | "nasso_logs" | "nasso_pay" | "nasso_qns" | "nasso_quiz" | "nasso_users" | "notifiers" | "pro_photo" | "referal" | "salary_pay" | "tbl_cashes" | "tbl_category" | "tbl_exchange" | "tbl_games" | "tbl_jifunze" | "tbl_karibu" | "tbl_loan" | "tbl_notify" | "tbl_payments" | "tbl_paymethod" | "tbl_products" | "tbl_rates" | "tbl_seller" | "tbl_sh_orders" | "tbl_status" | "tbl_video" | "tbl_video_pay" | "tknes_nasso" | "uza_answers" | "uza_status" | "tbl_customer_profiles" | "tbl_inventory" | "tbl_order_items" | "tbl_seller_profiles" | "tbl_transactions"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2753,6 +2758,336 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    tbl_customer_profiles: {
+      payload: Prisma.$tbl_customer_profilesPayload<ExtArgs>
+      fields: Prisma.tbl_customer_profilesFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.tbl_customer_profilesFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tbl_customer_profilesPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.tbl_customer_profilesFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tbl_customer_profilesPayload>
+        }
+        findFirst: {
+          args: Prisma.tbl_customer_profilesFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tbl_customer_profilesPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.tbl_customer_profilesFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tbl_customer_profilesPayload>
+        }
+        findMany: {
+          args: Prisma.tbl_customer_profilesFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tbl_customer_profilesPayload>[]
+        }
+        create: {
+          args: Prisma.tbl_customer_profilesCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tbl_customer_profilesPayload>
+        }
+        createMany: {
+          args: Prisma.tbl_customer_profilesCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.tbl_customer_profilesDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tbl_customer_profilesPayload>
+        }
+        update: {
+          args: Prisma.tbl_customer_profilesUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tbl_customer_profilesPayload>
+        }
+        deleteMany: {
+          args: Prisma.tbl_customer_profilesDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.tbl_customer_profilesUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.tbl_customer_profilesUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tbl_customer_profilesPayload>
+        }
+        aggregate: {
+          args: Prisma.Tbl_customer_profilesAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTbl_customer_profiles>
+        }
+        groupBy: {
+          args: Prisma.tbl_customer_profilesGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Tbl_customer_profilesGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.tbl_customer_profilesCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Tbl_customer_profilesCountAggregateOutputType> | number
+        }
+      }
+    }
+    tbl_inventory: {
+      payload: Prisma.$tbl_inventoryPayload<ExtArgs>
+      fields: Prisma.tbl_inventoryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.tbl_inventoryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tbl_inventoryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.tbl_inventoryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tbl_inventoryPayload>
+        }
+        findFirst: {
+          args: Prisma.tbl_inventoryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tbl_inventoryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.tbl_inventoryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tbl_inventoryPayload>
+        }
+        findMany: {
+          args: Prisma.tbl_inventoryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tbl_inventoryPayload>[]
+        }
+        create: {
+          args: Prisma.tbl_inventoryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tbl_inventoryPayload>
+        }
+        createMany: {
+          args: Prisma.tbl_inventoryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.tbl_inventoryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tbl_inventoryPayload>
+        }
+        update: {
+          args: Prisma.tbl_inventoryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tbl_inventoryPayload>
+        }
+        deleteMany: {
+          args: Prisma.tbl_inventoryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.tbl_inventoryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.tbl_inventoryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tbl_inventoryPayload>
+        }
+        aggregate: {
+          args: Prisma.Tbl_inventoryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTbl_inventory>
+        }
+        groupBy: {
+          args: Prisma.tbl_inventoryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Tbl_inventoryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.tbl_inventoryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Tbl_inventoryCountAggregateOutputType> | number
+        }
+      }
+    }
+    tbl_order_items: {
+      payload: Prisma.$tbl_order_itemsPayload<ExtArgs>
+      fields: Prisma.tbl_order_itemsFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.tbl_order_itemsFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tbl_order_itemsPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.tbl_order_itemsFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tbl_order_itemsPayload>
+        }
+        findFirst: {
+          args: Prisma.tbl_order_itemsFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tbl_order_itemsPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.tbl_order_itemsFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tbl_order_itemsPayload>
+        }
+        findMany: {
+          args: Prisma.tbl_order_itemsFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tbl_order_itemsPayload>[]
+        }
+        create: {
+          args: Prisma.tbl_order_itemsCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tbl_order_itemsPayload>
+        }
+        createMany: {
+          args: Prisma.tbl_order_itemsCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.tbl_order_itemsDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tbl_order_itemsPayload>
+        }
+        update: {
+          args: Prisma.tbl_order_itemsUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tbl_order_itemsPayload>
+        }
+        deleteMany: {
+          args: Prisma.tbl_order_itemsDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.tbl_order_itemsUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.tbl_order_itemsUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tbl_order_itemsPayload>
+        }
+        aggregate: {
+          args: Prisma.Tbl_order_itemsAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTbl_order_items>
+        }
+        groupBy: {
+          args: Prisma.tbl_order_itemsGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Tbl_order_itemsGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.tbl_order_itemsCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Tbl_order_itemsCountAggregateOutputType> | number
+        }
+      }
+    }
+    tbl_seller_profiles: {
+      payload: Prisma.$tbl_seller_profilesPayload<ExtArgs>
+      fields: Prisma.tbl_seller_profilesFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.tbl_seller_profilesFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tbl_seller_profilesPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.tbl_seller_profilesFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tbl_seller_profilesPayload>
+        }
+        findFirst: {
+          args: Prisma.tbl_seller_profilesFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tbl_seller_profilesPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.tbl_seller_profilesFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tbl_seller_profilesPayload>
+        }
+        findMany: {
+          args: Prisma.tbl_seller_profilesFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tbl_seller_profilesPayload>[]
+        }
+        create: {
+          args: Prisma.tbl_seller_profilesCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tbl_seller_profilesPayload>
+        }
+        createMany: {
+          args: Prisma.tbl_seller_profilesCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.tbl_seller_profilesDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tbl_seller_profilesPayload>
+        }
+        update: {
+          args: Prisma.tbl_seller_profilesUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tbl_seller_profilesPayload>
+        }
+        deleteMany: {
+          args: Prisma.tbl_seller_profilesDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.tbl_seller_profilesUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.tbl_seller_profilesUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tbl_seller_profilesPayload>
+        }
+        aggregate: {
+          args: Prisma.Tbl_seller_profilesAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTbl_seller_profiles>
+        }
+        groupBy: {
+          args: Prisma.tbl_seller_profilesGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Tbl_seller_profilesGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.tbl_seller_profilesCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Tbl_seller_profilesCountAggregateOutputType> | number
+        }
+      }
+    }
+    tbl_transactions: {
+      payload: Prisma.$tbl_transactionsPayload<ExtArgs>
+      fields: Prisma.tbl_transactionsFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.tbl_transactionsFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tbl_transactionsPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.tbl_transactionsFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tbl_transactionsPayload>
+        }
+        findFirst: {
+          args: Prisma.tbl_transactionsFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tbl_transactionsPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.tbl_transactionsFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tbl_transactionsPayload>
+        }
+        findMany: {
+          args: Prisma.tbl_transactionsFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tbl_transactionsPayload>[]
+        }
+        create: {
+          args: Prisma.tbl_transactionsCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tbl_transactionsPayload>
+        }
+        createMany: {
+          args: Prisma.tbl_transactionsCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.tbl_transactionsDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tbl_transactionsPayload>
+        }
+        update: {
+          args: Prisma.tbl_transactionsUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tbl_transactionsPayload>
+        }
+        deleteMany: {
+          args: Prisma.tbl_transactionsDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.tbl_transactionsUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.tbl_transactionsUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tbl_transactionsPayload>
+        }
+        aggregate: {
+          args: Prisma.Tbl_transactionsAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTbl_transactions>
+        }
+        groupBy: {
+          args: Prisma.tbl_transactionsGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Tbl_transactionsGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.tbl_transactionsCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Tbl_transactionsCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -3130,7 +3465,9 @@ export const Tbl_sh_ordersScalarFieldEnum = {
   oda_status: 'oda_status',
   o_idadi: 'o_idadi',
   o_datetimes: 'o_datetimes',
-  o_delivery: 'o_delivery'
+  o_delivery: 'o_delivery',
+  customer_id: 'customer_id',
+  seller_id: 'seller_id'
 } as const
 
 export type Tbl_sh_ordersScalarFieldEnum = (typeof Tbl_sh_ordersScalarFieldEnum)[keyof typeof Tbl_sh_ordersScalarFieldEnum]
@@ -3198,12 +3535,101 @@ export const Uza_statusScalarFieldEnum = {
 export type Uza_statusScalarFieldEnum = (typeof Uza_statusScalarFieldEnum)[keyof typeof Uza_statusScalarFieldEnum]
 
 
+export const Tbl_customer_profilesScalarFieldEnum = {
+  profile_id: 'profile_id',
+  user_id: 'user_id',
+  shipping_address: 'shipping_address',
+  billing_address: 'billing_address',
+  phone_number: 'phone_number',
+  preferences: 'preferences',
+  loyalty_points: 'loyalty_points',
+  total_orders: 'total_orders',
+  total_spent: 'total_spent',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type Tbl_customer_profilesScalarFieldEnum = (typeof Tbl_customer_profilesScalarFieldEnum)[keyof typeof Tbl_customer_profilesScalarFieldEnum]
+
+
+export const Tbl_inventoryScalarFieldEnum = {
+  inventory_id: 'inventory_id',
+  product_id: 'product_id',
+  seller_id: 'seller_id',
+  quantity_available: 'quantity_available',
+  quantity_sold: 'quantity_sold',
+  reorder_level: 'reorder_level',
+  cost_price: 'cost_price',
+  selling_price: 'selling_price',
+  last_updated: 'last_updated',
+  created_at: 'created_at'
+} as const
+
+export type Tbl_inventoryScalarFieldEnum = (typeof Tbl_inventoryScalarFieldEnum)[keyof typeof Tbl_inventoryScalarFieldEnum]
+
+
+export const Tbl_order_itemsScalarFieldEnum = {
+  item_id: 'item_id',
+  order_id: 'order_id',
+  product_id: 'product_id',
+  quantity: 'quantity',
+  unit_price: 'unit_price',
+  total_price: 'total_price',
+  created_at: 'created_at'
+} as const
+
+export type Tbl_order_itemsScalarFieldEnum = (typeof Tbl_order_itemsScalarFieldEnum)[keyof typeof Tbl_order_itemsScalarFieldEnum]
+
+
+export const Tbl_seller_profilesScalarFieldEnum = {
+  profile_id: 'profile_id',
+  user_id: 'user_id',
+  business_name: 'business_name',
+  business_description: 'business_description',
+  commission_rate: 'commission_rate',
+  verification_status: 'verification_status',
+  business_phone: 'business_phone',
+  business_email: 'business_email',
+  business_address: 'business_address',
+  rating: 'rating',
+  total_sales: 'total_sales',
+  total_products: 'total_products',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type Tbl_seller_profilesScalarFieldEnum = (typeof Tbl_seller_profilesScalarFieldEnum)[keyof typeof Tbl_seller_profilesScalarFieldEnum]
+
+
+export const Tbl_transactionsScalarFieldEnum = {
+  transaction_id: 'transaction_id',
+  user_id: 'user_id',
+  order_id: 'order_id',
+  amount: 'amount',
+  transaction_type: 'transaction_type',
+  description: 'description',
+  reference_id: 'reference_id',
+  balance_after: 'balance_after',
+  created_at: 'created_at'
+} as const
+
+export type Tbl_transactionsScalarFieldEnum = (typeof Tbl_transactionsScalarFieldEnum)[keyof typeof Tbl_transactionsScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const NullableJsonNullValueInput = {
+  DbNull: DbNull,
+  JsonNull: JsonNull
+} as const
+
+export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
 
 
 export const NullsOrder = {
@@ -3533,6 +3959,51 @@ export const uza_statusOrderByRelevanceFieldEnum = {
 export type uza_statusOrderByRelevanceFieldEnum = (typeof uza_statusOrderByRelevanceFieldEnum)[keyof typeof uza_statusOrderByRelevanceFieldEnum]
 
 
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
+
+
+export const QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
+} as const
+
+export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+export const tbl_customer_profilesOrderByRelevanceFieldEnum = {
+  shipping_address: 'shipping_address',
+  billing_address: 'billing_address',
+  phone_number: 'phone_number'
+} as const
+
+export type tbl_customer_profilesOrderByRelevanceFieldEnum = (typeof tbl_customer_profilesOrderByRelevanceFieldEnum)[keyof typeof tbl_customer_profilesOrderByRelevanceFieldEnum]
+
+
+export const tbl_seller_profilesOrderByRelevanceFieldEnum = {
+  business_name: 'business_name',
+  business_description: 'business_description',
+  business_phone: 'business_phone',
+  business_email: 'business_email',
+  business_address: 'business_address'
+} as const
+
+export type tbl_seller_profilesOrderByRelevanceFieldEnum = (typeof tbl_seller_profilesOrderByRelevanceFieldEnum)[keyof typeof tbl_seller_profilesOrderByRelevanceFieldEnum]
+
+
+export const tbl_transactionsOrderByRelevanceFieldEnum = {
+  description: 'description',
+  reference_id: 'reference_id'
+} as const
+
+export type tbl_transactionsOrderByRelevanceFieldEnum = (typeof tbl_transactionsOrderByRelevanceFieldEnum)[keyof typeof tbl_transactionsOrderByRelevanceFieldEnum]
+
+
 
 /**
  * Field references
@@ -3564,6 +4035,48 @@ export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, '
  * Reference to a field of type 'BigInt'
  */
 export type BigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt'>
+    
+
+
+/**
+ * Reference to a field of type 'Json'
+ */
+export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+/**
+ * Reference to a field of type 'QueryMode'
+ */
+export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
+    
+
+
+/**
+ * Reference to a field of type 'Decimal'
+ */
+export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
+    
+
+
+/**
+ * Reference to a field of type 'DateTime'
+ */
+export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+/**
+ * Reference to a field of type 'tbl_seller_profiles_verification_status'
+ */
+export type Enumtbl_seller_profiles_verification_statusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'tbl_seller_profiles_verification_status'>
+    
+
+
+/**
+ * Reference to a field of type 'tbl_transactions_transaction_type'
+ */
+export type Enumtbl_transactions_transaction_typeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'tbl_transactions_transaction_type'>
     
 
 /**
@@ -3688,6 +4201,11 @@ export type GlobalOmitConfig = {
   tknes_nasso?: Prisma.tknes_nassoOmit
   uza_answers?: Prisma.uza_answersOmit
   uza_status?: Prisma.uza_statusOmit
+  tbl_customer_profiles?: Prisma.tbl_customer_profilesOmit
+  tbl_inventory?: Prisma.tbl_inventoryOmit
+  tbl_order_items?: Prisma.tbl_order_itemsOmit
+  tbl_seller_profiles?: Prisma.tbl_seller_profilesOmit
+  tbl_transactions?: Prisma.tbl_transactionsOmit
 }
 
 /* Types for Logging */
