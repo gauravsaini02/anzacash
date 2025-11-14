@@ -51,12 +51,6 @@ const AdminHeader: React.FC<AdminHeaderProps> = ({ onLogout }) => {
               </span>
               <span
                 className="text-gray-700 hover:text-primary font-medium cursor-pointer"
-                onClick={() => navigate('/admin/orders')}
-              >
-                Orders
-              </span>
-              <span
-                className="text-gray-700 hover:text-primary font-medium cursor-pointer"
                 onClick={() => navigate('/admin/revenue')}
               >
                 Revenue

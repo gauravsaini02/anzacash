@@ -26,6 +26,7 @@ import ProductDetailPage from './components/product/ProductDetailPage';
 // Admin components
 import AdminDashboard from './components/admin/AdminDashboard';
 import VendorManagement from './components/admin/VendorManagement';
+import MemberManagement from './components/admin/MemberManagement';
 
 function App() {
   const [userPosition, setUserPosition] = useState<string | null>(null);
@@ -227,6 +228,14 @@ function App() {
             path="/admin/vendors"
             element={
               userPosition === 'admin' ? <VendorManagement /> : <Navigate to="/login" replace />
+            }
+          />
+
+          {/* Admin Member Management route */}
+          <Route
+            path="/admin/members"
+            element={
+              userPosition === 'admin' ? <MemberManagement /> : <Navigate to="/login" replace />
             }
           />
 

@@ -1,22 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AdminHeader from '../shared/AdminHeader';
+import AdminSidebar from '../shared/AdminSidebar';
 
 interface AdminStats {
   totalRevenue: number;
   activeVendors: number;
   mlmMembers: number;
-  ordersToday: number;
   revenueChange: number;
   vendorsChange: number;
   membersChange: number;
-  ordersChange: number;
 }
 
 interface TopVendor {
   id: number;
   name: string;
-  orders: number;
   revenue: number;
   avatar: string;
   rank: number;
@@ -24,7 +22,7 @@ interface TopVendor {
 
 interface Activity {
   id: number;
-  type: 'vendor' | 'order' | 'payout' | 'review' | 'report';
+  type: 'vendor' | 'payout' | 'review' | 'report';
   title: string;
   description: string;
   time: string;
@@ -33,6 +31,7 @@ interface Activity {
 const AdminDashboard: React.FC = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [stats, setStats] = useState<AdminStats | null>(null);
   const [topVendors, setTopVendors] = useState<TopVendor[]>([]);
   const [activities, setActivities] = useState<Activity[]>([]);
@@ -70,28 +69,25 @@ const AdminDashboard: React.FC = () => {
         totalRevenue: 45680000,
         activeVendors: 2847,
         mlmMembers: 18542,
-        ordersToday: 1248,
         revenueChange: 12.5,
         vendorsChange: 8.3,
-        membersChange: 15.7,
-        ordersChange: -2.1
+        membersChange: 15.7
       });
 
       // Mock top vendors
       setTopVendors([
-        { id: 1, name: 'TechWorld Electronics', orders: 2847, revenue: 8450000, avatar: 'avatar-2', rank: 1 },
-        { id: 2, name: 'Fashion Hub', orders: 1956, revenue: 6230000, avatar: 'avatar-4', rank: 2 },
-        { id: 3, name: 'Home & Garden', orders: 1234, revenue: 4870000, avatar: 'avatar-8', rank: 3 },
-        { id: 4, name: 'Sports Central', orders: 987, revenue: 3650000, avatar: 'avatar-9', rank: 4 }
+        { id: 1, name: 'TechWorld Electronics', revenue: 8450000, avatar: 'avatar-2', rank: 1 },
+        { id: 2, name: 'Fashion Hub', revenue: 6230000, avatar: 'avatar-4', rank: 2 },
+        { id: 3, name: 'Home & Garden', revenue: 4870000, avatar: 'avatar-8', rank: 3 },
+        { id: 4, name: 'Sports Central', revenue: 3650000, avatar: 'avatar-9', rank: 4 }
       ]);
 
       // Mock activities
       setActivities([
         { id: 1, type: 'vendor', title: 'John Mwangi', description: 'registered as a new vendor', time: '2 minutes ago' },
-        { id: 2, type: 'order', title: '#ORD-2024-5647', description: 'Large order placed for 450,000 TSH', time: '5 minutes ago' },
-        { id: 3, type: 'payout', title: '125,000 TSH', description: 'Commission payout processed to MLM members', time: '12 minutes ago' },
-        { id: 4, type: 'review', title: 'TechWorld Electronics', description: 'received a 5-star review', time: '18 minutes ago' },
-        { id: 5, type: 'report', title: 'iPhone 15 Pro', description: 'Product reported for suspicious pricing', time: '25 minutes ago' }
+        { id: 2, type: 'payout', title: '125,000 TSH', description: 'Commission payout processed to MLM members', time: '5 minutes ago' },
+        { id: 3, type: 'review', title: 'TechWorld Electronics', description: 'received a 5-star review', time: '10 minutes ago' },
+        { id: 4, type: 'report', title: 'iPhone 15 Pro', description: 'Product reported for suspicious pricing', time: '15 minutes ago' }
       ]);
 
       setLoading(false);
@@ -187,7 +183,6 @@ const AdminDashboard: React.FC = () => {
   const getActivityIcon = (type: string): string => {
     switch (type) {
       case 'vendor': return 'fa-user-plus';
-      case 'order': return 'fa-shopping-cart';
       case 'payout': return 'fa-money-bill';
       case 'review': return 'fa-star';
       case 'report': return 'fa-exclamation-triangle';
@@ -198,7 +193,6 @@ const AdminDashboard: React.FC = () => {
   const getActivityColor = (type: string): string => {
     switch (type) {
       case 'vendor': return 'bg-green-100 text-green-600';
-      case 'order': return 'bg-blue-100 text-blue-600';
       case 'payout': return 'bg-purple-100 text-purple-600';
       case 'review': return 'bg-orange-100 text-orange-600';
       case 'report': return 'bg-red-100 text-red-600';
@@ -209,7 +203,6 @@ const AdminDashboard: React.FC = () => {
   const getActivityBadgeColor = (type: string): string => {
     switch (type) {
       case 'vendor': return 'bg-green-100 text-green-800';
-      case 'order': return 'bg-blue-100 text-blue-800';
       case 'payout': return 'bg-purple-100 text-purple-800';
       case 'review': return 'bg-orange-100 text-orange-800';
       case 'report': return 'bg-red-100 text-red-800';
@@ -269,7 +262,7 @@ const AdminDashboard: React.FC = () => {
       </section>
 
       {/* KPI Cards */}
-      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
           <div className="flex items-center justify-between mb-4">
             <div className="w-12 h-12 bg-gradient-to-r from-primary to-blue-600 rounded-xl flex items-center justify-center">
@@ -320,23 +313,6 @@ const AdminDashboard: React.FC = () => {
           <p className="text-3xl font-bold text-gray-900">{formatCurrency(stats?.mlmMembers || 0)}</p>
           <p className="text-gray-500 text-sm">Active referrers</p>
         </div>
-
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
-          <div className="flex items-center justify-between mb-4">
-            <div className="w-12 h-12 bg-gradient-to-r from-orange-400 to-orange-600 rounded-xl flex items-center justify-center">
-              <i className="fa-solid fa-shopping-cart text-white text-xl"></i>
-            </div>
-            <div className="text-right">
-              <div className="flex items-center space-x-1">
-                <span className="text-red-500 text-sm font-medium">{stats?.ordersChange}%</span>
-                <i className="fa-solid fa-arrow-down text-red-500 text-xs"></i>
-              </div>
-            </div>
-          </div>
-          <h3 className="text-gray-600 text-sm font-medium mb-1">Orders Today</h3>
-          <p className="text-3xl font-bold text-gray-900">{formatCurrency(stats?.ordersToday || 0)}</p>
-          <p className="text-gray-500 text-sm">Compared to yesterday</p>
-        </div>
       </section>
 
       {/* Revenue Chart and Quick Actions */}
@@ -346,10 +322,6 @@ const AdminDashboard: React.FC = () => {
             <div>
               <h2 className="text-xl font-bold text-gray-900">Revenue Overview</h2>
               <p className="text-gray-600">Monthly revenue trend</p>
-            </div>
-            <div className="flex items-center space-x-2">
-              <button className="px-3 py-1 bg-primary bg-opacity-10 text-primary rounded-lg text-sm font-medium">Revenue</button>
-              <button className="px-3 py-1 text-gray-600 rounded-lg text-sm font-medium hover:bg-gray-100">Orders</button>
             </div>
           </div>
           <div id="revenue-chart-container" className="h-80"></div>
@@ -367,6 +339,22 @@ const AdminDashboard: React.FC = () => {
           </div>
 
           <div className="space-y-4">
+            <div className="flex items-center justify-between p-4 bg-green-50 rounded-xl border border-green-200">
+              <div className="flex items-center space-x-3">
+                <i className="fa-solid fa-tasks text-green-500"></i>
+                <div>
+                  <p className="font-medium text-gray-900">Task Management</p>
+                  <p className="text-sm text-gray-600">Manage tasks and upload videos</p>
+                </div>
+              </div>
+              <button
+                onClick={() => setSidebarOpen(true)}
+                className="bg-green-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-green-600"
+              >
+                Open
+              </button>
+            </div>
+
             <div className="flex items-center justify-between p-4 bg-red-50 rounded-xl border border-red-200">
               <div className="flex items-center space-x-3">
                 <i className="fa-solid fa-user-check text-red-500"></i>
@@ -466,7 +454,7 @@ const AdminDashboard: React.FC = () => {
                 />
                 <div className="flex-1">
                   <p className="font-medium text-gray-900">{vendor.name}</p>
-                  <p className="text-sm text-gray-600">{formatCurrency(vendor.orders)} orders</p>
+                  <p className="text-sm text-gray-600">Top performing vendor</p>
                 </div>
                 <div className="text-right">
                   <p className="font-bold text-gray-900">{formatCurrency(vendor.revenue)}</p>
@@ -487,7 +475,6 @@ const AdminDashboard: React.FC = () => {
           </div>
           <div className="flex items-center space-x-3">
             <button className="px-4 py-2 bg-primary bg-opacity-10 text-primary rounded-lg text-sm font-medium">All</button>
-            <button className="px-4 py-2 text-gray-600 rounded-lg text-sm font-medium hover:bg-gray-100">Orders</button>
             <button className="px-4 py-2 text-gray-600 rounded-lg text-sm font-medium hover:bg-gray-100">Users</button>
             <button className="px-4 py-2 text-gray-600 rounded-lg text-sm font-medium hover:bg-gray-100">Payments</button>
           </div>
@@ -502,7 +489,6 @@ const AdminDashboard: React.FC = () => {
               <div className="flex-1">
                 <p className="text-gray-900">
                   {activity.type === 'vendor' && <span className="font-medium">{activity.title}</span>}
-                  {activity.type === 'order' && <span>Large order <span className="font-medium">{activity.title}</span> placed</span>}
                   {activity.type === 'payout' && <span>Commission payout of <span className="font-medium">{activity.title}</span> processed</span>}
                   {activity.type === 'review' && <span><span className="font-medium">{activity.title}</span> received a 5-star review</span>}
                   {activity.type === 'report' && <span>Product <span className="font-medium">"{activity.title}"</span> reported</span>}
@@ -512,7 +498,6 @@ const AdminDashboard: React.FC = () => {
               </div>
               <span className={`text-xs ${getActivityBadgeColor(activity.type)} px-2 py-1 rounded-full capitalize`}>
                 {activity.type === 'vendor' && 'New Vendor'}
-                {activity.type === 'order' && 'High Value'}
                 {activity.type === 'payout' && 'Payout'}
                 {activity.type === 'review' && 'Review'}
                 {activity.type === 'report' && 'Report'}
@@ -526,6 +511,18 @@ const AdminDashboard: React.FC = () => {
         </div>
       </section>
       </main>
+
+      {/* Sidebar */}
+      <AdminSidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+
+      {/* Floating Action Button */}
+      <button
+        onClick={() => setSidebarOpen(true)}
+        className="fixed bottom-6 right-6 w-14 h-14 bg-primary text-white rounded-full shadow-lg hover:bg-blue-600 transition-all duration-300 hover:scale-110 flex items-center justify-center z-30"
+        title="Open Task Management"
+      >
+        <i className="fa-solid fa-tasks text-xl"></i>
+      </button>
     </div>
   );
 };

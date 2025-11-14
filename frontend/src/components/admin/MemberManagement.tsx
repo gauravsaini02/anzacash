@@ -3,25 +3,29 @@ import { useNavigate } from 'react-router-dom';
 import AdminHeader from '../shared/AdminHeader';
 import AdminSidebar from '../shared/AdminSidebar';
 
-interface Vendor {
+interface Member {
   id: number;
   name: string;
-  businessName: string;
+  email: string;
+  phone: string;
   avatar: string;
-  applicationDate: string;
+  registrationDate: string;
   location: string;
-  category: string;
+  referralCode: string;
+  referredBy?: string;
   documentsStatus: 'complete' | 'missing' | 'partial';
   documentsCount: number;
-  feeStatus: 'paid' | 'pending' | 'unpaid';
   status: 'pending' | 'under_review' | 'documents_missing' | 'approved' | 'rejected' | 'suspended';
+  level: number;
+  commissionEarned: number;
+  activeReferrals: number;
 }
 
-const VendorManagement: React.FC = () => {
+const MemberManagement: React.FC = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [vendors, setVendors] = useState<Vendor[]>([]);
+  const [members, setMembers] = useState<Member[]>([]);
   const [activeTab, setActiveTab] = useState<'pending' | 'active' | 'suspended'>('pending');
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -43,88 +47,109 @@ const VendorManagement: React.FC = () => {
   }, []);
 
   const loadMockData = () => {
-    const mockVendors: Vendor[] = [
+    const mockMembers: Member[] = [
       {
         id: 1,
-        name: 'John Mwangi',
-        businessName: 'TechWorld Electronics',
-        avatar: 'avatar-2',
-        applicationDate: 'Dec 15, 2024',
+        name: 'Alice Johnson',
+        email: 'alice.j@email.com',
+        phone: '+255 712 345 678',
+        avatar: 'avatar-6',
+        registrationDate: 'Dec 15, 2024',
         location: 'Dar es Salaam, Tanzania',
-        category: 'Electronics & Tech',
+        referralCode: 'ALI234',
+        referredBy: 'John Smith',
         documentsStatus: 'complete',
-        documentsCount: 5,
-        feeStatus: 'paid',
-        status: 'pending'
+        documentsCount: 3,
+        status: 'pending',
+        level: 1,
+        commissionEarned: 0,
+        activeReferrals: 0
       },
       {
         id: 2,
-        name: 'Sarah Kimani',
-        businessName: 'Fashion Boutique',
-        avatar: 'avatar-5',
-        applicationDate: 'Dec 14, 2024',
+        name: 'Robert Kimani',
+        email: 'robert.k@email.com',
+        phone: '+254 712 987 654',
+        avatar: 'avatar-7',
+        registrationDate: 'Dec 14, 2024',
         location: 'Nairobi, Kenya',
-        category: 'Fashion & Clothing',
+        referralCode: 'ROB456',
         documentsStatus: 'missing',
-        documentsCount: 3,
-        feeStatus: 'paid',
-        status: 'documents_missing'
+        documentsCount: 1,
+        status: 'documents_missing',
+        level: 1,
+        commissionEarned: 0,
+        activeReferrals: 0
       },
       {
         id: 3,
-        name: 'Michael Ochieng',
-        businessName: 'Home & Garden Supplies',
-        avatar: 'avatar-8',
-        applicationDate: 'Dec 13, 2024',
-        location: 'Kampala, Uganda',
-        category: 'Home & Garden',
+        name: 'Grace Mutiso',
+        email: 'grace.m@email.com',
+        phone: '+254 734 567 890',
+        avatar: 'avatar-1',
+        registrationDate: 'Dec 13, 2024',
+        location: 'Mombasa, Kenya',
+        referralCode: 'GRA789',
+        referredBy: 'Sarah Davis',
         documentsStatus: 'complete',
-        documentsCount: 5,
-        feeStatus: 'paid',
-        status: 'under_review'
+        documentsCount: 3,
+        status: 'under_review',
+        level: 1,
+        commissionEarned: 0,
+        activeReferrals: 0
       },
       {
         id: 4,
-        name: 'Grace Mutiso',
-        businessName: 'Fashion Hub',
-        avatar: 'avatar-4',
-        applicationDate: 'Dec 10, 2024',
-        location: 'Nairobi, Kenya',
-        category: 'Fashion & Clothing',
+        name: 'Michael Ochieng',
+        email: 'michael.o@email.com',
+        phone: '+255 756 234 567',
+        avatar: 'avatar-8',
+        registrationDate: 'Dec 10, 2024',
+        location: 'Kampala, Uganda',
+        referralCode: 'MIC123',
+        referredBy: 'Alice Johnson',
         documentsStatus: 'complete',
-        documentsCount: 5,
-        feeStatus: 'paid',
-        status: 'approved'
+        documentsCount: 3,
+        status: 'approved',
+        level: 2,
+        commissionEarned: 45000,
+        activeReferrals: 5
       },
       {
         id: 5,
-        name: 'David Kamau',
-        businessName: 'Sports Central',
-        avatar: 'avatar-9',
-        applicationDate: 'Dec 8, 2024',
-        location: 'Mombasa, Kenya',
-        category: 'Sports & Fitness',
+        name: 'Sarah Kimani',
+        email: 'sarah.k@email.com',
+        phone: '+254 712 345 678',
+        avatar: 'avatar-5',
+        registrationDate: 'Dec 8, 2024',
+        location: 'Nairobi, Kenya',
+        referralCode: 'SAR567',
         documentsStatus: 'complete',
-        documentsCount: 5,
-        feeStatus: 'paid',
-        status: 'approved'
+        documentsCount: 3,
+        status: 'approved',
+        level: 3,
+        commissionEarned: 125000,
+        activeReferrals: 12
       },
       {
         id: 6,
         name: 'James Wanjala',
-        businessName: 'Electronics Plus',
+        email: 'james.w@email.com',
+        phone: '+254 723 456 789',
         avatar: 'avatar-3',
-        applicationDate: 'Dec 5, 2024',
+        registrationDate: 'Dec 5, 2024',
         location: 'Arusha, Tanzania',
-        category: 'Electronics & Tech',
+        referralCode: 'JAM890',
         documentsStatus: 'complete',
-        documentsCount: 5,
-        feeStatus: 'paid',
-        status: 'suspended'
+        documentsCount: 3,
+        status: 'suspended',
+        level: 1,
+        commissionEarned: 15000,
+        activeReferrals: 2
       }
     ];
 
-    setVendors(mockVendors);
+    setMembers(mockMembers);
   };
 
   const getStatusBadge = (status: string) => {
@@ -155,7 +180,7 @@ const VendorManagement: React.FC = () => {
       case 'documents_missing':
         return 'Documents Missing';
       case 'approved':
-        return 'Approved';
+        return 'Active Member';
       case 'rejected':
         return 'Rejected';
       case 'suspended':
@@ -165,62 +190,37 @@ const VendorManagement: React.FC = () => {
     }
   };
 
-  const getCategoryIcon = (category: string) => {
-    if (category.toLowerCase().includes('electronics') || category.toLowerCase().includes('tech')) {
-      return 'fa-store';
-    } else if (category.toLowerCase().includes('fashion') || category.toLowerCase().includes('clothing')) {
-      return 'fa-tshirt';
-    } else if (category.toLowerCase().includes('home') || category.toLowerCase().includes('garden')) {
-      return 'fa-home';
-    } else if (category.toLowerCase().includes('sports') || category.toLowerCase().includes('fitness')) {
-      return 'fa-running';
-    } else {
-      return 'fa-store';
+  const getLevelColor = (level: number) => {
+    switch (level) {
+      case 1:
+        return 'bg-bronze-50 text-bronze-600';
+      case 2:
+        return 'bg-silver-50 text-silver-600';
+      case 3:
+        return 'bg-yellow-50 text-yellow-600';
+      case 4:
+        return 'bg-purple-50 text-purple-600';
+      case 5:
+        return 'bg-red-50 text-red-600';
+      default:
+        return 'bg-gray-50 text-gray-600';
     }
   };
 
-  const getCategoryColor = (category: string) => {
-    if (category.toLowerCase().includes('electronics') || category.toLowerCase().includes('tech')) {
-      return 'bg-blue-50';
-    } else if (category.toLowerCase().includes('fashion') || category.toLowerCase().includes('clothing')) {
-      return 'bg-pink-50';
-    } else if (category.toLowerCase().includes('home') || category.toLowerCase().includes('garden')) {
-      return 'bg-green-50';
-    } else if (category.toLowerCase().includes('sports') || category.toLowerCase().includes('fitness')) {
-      return 'bg-orange-50';
-    } else {
-      return 'bg-gray-50';
-    }
-  };
-
-  const getIconColor = (category: string) => {
-    if (category.toLowerCase().includes('electronics') || category.toLowerCase().includes('tech')) {
-      return 'text-blue-600';
-    } else if (category.toLowerCase().includes('fashion') || category.toLowerCase().includes('clothing')) {
-      return 'text-pink-600';
-    } else if (category.toLowerCase().includes('home') || category.toLowerCase().includes('garden')) {
-      return 'text-green-600';
-    } else if (category.toLowerCase().includes('sports') || category.toLowerCase().includes('fitness')) {
-      return 'text-orange-600';
-    } else {
-      return 'text-gray-600';
-    }
-  };
-
-  const getDocumentsStatusInfo = (vendor: Vendor) => {
-    if (vendor.documentsStatus === 'complete') {
+  const getDocumentsStatusInfo = (member: Member) => {
+    if (member.documentsStatus === 'complete') {
       return {
         bgColor: 'bg-green-50',
         icon: 'fa-check',
         iconColor: 'text-green-600',
         text: 'All Complete'
       };
-    } else if (vendor.documentsStatus === 'missing') {
+    } else if (member.documentsStatus === 'missing') {
       return {
         bgColor: 'bg-red-50',
         icon: 'fa-exclamation-triangle',
         iconColor: 'text-red-600',
-        text: `${5 - vendor.documentsCount} Missing`
+        text: `${3 - member.documentsCount} Missing`
       };
     } else {
       return {
@@ -232,66 +232,67 @@ const VendorManagement: React.FC = () => {
     }
   };
 
-  const filteredVendors = vendors.filter(vendor => {
-    const matchesTab =
-      (activeTab === 'pending' && (vendor.status === 'pending' || vendor.status === 'under_review' || vendor.status === 'documents_missing')) ||
-      (activeTab === 'active' && vendor.status === 'approved') ||
-      (activeTab === 'suspended' && vendor.status === 'suspended');
+  const formatCurrency = (amount: number): string => {
+    return amount.toLocaleString('en-TZ');
+  };
 
-    const matchesSearch = vendor.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         vendor.businessName.toLowerCase().includes(searchTerm.toLowerCase());
+  const filteredMembers = members.filter(member => {
+    const matchesTab =
+      (activeTab === 'pending' && (member.status === 'pending' || member.status === 'under_review' || member.status === 'documents_missing')) ||
+      (activeTab === 'active' && member.status === 'approved') ||
+      (activeTab === 'suspended' && member.status === 'suspended');
+
+    const matchesSearch = member.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         member.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         member.referralCode.toLowerCase().includes(searchTerm.toLowerCase());
 
     return matchesTab && matchesSearch;
   });
 
-  const pendingCount = vendors.filter(v => v.status === 'pending' || v.status === 'under_review' || v.status === 'documents_missing').length;
-  const activeCount = vendors.filter(v => v.status === 'approved').length;
-  const suspendedCount = vendors.filter(v => v.status === 'suspended').length;
+  const pendingCount = members.filter(m => m.status === 'pending' || m.status === 'under_review' || m.status === 'documents_missing').length;
+  const activeCount = members.filter(m => m.status === 'approved').length;
+  const suspendedCount = members.filter(m => m.status === 'suspended').length;
 
-  const handleApprove = (vendorId: number) => {
-    console.log('Approve vendor:', vendorId);
-    // In a real app, this would call an API
-    setVendors(vendors.map(v =>
-      v.id === vendorId ? { ...v, status: 'approved' as const } : v
+  const handleApprove = (memberId: number) => {
+    console.log('Approve member:', memberId);
+    setMembers(members.map(m =>
+      m.id === memberId ? { ...m, status: 'approved' as const } : m
     ));
   };
 
-  const handleReject = (vendorId: number) => {
-    console.log('Reject vendor:', vendorId);
-    // In a real app, this would call an API
-    setVendors(vendors.map(v =>
-      v.id === vendorId ? { ...v, status: 'rejected' as const } : v
+  const handleReject = (memberId: number) => {
+    console.log('Reject member:', memberId);
+    setMembers(members.map(m =>
+      m.id === memberId ? { ...m, status: 'rejected' as const } : m
     ));
   };
 
-  const handleSuspend = (vendorId: number) => {
-    console.log('Suspend vendor:', vendorId);
-    // In a real app, this would call an API
-    setVendors(vendors.map(v =>
-      v.id === vendorId ? { ...v, status: 'suspended' as const } : v
+  const handleSuspend = (memberId: number) => {
+    console.log('Suspend member:', memberId);
+    setMembers(members.map(m =>
+      m.id === memberId ? { ...m, status: 'suspended' as const } : m
     ));
   };
 
-  const handleReinstate = (vendorId: number) => {
-    console.log('Reinstate vendor:', vendorId);
-    // In a real app, this would call an API
-    setVendors(vendors.map(v =>
-      v.id === vendorId ? { ...v, status: 'approved' as const } : v
+  const handleReinstate = (memberId: number) => {
+    console.log('Reinstate member:', memberId);
+    setMembers(members.map(m =>
+      m.id === memberId ? { ...m, status: 'approved' as const } : m
     ));
   };
 
-  const handleViewDetails = (vendorId: number) => {
-    console.log('View vendor details:', vendorId);
-    // In a real app, this would navigate to vendor details page
+  const handleViewDetails = (memberId: number) => {
+    console.log('View member details:', memberId);
+    // In a real app, this would navigate to member details page
   };
 
-  const handleDownloadDocuments = (vendorId: number) => {
-    console.log('Download documents for vendor:', vendorId);
+  const handleDownloadDocuments = (memberId: number) => {
+    console.log('Download documents for member:', memberId);
     // In a real app, this would trigger a download
   };
 
-  const handleRequestDocuments = (vendorId: number) => {
-    console.log('Request documents for vendor:', vendorId);
+  const handleRequestDocuments = (memberId: number) => {
+    console.log('Request documents for member:', memberId);
     // In a real app, this would send an email/notification
   };
 
@@ -300,7 +301,7 @@ const VendorManagement: React.FC = () => {
       <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-center">
           <i className="fa-solid fa-spinner fa-spin text-4xl text-primary mb-4"></i>
-          <p className="text-gray-600">Loading vendor management...</p>
+          <p className="text-gray-600">Loading member management...</p>
         </div>
       </div>
     );
@@ -310,19 +311,19 @@ const VendorManagement: React.FC = () => {
     <div className="bg-background min-h-screen">
       <AdminHeader />
 
-      <main id="vendor-management-main" className="max-w-7xl mx-auto px-6 py-8">
+      <main id="member-management-main" className="max-w-7xl mx-auto px-6 py-8">
         {/* Header */}
-        <section id="vendor-management-header" className="mb-8">
+        <section id="member-management-header" className="mb-8">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">Vendor Management</h1>
-              <p className="text-gray-600">Approve and manage vendor applications</p>
+              <h1 className="text-3xl font-bold text-gray-900 mb-2">MLM Member Management</h1>
+              <p className="text-gray-600">Approve and manage MLM member applications</p>
             </div>
             <div className="flex items-center space-x-3">
               <div className="relative">
                 <input
                   type="text"
-                  placeholder="Search vendors..."
+                  placeholder="Search members..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary w-64"
@@ -338,7 +339,7 @@ const VendorManagement: React.FC = () => {
         </section>
 
         {/* Tabs */}
-        <section id="vendor-tabs" className="mb-8">
+        <section id="member-tabs" className="mb-8">
           <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-2">
             <div className="flex items-center space-x-2">
               <button
@@ -366,7 +367,7 @@ const VendorManagement: React.FC = () => {
                 onClick={() => setActiveTab('active')}
               >
                 <i className="fa-solid fa-check-circle"></i>
-                <span>Active Vendors</span>
+                <span>Active Members</span>
                 <span className="bg-gray-100 text-gray-600 px-2 py-1 rounded-full text-xs font-bold">
                   {activeCount}
                 </span>
@@ -390,39 +391,47 @@ const VendorManagement: React.FC = () => {
           </div>
         </section>
 
-        {/* Vendor List */}
-        <section id="pending-vendors" className="space-y-6">
-          {filteredVendors.map((vendor) => {
-            const documentsInfo = getDocumentsStatusInfo(vendor);
-            const canApprove = vendor.documentsStatus === 'complete' && vendor.feeStatus === 'paid';
+        {/* Member List */}
+        <section id="pending-members" className="space-y-6">
+          {filteredMembers.map((member) => {
+            const documentsInfo = getDocumentsStatusInfo(member);
+            const canApprove = member.documentsStatus === 'complete';
 
             return (
-              <div key={vendor.id} className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+              <div key={member.id} className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex items-start space-x-4">
                     <img
-                      src={`https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/${vendor.avatar}.jpg`}
-                      alt={vendor.name}
+                      src={`https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/${member.avatar}.jpg`}
+                      alt={member.name}
                       className="w-16 h-16 rounded-xl"
                     />
                     <div>
-                      <h3 className="text-xl font-bold text-gray-900 mb-1">{vendor.name}</h3>
-                      <p className="text-gray-600 mb-2">{vendor.businessName}</p>
+                      <h3 className="text-xl font-bold text-gray-900 mb-1">{member.name}</h3>
+                      <div className="flex items-center space-x-4 mb-2">
+                        <p className="text-gray-600">{member.email}</p>
+                        <span className="text-gray-400">•</span>
+                        <p className="text-gray-600">{member.phone}</p>
+                      </div>
                       <div className="flex items-center space-x-4 text-sm text-gray-500">
                         <span className="flex items-center space-x-1">
                           <i className="fa-solid fa-calendar"></i>
-                          <span>Applied: {vendor.applicationDate}</span>
+                          <span>Joined: {member.registrationDate}</span>
                         </span>
                         <span className="flex items-center space-x-1">
                           <i className="fa-solid fa-map-marker-alt"></i>
-                          <span>{vendor.location}</span>
+                          <span>{member.location}</span>
+                        </span>
+                        <span className="flex items-center space-x-1">
+                          <i className="fa-solid fa-ticket"></i>
+                          <span>Code: {member.referralCode}</span>
                         </span>
                       </div>
                     </div>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <span className={`${getStatusBadge(vendor.status)} px-3 py-1 rounded-full text-sm font-medium`}>
-                      {getStatusText(vendor.status)}
+                    <span className={`${getStatusBadge(member.status)} px-3 py-1 rounded-full text-sm font-medium`}>
+                      {getStatusText(member.status)}
                     </span>
                     <button className="text-gray-400 hover:text-gray-600">
                       <i className="fa-solid fa-ellipsis-h"></i>
@@ -430,16 +439,16 @@ const VendorManagement: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-                  {/* Business Category */}
-                  <div className={`${getCategoryColor(vendor.category)} rounded-xl p-4`}>
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+                  {/* MLM Level */}
+                  <div className={`${getLevelColor(member.level)} rounded-xl p-4`}>
                     <div className="flex items-center space-x-3">
-                      <div className={`w-10 h-10 bg-white rounded-lg flex items-center justify-center`}>
-                        <i className={`fa-solid ${getCategoryIcon(vendor.category)} ${getIconColor(vendor.category)}`}></i>
+                      <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+                        <i className="fa-solid fa-layer-group text-gray-600"></i>
                       </div>
                       <div>
-                        <p className="text-sm text-gray-600">Business Category</p>
-                        <p className="font-bold text-gray-900">{vendor.category}</p>
+                        <p className="text-sm text-gray-600">MLM Level</p>
+                        <p className="font-bold text-gray-900">Level {member.level}</p>
                       </div>
                     </div>
                   </div>
@@ -457,41 +466,63 @@ const VendorManagement: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Registration Fee */}
-                  <div className="bg-purple-50 rounded-xl p-4">
+                  {/* Commission Earned */}
+                  <div className="bg-blue-50 rounded-xl p-4">
                     <div className="flex items-center space-x-3">
-                      <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
-                        <i className="fa-solid fa-dollar-sign text-purple-600"></i>
+                      <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                        <i className="fa-solid fa-coins text-blue-600"></i>
                       </div>
                       <div>
-                        <p className="text-sm text-gray-600">Registration Fee</p>
-                        <p className="font-bold text-gray-900 capitalize">{vendor.feeStatus.replace('_', ' ')}</p>
+                        <p className="text-sm text-gray-600">Commission Earned</p>
+                        <p className="font-bold text-gray-900">{formatCurrency(member.commissionEarned)}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Active Referrals */}
+                  <div className="bg-green-50 rounded-xl p-4">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                        <i className="fa-solid fa-users text-green-600"></i>
+                      </div>
+                      <div>
+                        <p className="text-sm text-gray-600">Active Referrals</p>
+                        <p className="font-bold text-gray-900">{member.activeReferrals}</p>
                       </div>
                     </div>
                   </div>
                 </div>
 
+                {/* Referred By */}
+                {member.referredBy && (
+                  <div className="mb-6">
+                    <p className="text-sm text-gray-600">
+                      Referred by: <span className="font-medium text-gray-900">{member.referredBy}</span>
+                    </p>
+                  </div>
+                )}
+
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-4">
                     <button
-                      onClick={() => handleViewDetails(vendor.id)}
+                      onClick={() => handleViewDetails(member.id)}
                       className="text-primary hover:text-blue-600 font-medium flex items-center space-x-2"
                     >
                       <i className="fa-solid fa-eye"></i>
                       <span>View Details</span>
                     </button>
-                    {vendor.documentsStatus === 'complete' && (
+                    {member.documentsStatus === 'complete' && (
                       <button
-                        onClick={() => handleDownloadDocuments(vendor.id)}
+                        onClick={() => handleDownloadDocuments(member.id)}
                         className="text-gray-600 hover:text-gray-800 font-medium flex items-center space-x-2"
                       >
                         <i className="fa-solid fa-file-download"></i>
                         <span>Download Documents</span>
                       </button>
                     )}
-                    {vendor.documentsStatus === 'missing' && (
+                    {member.documentsStatus === 'missing' && (
                       <button
-                        onClick={() => handleRequestDocuments(vendor.id)}
+                        onClick={() => handleRequestDocuments(member.id)}
                         className="text-orange-600 hover:text-orange-800 font-medium flex items-center space-x-2"
                       >
                         <i className="fa-solid fa-envelope"></i>
@@ -501,17 +532,17 @@ const VendorManagement: React.FC = () => {
                   </div>
                   <div className="flex items-center space-x-3">
                     {/* Pending/Under Review/Documents Missing Status - Show Approve/Reject */}
-                    {(vendor.status === 'pending' || vendor.status === 'under_review' || vendor.status === 'documents_missing') && (
+                    {(member.status === 'pending' || member.status === 'under_review' || member.status === 'documents_missing') && (
                       <>
                         <button
-                          onClick={() => handleReject(vendor.id)}
+                          onClick={() => handleReject(member.id)}
                           className="bg-red-500 text-white px-6 py-2 rounded-lg font-medium hover:bg-red-600 flex items-center space-x-2"
                         >
                           <i className="fa-solid fa-times"></i>
                           <span>Reject</span>
                         </button>
                         <button
-                          onClick={() => handleApprove(vendor.id)}
+                          onClick={() => handleApprove(member.id)}
                           disabled={!canApprove}
                           className={`px-6 py-2 rounded-lg font-medium flex items-center space-x-2 ${
                             canApprove
@@ -526,9 +557,9 @@ const VendorManagement: React.FC = () => {
                     )}
 
                     {/* Approved Status - Show Suspend */}
-                    {vendor.status === 'approved' && (
+                    {member.status === 'approved' && (
                       <button
-                        onClick={() => handleSuspend(vendor.id)}
+                        onClick={() => handleSuspend(member.id)}
                         className="bg-yellow-500 text-white px-6 py-2 rounded-lg font-medium hover:bg-yellow-600 flex items-center space-x-2"
                       >
                         <i className="fa-solid fa-ban"></i>
@@ -537,9 +568,9 @@ const VendorManagement: React.FC = () => {
                     )}
 
                     {/* Suspended Status - Show Reinstate */}
-                    {vendor.status === 'suspended' && (
+                    {member.status === 'suspended' && (
                       <button
-                        onClick={() => handleReinstate(vendor.id)}
+                        onClick={() => handleReinstate(member.id)}
                         className="bg-success text-white px-6 py-2 rounded-lg font-medium hover:bg-green-600 flex items-center space-x-2"
                       >
                         <i className="fa-solid fa-check-circle"></i>
@@ -556,7 +587,7 @@ const VendorManagement: React.FC = () => {
         {/* Pagination */}
         <section id="pagination" className="flex items-center justify-between mt-8">
           <div className="text-gray-600">
-            Showing {filteredVendors.length} of {vendors.length} vendors
+            Showing {filteredMembers.length} of {members.length} members
           </div>
           <div className="flex items-center space-x-2">
             <button className="px-3 py-2 border border-gray-200 rounded-lg text-gray-600 hover:bg-gray-50">
@@ -587,4 +618,4 @@ const VendorManagement: React.FC = () => {
   );
 };
 
-export default VendorManagement;
+export default MemberManagement;
